@@ -204,7 +204,7 @@ class PageController extends Controller
             'contact' => $request->contact
     	]);
  
-    	return redirect('customers-list-page');
+    	return redirect('customers-list-page')->with('status', 'customer berhasil di tambah');
     }
 
     /**
@@ -239,7 +239,7 @@ class PageController extends Controller
          $customer->customer_name = $request->customer_name;
          $customer->contact = $request->contact;
          $customer->save();
-         return redirect('customers-list-page');
+         return redirect('customers-list-page')->with('status', 'customer berhasil di edit');
     }
 
     /**
@@ -252,7 +252,7 @@ class PageController extends Controller
     {
         $customer = Customer::find($id);
         $customer->delete();
-        return redirect('customers-list-page');
+        return redirect('customers-list-page')->with('status', 'customer berhasil di tambah');
     }
 
     /**
