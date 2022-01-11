@@ -1,0 +1,12 @@
+Tutorial Penginstalan
+Sebelum memulai jangan lupa nyalakan XAMPP/MAMPP/sebagainya
+
+1. Buat database dengan nama "midone"
+2. Lalu samakan nama database di .env nya
+3. Lalu ketik di terminal "composer install"
+	(jika tidka bisa install,coba di "composer update")
+4. Lalu ketikkan "php artisan migrate"
+5. Jika sudah,ketikkan "php artisan db:seed"
+6. Terakhir jalankan,"php artisan serve"
+
+Silahkan Dilanjut Kodingannya
