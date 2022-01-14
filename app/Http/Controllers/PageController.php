@@ -401,7 +401,7 @@ class PageController extends Controller
             'deskripsi'=>$request->deskripsi
     	]);
  
-    	return redirect('product-list-page');
+    	return redirect('product-list-page')->with('status','produk berhasil di tambah');
     }
 
     /**
@@ -440,7 +440,7 @@ class PageController extends Controller
         $product->stock = $request->stock;
         $product->deskripsi = $request->deskripsi;
         $product->save();
-        return redirect('product-list-page');
+        return redirect('product-list-page')->with('status','produk berhasil di tambah');
     }
 
     /**
@@ -453,7 +453,7 @@ class PageController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
-        return redirect('product-list-page');
+        return redirect('product-list-page')->with('status','produk berhasil di tambah');
     }
 
     /**
