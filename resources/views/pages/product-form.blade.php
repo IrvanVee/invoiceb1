@@ -17,35 +17,50 @@
             <div class="intro-y box p-5">
                 <div>
                     <label for="crud-form-1" class="form-label">Product Name</label>
-                    <input type="text" name="product_name" class="form-control w-full" placeholder="Input Product Name">
+                    <input type="text" name="product_name" class="form-control w-full" placeholder="Input Product Name" value="{{old('product_name')}}">
+                    @error('product_name')
+                        <span style="color:red;">{{$message}}</span>
+                    @enderror
                 </div>
                 <div class="mt-3">
                     <label for="crud-form-2" class="form-label">Vendor</label>
-                    <select data-placeholder="Select Vendor" class="tail-select w-full" name="vendor">
+                    <select data-placeholder="Select Vendor" class="tail-select w-full" name="vendor" value="{{old('vendor')}}">
                         <option value="">Select Vendor</option>
                         <option value="1">Vendor 1</option>
                         <option value="2">Vendor 2</option>
                     </select>
+                    @error('vendor')
+                    <span style="color:red;">{{$message}}</span>
+                    @enderror
                 </div>
                 <div class="mt-3">
                     <label for="crud-form-3" class="form-label">Price</label>
                     <div class="input-group">
-                        <input type="number" class="form-control" name="price" aria-describedby="input-group-1">
+                        <input type="number" class="form-control" name="price" aria-describedby="input-group-1" value="{{old('price')}}">
                     </div>
+                    @error('price')
+                    <p style="color:red;">{{$message}}</p>
+                    @enderror
                 </div>
                 <div class="mt-3">
                     <label for="crud-form-4" class="form-label">Stock</label>
                     <div class="input-group">
-                        <input type="number" class="form-control" name="stock" aria-describedby="input-group-2">
+                        <input type="number" class="form-control" name="stock" aria-describedby="input-group-2" value="{{old('stock')}}">
                         <div class="input-group-text">pcs</div>
+                        {{-- <span style="color:red;">{{$message}}</span> --}}
                     </div>
+                    @error('stock')
+                    <p style="color:red;">{{$message}}</p>
+                    @enderror
                 </div>
                 <div class="mt-3">
                     <label>Description</label>
-                    <div class="mt-2">
-                        <div data-simple-toolbar="true" class="editor">
-                        </div>
+                    <div class="input-group">
+                     <textarea class="form-control" id="textarea" name="deskripsi" rows="3" value="{{old('stock')}}"></textarea>
                     </div>
+                    @error('deskripsi')
+                    <p style="color:red;">{{$message}}</p>
+                    @enderror
                 </div>
                 <div class="text-right mt-5">
                     <a href="product-list-page" type="button" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
@@ -57,3 +72,13 @@
         </div>
     </div>    
 @endsection
+
+@push('tinyscript')
+<script>
+tinymce.init({
+    selector:'#textarea',
+    // widht:350,
+    width: '100%',
+})
+</script>
+@endpush

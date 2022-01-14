@@ -252,7 +252,7 @@ class PageController extends Controller
     {
         $customer = Customer::find($id);
         $customer->delete();
-        return redirect('customers-list-page')->with('status', 'customer berhasil di tambah');
+        return redirect('customers-list-page')->with('status', 'customer berhasil di hapus');
     }
 
     /**
@@ -389,14 +389,16 @@ class PageController extends Controller
     		'product_name' => 'required',
             'vendor' => 'required',
     		'price' => 'required',
-            'stock' => 'required'   
+            'stock' => 'required',
+            'deskripsi'=>'required'   
     	]);
  
         Product::create([   
     		'product_name' => $request->product_name,
             'vendor' => $request->vendor,
     		'price' => $request->price,
-            'stock' => $request->stock
+            'stock' => $request->stock,
+            'deskripsi'=>$request->deskripsi
     	]);
  
     	return redirect('product-list-page');
@@ -427,7 +429,8 @@ class PageController extends Controller
     		'product_name' => 'required',
             'vendor' => 'required',
     		'price' => 'required',
-            'stock' => 'required'   
+            'stock' => 'required',
+            'deskripsi'=>'required'  
     	]);
  
         $product = Product::find($id);
@@ -435,6 +438,7 @@ class PageController extends Controller
         $product->vendor = $request->vendor;
         $product->price = $request->price;
         $product->stock = $request->stock;
+        $product->deskripsi = $request->deskripsi;
         $product->save();
         return redirect('product-list-page');
     }

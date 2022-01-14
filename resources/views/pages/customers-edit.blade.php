@@ -29,14 +29,14 @@
                     <label class="form-label mt-2">Contact</label>
                     <input name="contact" type="text" class="form-control" placeholder="Input Email or Phone Number" aria-describedby="input-group-4" value=" {{ $customer->contact }}"> 
                 </div>
-                <div class="mt-3">
+                {{-- <div class="mt-3">
                     <label>Description</label>
                     <div class="mt-2">
                         <div data-simple-toolbar="true" class="editor">
                             <p>Content of the editor.</p>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="text-right mt-5">
                     <a href="/customers-list-page" type="button" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
                     <input type="submit" class="btn btn-primary w-24" value="Save">

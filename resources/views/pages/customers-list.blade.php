@@ -8,7 +8,7 @@
 @if (session('status'))
 <div class="bg-indigo-900 text-center py-4 lg:px-4" style="background-color:rgba(25, 73, 149, 0.5);color:whitesmoke;">
     <div class="p-2 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
-      <span class="flex rounded-full bg-indigo-500 uppercase px-2 py-1 text-xs font-bold mr-3">{{ session('status') }}</span>
+      <span class="flex rounded-full bg-indigo-500 uppercase px-2 py-1 text-xs font-bold mr-3 animate__animated animate__swing">{{ session('status') }}</span>
       {{-- <span class="font-semibold mr-2 text-left flex-auto">{{ session('status') }}</span> --}}
       {{-- <svg class="fill-current opacity-75 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"/></svg> --}}
     </div>
@@ -58,6 +58,9 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if ($customer->count() == 0)
+                    <td style="background-color: rgb(206, 61, 61);color:white;" colspan="4">Customer Kosong</td>
+                    @endif
                     @foreach ($customer as $c)
                         <tr class="intro-x ">
                             {{-- <td class="w-40">
@@ -89,10 +92,10 @@
                                     <a class="flex items-center mr-3" href="customers-list-page/edit/{{ $c->id }}">
                                         <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit
                                     </a>
-                                    <a class="flex items-center text-theme-6" href="customers-list-page/delete/{{ $c->id }}">
-{{-- data-toggle="modal" data-target="#delete-confirmation-modal" --}}
+                                    <a class="flex items-center text-theme-6" onclick="return confirm('apa kamu yakin')" href="customers-list-page/delete/{{ $c->id }}">
                                         <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete
                                     </a>
+                                    {{-- <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a> --}}
                                 </div>
                                 
                             </td>

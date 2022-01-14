@@ -18,24 +18,39 @@
             <div class="intro-y box p-5">
                 <div>
                     <label for="crud-form-1" class="form-label">Instance</label>
-                    <input type="text" name="instance" class="form-control w-full" placeholder="">
+                    <input type="text" name="instance" class="form-control w-full" value="{{old('instance')}}">
+                    @error('instance')
+                    <div class="bg-red-400 p-2 shadow-sm rounded mt-2" style="color:red;">
+                        {{ $message }}
+                    </div>
+                @enderror
                 </div>
                 <div>
                     <label for="crud-form-1" class="form-label">Customer Name</label>
-                    <input name="customer_name" type="text" class="form-control w-full" placeholder="">
+                    <input name="customer_name" type="text" class="form-control w-full" value="{{old('customer_name')}}">
+                    @error('customer_name')
+                    <div class="bg-red-400 p-2 shadow-sm rounded mt-2" style="color:red;">
+                        {{ $message }}
+                    </div> 
+                    @enderror
                 </div>
                 <div>
                     <label class="form-label mt-2">Contact</label>
-                    <input name="contact" type="text" class="form-control" placeholder="Input Email or Phone Number" aria-describedby="input-group-4"> 
+                    <input name="contact" type="text" class="form-control" placeholder="Input Email or Phone Number" aria-describedby="input-group-4" value="{{old('contact')}}"> 
+                    @error('contact')
+                    <div class="bg-red-400 p-2 shadow-sm rounded mt-2" style="color:red;">
+                        {{ $message }}
+                    </div> 
+                    @enderror
                 </div>
-                <div class="mt-3">
+                {{-- <div class="mt-3">
                     <label>Description</label>
                     <div class="mt-2">
                         <div data-simple-toolbar="true" class="editor">
                             <p>Content of the editor.</p>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="text-right mt-5">
                     <a href="customers-list-page" type="button" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
                     <input type="submit" class="btn btn-primary w-24" value="Save">

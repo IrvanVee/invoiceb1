@@ -59,8 +59,9 @@
                                 <a href="" class="font-medium whitespace-nowrap">{{ $p->product_name }}</a>
                                 {{-- <div class="text-gray-600 text-xs whitespace-nowrap mt-0.5"></div> --}}
                             </td>
-                            <td class="text-center">{{ $p->price }}</td>
+                            <td class="text-center">Rp. {{ number_format($p->price,-2,".",".") }}</td>
                             <td class="text-center">{{ $p->stock }}</td>
+                            {{-- <td class="text-center">{!!$p->deskripsi!!}</td> --}}
                             {{-- <td class="w-40">
                                 <div class="flex items-center justify-center {{ $faker['true_false'][0] ? 'text-theme-9' : 'text-theme-6' }}">
                                     <i data-feather="check-square" class="w-4 h-4 mr-2"></i> {{ $faker['true_false'][0] ? 'Active' : 'Inactive' }}
