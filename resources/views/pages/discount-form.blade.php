@@ -1,7 +1,7 @@
 @extends('../layout/' . $layout)
 
 @section('subhead')
-    <title>CRUD Form - B One - Tax</title>
+    <title>CRUD Form - B One - Discount</title>
 @endsection
 
 @section('subcontent')
@@ -11,18 +11,18 @@
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 lg:col-span-6">
             <!-- BEGIN: Form Layout -->
-        <form method="POST" action="tax-list-page/store">
+        <form method="POST" action="discount-list-page/store">
             {{ csrf_field() }}
 
             <div class="intro-y box p-5">
                 <div class="intro-y box p-5">
                     <div>
                         <label for="crud-form-1" class="form-label">Name</label>
-                        <input name="name" type="text" class="form-control w-full" placeholder="Nama Pajak">
+                        <input name="name" type="text" class="form-control w-full" placeholder="Nama Diskon">
                     </div>
                     <div>
-                        <label for="crud-form-1" class="form-label">Nilai Pajak</label>
-                        <input name="tax_value" type="text" class="form-control w-full" placeholder="Nilai Pajak">
+                        <label for="crud-form-1" class="form-label">Nilai Discount</label>
+                        <input name="discount_value" type="text" class="form-control w-full" placeholder="Nilai Diskon">
                     </div>
                     {{-- <div>
                         <label for="crud-form-1" class="form-label">Percentage</label>
@@ -35,7 +35,7 @@
                 </div>
                 
                 <div class="text-right mt-5">
-                    <a href="tax-list-page" type="button" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
+                    <a href="discount-list-page" type="button" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
                     <input type="submit" class="btn btn-primary w-24" value="Save">
                 </div>
             </div>

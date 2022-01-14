@@ -77,6 +77,15 @@ Route::middleware('auth')->group(function() {
     Route::get('tax-list-page/delete/{id}', [PageController::class, 'taxDelete'])->name('tax-delete');
     // END TAX
 
+    // DISCOUNT SET
+    Route::get('discount-form-page', [PageController::class, 'discountForm'])->name('discount-form');
+    Route::get('discount-list-page', [PageController::class, 'discountList'])->name('discount-list');
+    Route::get('discount-list-page/edit/{id}', [PageController::class, 'discountEdit'])->name('discount-edit');
+    Route::put('discount-list-page/update/{id}', [PageController::class, 'discountUpdate'])->name('discount-update');
+    Route::post('discount-list-page/store', [PageController::class, 'discountStore'])->name('discount-store');
+    Route::get('discount-list-page/delete/{id}', [PageController::class, 'discountDelete'])->name('discount-delete');
+    // END DISCOUNT
+
     // Route::get('profile-overview-3-page', [PageController::class, 'profileOverview3'])->name('profile-overview-3');
     Route::get('wizard-layout-1-page', [PageController::class, 'wizardLayout1'])->name('wizard-layout-1');
     Route::get('wizard-layout-2-page', [PageController::class, 'wizardLayout2'])->name('wizard-layout-2');

@@ -267,14 +267,22 @@ class SideMenu
                         ],
                         'title' => 'Tax List'
                     ],
-                    // 'users-layout-3' => [
-                    //     'icon' => '',
-                    //     'route_name' => 'users-layout-3',
-                    //     'params' => [
-                    //         'layout' => 'side-menu'
-                    //     ],
-                    //     'title' => 'Layout 3'
-                    // ]
+                    'discount-form' => [
+                        'icon' => '',
+                        'route_name' => 'discount-form',
+                        'params' => [
+                            'layout' => 'side-menu'
+                        ],
+                        'title' => 'Input Discount'
+                    ],
+                    'discount-list' => [
+                        'icon' => '',
+                        'route_name' => 'discount-list',
+                        'params' => [
+                            'layout' => 'side-menu'
+                        ],
+                        'title' => 'Discount List'
+                    ],
                 ]
             ],
             

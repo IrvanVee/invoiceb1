@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\Pengguna;
 use App\Models\Product;
 use App\Models\Tax; 
+use App\Models\Discount;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -440,7 +441,7 @@ class PageController extends Controller
         $product->stock = $request->stock;
         $product->deskripsi = $request->deskripsi;
         $product->save();
-        return redirect('product-list-page')->with('status','produk berhasil di tambah');
+        return redirect('product-list-page')->with('status','produk berhasil di edit');
     }
 
     /**
@@ -453,7 +454,7 @@ class PageController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
-        return redirect('product-list-page')->with('status','produk berhasil di tambah');
+        return redirect('product-list-page')->with('status','produk berhasil di hapus');
     }
 
     /**
@@ -490,13 +491,13 @@ class PageController extends Controller
         $this->validate($request,[
     		'name' => 'required',
             'tax_value' => 'required',
-    		'percentage' => 'required',   
+    		// 'percentage' => 'required',   
     	]);
  
         Tax::create([   
     		'name' => $request->name,
             'tax_value' => $request->tax_value,
-    		'percentage' => $request->percentage,
+    		// 'percentage' => $request->percentage,
     	]);
  
     	return redirect('tax-list-page');
@@ -526,13 +527,13 @@ class PageController extends Controller
         $this->validate($request,[
             'name' => 'required',
     		'tax_value' => 'required',
-            'percentage' => 'required'
+            // 'percentage' => 'required'
          ]);
       
          $tax = Tax::find($id);
          $tax->name = $request->name;
          $tax->tax_value = $request->tax_value;
-         $tax->percentage = $request->percentage;
+        //  $tax->percentage = $request->percentage;
          $tax->save();
          return redirect('tax-list-page');
     }
@@ -548,6 +549,100 @@ class PageController extends Controller
         $tax = Tax::find($id);
         $tax->delete();
         return redirect('tax-list-page');
+    }
+
+        /**
+     * Show specified view.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function discountForm()
+    {
+        return view('pages/discount-form');
+    }
+
+    /**
+     * Show specified view.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function discountList()
+    {
+        $discount = Discount::all();
+    	return view('pages/discount-list', ['discount' => $discount]);
+    }
+
+        /**
+     * Show specified view.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function discountStore(Request $request)
+    {
+        $this->validate($request,[
+    		'name' => 'required',
+            'discount_value' => 'required',
+    		// 'percentage' => 'required',   
+    	]);
+ 
+        Discount::create([   
+    		'name' => $request->name,
+            'discount_value' => $request->discount_value,
+    		// 'percentage' => $request->percentage,
+    	]);
+ 
+    	return redirect('discount-list-page');
+    }
+
+    /**
+     * Show specified view.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function discountEdit($id)
+    {
+        $discount = Discount::find($id);
+
+        return view('pages/discount-edit', ['discount' => $discount]);
+    }
+
+    /**
+     * Show specified view.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function discountUpdate($id, Request $request)
+    {
+        $this->validate($request,[
+            'name' => 'required',
+    		'discount_value' => 'required',
+            // 'percentage' => 'required'
+         ]);
+      
+         $discount = Discount::find($id);
+         $discount->name = $request->name;
+         $discount->discount_value = $request->discount_value;
+        //  $tax->percentage = $request->percentage;
+         $discount->save();
+         return redirect('discount-list-page');
+    }
+
+    /**
+     * Show specified view.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function discountDelete($id)
+    {
+        $discount = Discount::find($id);
+        $discount->delete();
+        return redirect('discount-list-page');
     }
 
     /**

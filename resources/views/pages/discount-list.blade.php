@@ -1,14 +1,14 @@
 @extends('../layout/' . $layout)
 
 @section('subhead')
-    <title>CRUD Data List - B One - Tax</title>
+    <title>CRUD Data List - B One - Discount</title>
 @endsection
 
 @section('subcontent')
     <h2 class="intro-y text-lg font-medium mt-10">Data List Layout</h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-            <a href="tax-form-page" class="btn btn-primary shadow-md mr-2">Add New Tax</a>
+            <a href="discount-form-page" class="btn btn-primary shadow-md mr-2">Add New Discount</a>
             {{-- <div class="dropdown">
                 <button class="dropdown-toggle btn px-2 box text-gray-700 dark:text-gray-300" aria-expanded="false">
                     <span class="w-5 h-5 flex items-center justify-center">
@@ -43,13 +43,13 @@
                 <thead>
                     <tr>
                         <th class="whitespace-nowrap">NAME</th>
-                        <th class="text-center whitespace-nowrap">TAX VALUE</th>
+                        <th class="text-center whitespace-nowrap">DISCOUNT VALUE</th>
                         {{-- <th class="text-center whitespace-nowrap">PERCENTAGE</th> --}}
                         <th class="text-center whitespace-nowrap">ACTIONS</th>
                     </tr>   
                 </thead>
                 <tbody>
-                    @foreach ($tax as $t)
+                    @foreach ($discount as $d)
                         <tr class="intro-x">
                             {{-- <td class="w-40">
                                 <div class="flex">
@@ -66,12 +66,12 @@
                             </td> --}}
                             <td>
                                 {{-- <a href="" class="font-medium whitespace-nowrap">{{ $T-> }}</a> --}}
-                                <div class="text-gray-600 text-l font-medium whitespace-nowrap mt-0.5">{{ $t->name }}</div>
+                                <div class="text-gray-600 text-l font-medium whitespace-nowrap mt-0.5">{{ $d->name }}</div>
                             </td>
                             {{-- <td>
                                 <a href="" class="font-medium whitespace-nowrap">{{ $faker['products'][0]['name'] }}</a>
                             </td> --}}
-                            <td class="text-center">{{ $t->tax_value }}</td>
+                            <td class="text-center">{{ $d->discount_value }}</td>
                             {{-- <td class="text-center">{{ $t->percentage }}</td> --}}
                             {{-- <td class="w-40">
                                 <div class="flex items-center justify-center {{ $faker['true_false'][0] ? 'text-theme-9' : 'text-theme-6' }}">
@@ -80,10 +80,10 @@
                             </td> --}}
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3" href="tax-list-page/edit/{{ $t->id }}">
+                                    <a class="flex items-center mr-3" href="discount-list-page/edit/{{ $d->id }}">
                                         <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit
                                     </a>
-                                    <a class="flex items-center text-theme-6" href="tax-list-page/delete/{{ $t->id }}">
+                                    <a class="flex items-center text-theme-6" href="discount-list-page/delete/{{ $d->id }}">
                                         <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete
                                     </a>
                                 </div>
