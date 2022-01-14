@@ -16,8 +16,8 @@
                     <label for="crud-form-1" class="form-label">Marketing</label>
                     <select data-placeholder="Marketing" class="tail-select w-full" id="crud-form-2">
                         <option value="">Pilih Marketing</option>
-                        <option value="1">vendor 1</option>
-                        <option value="2">vendor 2</option>
+                        <option value="1">marketing 1</option>
+                        <option value="2">marketing 2</option>
                     </select>
                 </div>
                 <div>
@@ -66,11 +66,11 @@
                         <option value="1">10%</option>
                         <option value="2">20%</option>
                     </select>
-                    <select data-placeholder="Status" class="tail-select w-full" id="crud-status">
+                    {{-- <select data-placeholder="Status" class="tail-select w-full" id="crud-status">
                         <option value="1">Draft</option>
                         <option value="2">Dibayar</option>
                         <option value="3">Terlambat</option>
-                    </select>
+                    </select> --}}
                 </div>
                 <div class="mt-3">
                     <label class="form-label">Price</label>
