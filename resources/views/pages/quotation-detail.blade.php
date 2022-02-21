@@ -6,6 +6,7 @@
 
 @section('subcontent')
 <a href="/quote-list-page"><button class="btn btn-warning shadow-md mr-2 mt-6">Back</button></a>
+<a href="/quotationpdf/{{$quotation->id}}" class="btn btn-danger" target="_blank">Cetak PDF</a>
 <h1 class="mt-10" style="font-size:30px;">Quotation Id : {{$quotation->id}}</h1>
     <h2 class="intro-y text-lg font-medium mt-5">Marketing : {{$quotation->marketing->marketing_name}}</h2>
     <h3 class="intro-y text-lg font-medium mt-5">Customer  : {{$quotation->customer->customer_name}}</h3>

@@ -14,6 +14,7 @@ use App\Models\Vendor;
 use App\Models\DetailQuotation;
 use Facade\Ignition\QueryRecorder\Query;
 use GuzzleHttp\Handler\Proxy;
+use PDF;
 use Illuminate\Http\Request;
 
 use function PHPSTORM_META\map;
@@ -310,6 +311,15 @@ class PageController extends Controller
             return redirect('quote-list-page')->with('status', 'Quotation Berhasil Di Hapus');
         }
     }
+
+    public function quotationpdf($id){
+        $quotation = Quotation::with('detailquotation')->where('id',$id)->first();
+        $detailquotation = DetailQuotation::where('quotation_id',$id)->sum("sum_product");
+
+        $pdf = PDF::loadview('pages.quotationpdf',compact('quotation','detailquotation'));
+        return $pdf->stream();
+    }
+
 
 
     /**

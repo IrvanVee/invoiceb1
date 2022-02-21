@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function() {
     Route::get('quote-edit/edit/{id}',[PageController::class,'quotesedit'])->name('quote-edit');
     Route::patch('quote-update/{id}',[PageController::class,'quotesupdate'])->name('quote-update');
     Route::delete('/quotation-list-page/delete/{id}',[PageController::class,'quotationdelete'])->name('quote-delete');
+    Route::get('quotationpdf/{id}',[PageController::class,'quotationpdf'])->name('quotation-pdf');
 
     // CUSTOMER SET
     Route::get('customers-form-page', [PageController::class, 'usersLayout1'])->name('users-layout-1');
@@ -135,8 +136,6 @@ Route::middleware('auth')->group(function() {
     Route::get('chart-page', [PageController::class, 'chart'])->name('chart');
     Route::get('slider-page', [PageController::class, 'slider'])->name('slider');
     Route::get('image-zoom-page', [PageController::class, 'imageZoom'])->name('image-zoom');
-
-    
 });
 
 
