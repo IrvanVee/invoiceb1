@@ -10,3 +10,342 @@ Sebelum memulai jangan lupa nyalakan XAMPP/MAMPP/sebagainya
 6. Terakhir jalankan,"php artisan serve"
 
 Silahkan Dilanjut Kodingannya
+
+@extends('../layout/' . $layout)
+
+@section('subhead')
+<title>CRUD Form - B One - Invoice</title>
+@endsection
+
+@section('subcontent')
+<div class="intro-y flex items-center mt-8">
+<h2 class="text-lg font-medium mr-auto">Form Layout</h2>
+</div>
+<div class="grid grid-cols-12 gap-6 mt-5">
+<div class="intro-y col-span-12 lg:col-span-6">
+<!-- BEGIN: Form Layout -->
+<form action="qoute-list-page/store" method="POST" class="form">
+@csrf
+<div class="intro-y box p-5">
+<div>
+<label for="crud-form-1" class="form-label">Marketing</label>
+<select class="tail-select w-full @error('marketing_id') is-invalid @enderror" id="crud-form-2" name="marketing_id">
+    <option value="">silahkan pilih marketing</option>
+@foreach($marketings as $marketing)
+    <option value="{{$marketing->id}}" {{old('marketing_id') == $marketing->id ? 'selected' : null}}>{{$marketing->marketing_name}}</option>
+@endforeach
+</select>
+@error('marketing_id')
+<p class="mb-2" style="color: red;">{{$message}}</p>
+@enderror
+</div>
+<div>
+<label for="crud-form-1" class="form-label mt-3">Customer</label>
+<select data-placeholder="Vendor" class="tail-select w-full @error('customer_id') is-invalid @enderror" id="crud-form-2" name="customer_id">
+    <option value="">silahkan pilih customer</option>
+    @foreach($customers as $customer)
+        <option value="{{$customer->id}}" {{old('customer_id') == $customer->id ? 'selected' : null}}>{{$customer->customer_name}}</option>
+    @endforeach
+</select>
+@error('customer_id')
+<p class="mb-2" style="color: red;">{{$message}}</p>
+@enderror
+</div>
+<label class="form-label mt-2">No. Referensi</label>
+<div class="input-group">
+<input type="number" onkeypress="return hanyaangka(event)" class="form-control @error('refrensi') is-invalid @enderror" placeholder="masukkan nomor referensi" aria-describedby="input-group-4" name="refrensi" value="{{ old('refrensi')}}" id="refrensi">
+<button class="btn btn-outline-warning" type="button" onclick="random();">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-codesandbox block mx-auto"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline><polyline points="7.5 19.79 7.5 14.6 3 12"></polyline><polyline points="21 12 16.5 14.6 16.5 19.79"></polyline><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>    
+</button> 
+@error('refrensi')
+<p class="mb-2" style="color: red;">{{$message}}</p>
+@enderror
+</div>
+<div>
+<label class="form-label mt-2">Due Date</label>
+<input type="date" class="form-control @error('duedate') is-invalid @enderror" id="duedate" name="duedate" data-single-mode="true" value="{{ old('duedate')}}">
+@error('duedate')
+<p class="mb-2" style="color: red;">{{$message}}</p>
+@enderror
+</div>
+<br>
+<div class="overflow-x-auto">
+<table class="table" id="tableproduct">
+<thead>
+<tr>
+    <th class="whitespace-nowrap">Vendor Name</th>
+    <th class="whitespace-nowrap">Product Name</th>
+    <th class="whitespace-nowrap">Price Product</th>
+    <th class="whitespace-nowrap">
+    <button type="button" class="btn btn-primary" onclick="create_tr('table_body')">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus block mx-auto"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+    </button>
+    </th>
+</tr>
+</thead>
+<tbody id="table_body">
+<tr>
+<td class="whitespace-nowrap">
+<select class="form-select vendor_id" aria-label="Default select example" name="vendor_id" id="vendor_id">
+    <option value="0" disabled selected="true">--pilih--</option>
+    @foreach ($vendors as $vendor)
+        <option value="{{$vendor->id}}">{{$vendor->vendor_name}}</option>
+    @endforeach
+</select>
+</td>
+<td class="whitespace-nowrap">
+<select class="form-select product_name" aria-label="Default select example" id="product_name" name="product_id[]">
+    <option value="" disabled selected="true">pilih produk</option>
+    {{-- @foreach ($products as $product)
+        <option value="{{$product->id}}">{{$product->product_name}}</option>
+    @endforeach --}}
+</select>
+</td>
+<td class="whitespace-nowrap">
+<input type="text" class="form-control price" id="price" readonly>
+</td>
+<td>
+<button type="button" class="btn btn-danger" onclick="remove_tr(this)">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus block mx-auto"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sm:grid grid-cols-2 mt-3">
+<label for="diskon">Diskon</label>
+<label for="tax">Tax</label>
+<div class="input-group">
+    <select data-placeholder="Discount" class="tail-select w-full" id="discount" name="discount_id">
+        @foreach ($discounts as $discount)
+                <option value="{{$discount->id}}">{{$discount->nilai_discount}}</option>
+        @endforeach
+        </select>
+    <label class="input-group-text" for="inputGroupSelect02">%</label>
+</div>
+<div class="input-group">
+<select data-placeholder="Tax" name="tax_id" class="tail-select w-full" id="tax">
+    @foreach ($taxs as $tax)
+    <option value="{{$tax->id}}">{{$tax->tax_value}}</option>
+    @endforeach
+    </select>
+<label class="input-group-text" for="inputGroupSelect02">%</label>
+</div>
+{{-- end div --}}
+</div>
+<div class="mt-3">
+<label class="form-label">Price</label>
+<div class="m:grid grid-cols-3 gap-2">
+    <div class="input-group sm">
+        <div id="input-group-3" class="input-group-text">Quantity</div>
+        <input type="number" class="form-control" id="quantity" aria-describedby="input-group-3">
+    </div>
+    <div class="input-group mt-2 sm:mt-2">
+        <div id="input-group-4" class="input-group-text">Price</div>
+        <input type="number" class="form-control" readonly id="price" aria-describedby="input-group-4">
+    </div>
+    <div class="input-group mt-2 sm:mt-2">
+        <div id="input-group-4" class="input-group-text">Pengiriman</div>
+        <input type="number" id="pengiriman" class="form-control" aria-describedby="input-group-4" value="0">
+    </div>
+</div>
+</div>
+<br>
+<div class="mt-3">
+<label class="form-label">Discount</label>
+<div class="m:grid grid-cols-3 gap-2">
+    <div class="input-group sm">
+        <div id="input-group-3" class="input-group-text">Discount</div>
+        <input type="number" class="form-control" readonly id="outputdiscount" aria-describedby="input-group-3">
+    </div>
+    <div class="input-group sm sm:mt-2">
+        <div id="input-group-3" class="input-group-text">Hasil Discount</div>
+        <input type="number" readonly class="form-control" id="hasildiscount" aria-describedby="input-group-3">
+    </div>
+    <br>
+    <label class="form-label">Tax</label>
+    <div class="input-group mt-2 sm:mt-2">
+        <div id="input-group-4" class="input-group-text">Tax</div>
+        <input type="number" class="form-control" readonly id="outputtax" aria-describedby="input-group-4">
+    </div>
+    <div class="input-group sm sm:mt-2">
+        <div id="input-group-3" class="input-group-text">Hasil Tax</div>
+        <input type="number" readonly class="form-control" id="hasiltax" aria-describedby="input-group-3">
+    </div>
+    <br>
+    <div class="input-group mt-2 sm:mt-2">
+        <div id="input-group-4" class="input-group-text">Total</div>
+        <input type="number" class="form-control @error('total') is-invalid @enderror" id="total" name="total" readonly aria-describedby="input-group-4">
+    </div>
+    @error('total')
+    <p class="mb-2" style="color: red;">{{$message}}</p>
+    @enderror
+</div>
+</div>
+<div class="mt-3">
+<label>Note</label>
+<div class="mt-2">
+    <textarea class="form-control" id="textarea" name="note" rows="3">
+        {{old('note')}}
+    </textarea>
+    @error('note')
+    <p class="mb-2" style="color: red;">{{$message}}</p>
+    @enderror
+</div>
+</div>
+<div class="text-right mt-5">
+{{-- <button type="button" class="btn btn-outline-secondary w-24 mr-1">Cancel</button> --}}
+<a href="quote-list-page" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
+<button type="submit" class="btn btn-primary w-24">Save</button>
+</div>
+</form>
+</div>
+<!-- END: Form Layout -->
+</div>
+</div>    
+@endsection
+
+{{-- BEGIN:UNTUK TEXT AREA DENGAN MENGGUNAKAN TINYMCE  --}}
+@push('tinyscript')
+<script>
+tinymce.init({
+selector:'#textarea',
+// widht:350,
+width: '100%',
+branding:false,
+});
+</script>
+@endpush
+{{-- END  --}}
+
+{{-- BEGIN:UNTUK MEMBUAT INPUT OTOMATIS KETIKA DI PILIH TAX DENGAN DISKON --}}
+@push('selectedjs')
+<script>
+// begin discount
+$(function(){
+$("#discount").change(function(){
+var diskon = $("#discount option:selected").text();
+$("#outputdiscount").val(diskon);
+})
+})
+// end discount
+
+// begin tax
+$(function(){
+$("#tax").change(function(){
+var taks = $("#tax option:selected").text();
+$("#outputtax").val(taks);
+})
+})
+// end tax
+</script>
+@endpush
+{{-- END --}}
+
+{{-- BEGIN:MEMBUAT DYNAMIC DROPDOWN DENGAN AJAX --}}
+@push('ajax')   
+<script type="text/javascript">
+$(document).ready(function(){
+$(document).on('change','.vendor_id',function(){
+// console.log("bisa di klik");
+// alert("bisa di klik");
+
+var vendor_id = $(this).val();
+// console.log(id)
+var div= $(this).parent();
+var op = " ";
+
+$.ajax({
+type:'get',
+url:'{!!URL::to('findProductName')!!}',
+data:{'id':vendor_id},
+success:function(data){
+console.log('success');
+console.log(data);
+console.log(data.length);
+op+='<option value="0" selected disabled>pilih produk</option>';
+for(var i = 0; i <data.length;i++){
+op+='<option value = "'+data[i].id+'">'+data[i].product_name+'</option>';
+}
+$('#product_name').html(" ");
+$('#product_name').append(op);
+},
+error:function(){
+
+}
+});
+});
+$(document).on('change','.product_name',function(){
+var prod_id = $(this).val();
+
+var a = $(this).parent();
+console.log(prod_id);
+var op = "";
+
+$.ajax({
+type:'get',
+url:'{!!URL::to('findPrice')!!}',
+data:{'id':prod_id},
+dataType:'json',
+success:function(data){
+console.log("price/harga");
+console.log(data);
+console.log(data.price);
+
+$('#price').val(data.price);
+},
+error:function(){
+
+}
+});
+});
+});
+</script>
+
+<script>
+function create_tr(table_id) {
+    let table_body = document.getElementById(table_id),
+        first_tr   = table_body.firstElementChild
+        tr_clone   = first_tr.cloneNode(true);
+
+    table_body.append(tr_clone);
+
+    clean_first_tr(table_body.firstElementChild);
+}
+
+function clean_first_tr(firstTr) {
+    let children = firstTr.children;
+    
+    children = Array.isArray(children) ? children : Object.values(children);
+    children.forEach(x=>{
+        if(x !== firstTr.lastElementChild)
+        {
+            x.firstElementChild.value = '';
+        }
+    });
+}
+
+function remove_tr(This) {
+    if(This.closest('tbody').childElementCount == 1)
+    {
+        alert("sisakan 1 tabel");
+    }else{
+        This.closest('tr').remove();
+    }
+}
+// membuat kode refrensi Random
+function random() {
+    // alert("tes")
+document.getElementById("refrensi").value =
+Math.floor(Math.random() * 1000000000000);
+}
+function hanyaangka(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+        return true;
+}
+</script>
+@endpush
+{{-- END --}}

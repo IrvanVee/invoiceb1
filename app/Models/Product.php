@@ -9,5 +9,12 @@ class Product extends Model
 {
     protected $table = "product";
     
-    protected $fillable = ['product_name', 'vendor', 'price', 'stock','deskripsi'];
+    protected $fillable = ['product_name', 'vendor_id', 'price', 'stock','deskripsi'];
+
+    public function vendor(){
+        return $this->belongsTo(Vendor::class);
+    }
+    public function detailquotation(){
+        return $this->hasMany(DetailQuotation::class,'quotation_id');
+    }
 }

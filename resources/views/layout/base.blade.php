@@ -34,6 +34,27 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.10.2/tinymce.min.js" integrity="sha512-MbhLUiUv8Qel+cWFyUG0fMC8/g9r+GULWRZ0axljv3hJhU6/0B3NoL6xvnJPTYZzNqCQU3+TzRVxhkE531CLKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     @stack('tinyscript')
     {{-- END: TINYMCE CDN --}}
+
+    {{-- BEGIN:SELECTED --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @stack('selectedjs')
+    {{-- END:SELECTED --}}
+
+    {{-- BEGIN:AUTO DISPLAY WITH AJAX --}}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    @stack('ajax')
+    {{-- END:AUTO DISPLAY WITH AJAX --}}
+
+    {{-- BEGIN:MAKE COUNT WITH JQUERY  --}}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    @stack('count')
+    {{-- END:MAKE COUNT WITH JQUERY --}}
+
+    {{-- BEGIN : MAKE DATA TABLES WITH DATATABLES.NET --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    @stack('datatables')
+    {{-- END : MAKE DATA TABLES WITH DATATABLES.NET --}}
 </head>
 <!-- END: Head -->
 

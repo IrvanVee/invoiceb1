@@ -9,5 +9,9 @@ class Tax extends Model
 {
     protected $table = 'tax';
 
-    protected $fillable = ['name','tax_value','percentage'];
+    protected $fillable = ['name','tax_value'];
+    
+    public function quotation(){
+        return $this->hasOne(Quotation::class);
+    }
 }

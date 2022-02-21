@@ -62,7 +62,7 @@
                     @foreach ($product as $p)
                         <tr class="intro-x">
                             <td class="w-40">
-                                {{ $p->vendor }}
+                                {{ $p->vendor->vendor_name }}
                             </td>
                             <td>
                                 <a href="" class="font-medium whitespace-nowrap">{{ $p->product_name }}</a>
@@ -81,7 +81,7 @@
                                     <a class="flex items-center mr-3" href="product-list-page/edit/{{ $p->id }}">
                                         <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit
                                     </a>
-                                    <a class="flex items-center text-theme-6" href="product-list-page/delete/{{ $p->id }}">
+                                    <a class="flex items-center text-theme-6" onclick="return confirm('yakin akan menghapus data ini');" href="product-list-page/delete/{{ $p->id }}">
                                         <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete
                                     </a>
                                 </div>

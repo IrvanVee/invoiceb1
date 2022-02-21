@@ -21,12 +21,12 @@
                 </div>
                 <div class="mt-3">
                     <label for="crud-form-2" class="form-label">Vendor</label>
-                    <select data-placeholder="Select Vendor" class="tail-select w-full" name="vendor">
+                    <select data-placeholder="Select Vendor" class="tail-select w-full" name="vendor_id">
                         {{-- <option value="">Select Vendor</option>
                         <option value="1">Vendor 1</option>
                         <option value="2">Vendor 2</option> --}}
-                        <option value="{{$product->vendor}}">
-                        {{$product->vendor}}
+                        <option value="{{$product->vendor_id}}">
+                        {{$product->vendor->vendor_name}}
                         </option>
                     </select>
                 </div>
@@ -68,6 +68,7 @@ tinymce.init({
     selector:'#textarea',
     // widht:350,
     width: '100%',
+    branding:false,
 })
 </script>
 @endpush

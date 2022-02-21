@@ -40,6 +40,13 @@ Route::middleware('auth')->group(function() {
     Route::get('invoice-form-page', [PageController::class, 'invoiceForm'])->name('invoice-form');
     Route::get('quote-list-page', [PageController::class, 'quoteList'])->name('quote-list');
     Route::get('quote-form-page', [PageController::class, 'quoteForm'])->name('quote-form');
+    Route::get('findProductName', [PageController::class, 'findProductName'])->name('findProductName');
+    Route::get('findPrice', [PageController::class, 'findPrice'])->name('findPrice');
+    Route::post('qoute-list-page/store',[PageController::class,'quoteStore'])->name('quote-store');
+    Route::get('quote-detail/{id}',[PageController::class,'quoteshow'])->name('quote-detail');
+    Route::get('quote-edit/edit/{id}',[PageController::class,'quotesedit'])->name('quote-edit');
+    Route::patch('quote-update/{id}',[PageController::class,'quotesupdate'])->name('quote-update');
+    Route::delete('/quotation-list-page/delete/{id}',[PageController::class,'quotationdelete'])->name('quote-delete');
 
     // CUSTOMER SET
     Route::get('customers-form-page', [PageController::class, 'usersLayout1'])->name('users-layout-1');

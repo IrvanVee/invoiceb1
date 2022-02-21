@@ -17,7 +17,7 @@ class CreateTaxesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('tax_value');
-            $table->text('percentage');
+            $table->text('percentage')->nullable();
             $table->timestamps();
         });
     }

@@ -24,12 +24,12 @@
                 </div>
                 <div class="mt-3">
                     <label for="crud-form-2" class="form-label">Vendor</label>
-                    <select data-placeholder="Select Vendor" class="tail-select w-full" name="vendor" value="{{old('vendor')}}">
-                        <option value="">Select Vendor</option>
-                        <option value="1">Vendor 1</option>
-                        <option value="2">Vendor 2</option>
+                    <select data-placeholder="Select Vendor" class="tail-select w-full" name="vendor_id" value="{{old('vendor_id')}}">
+                    @foreach ($vendors as $vendor)
+                        <option value="{{$vendor->id}}">{{$vendor->vendor_name}}</option>
+                    @endforeach
                     </select>
-                    @error('vendor')
+                    @error('vendor_id')
                     <span style="color:red;">{{$message}}</span>
                     @enderror
                 </div>
@@ -79,6 +79,7 @@ tinymce.init({
     selector:'#textarea',
     // widht:350,
     width: '100%',
+    branding:false,
 })
 </script>
 @endpush

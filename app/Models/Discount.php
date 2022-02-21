@@ -9,5 +9,9 @@ class Discount extends Model
 {
     protected $table = 'discount';
 
-    protected $fillable = ['name', 'discount_value'];
+    protected $fillable = ['name', 'nilai_discount'];
+
+    public function quotation(){
+        return $this->hasOne(Quotation::class);
+    }
 }

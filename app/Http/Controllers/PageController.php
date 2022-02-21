@@ -8,7 +8,15 @@ use App\Models\Pengguna;
 use App\Models\Product;
 use App\Models\Tax; 
 use App\Models\Discount;
+use App\Models\Marketing;
+use App\Models\Quotation;
+use App\Models\Vendor;
+use App\Models\DetailQuotation;
+use Facade\Ignition\QueryRecorder\Query;
+use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
+
+use function PHPSTORM_META\map;
 
 class PageController extends Controller
 {
@@ -147,7 +155,9 @@ class PageController extends Controller
      */
     public function quoteList()
     {
-        return view('pages/quotation-list');
+        $quotation = Quotation::all();
+        return view('pages.quotation-list',compact('quotation'));
+        // return view('pages/quotation-list');
     }
 
     /**
@@ -158,8 +168,149 @@ class PageController extends Controller
      */
     public function quoteForm()
     {
-        return view('pages/quotation-form');
+        $customers = Customer::all();
+        $marketings = Marketing::all();
+        $vendors = Vendor::all();
+        $products = Product::all();
+        $discounts = Discount::all()->sortBy('nilai_discount');
+        $taxs = Tax::all()->sortBy('tax_value');
+        return view('pages/quotation-form',compact('customers','marketings','products','discounts','taxs','vendors'));
     }
+
+    public function findProductName(Request $request){
+        $data = Product::select('product_name','id')->where('vendor_id',$request->id)->take(100)->get();
+        return response()->json([
+            'data'=>$data,
+        ]);
+    }
+    public function findPrice(Request $request){
+		$p = Product::select('price')->where('id',$request->id)->first();
+	    return response()->json([
+            'data'=>$p,
+        ]);
+	}
+
+
+    public function quoteStore(Request $request){
+        $request->validate([
+            'marketing_id' => 'required',
+            'customer_id' => 'required',
+            'refrensi'=>'required',
+            'duedate'=>'required',
+            'discount_id'=>'required',
+            'tax_id'=>'required',
+            'total'=>'required|numeric',
+            'note'=>'required',
+        ]);
+        $data = $request->all();
+        // dd($data);
+
+        $quotation = new Quotation();
+        $quotation->marketing_id = $data['marketing_id'];
+        $quotation->customer_id = $data['customer_id'];
+        $quotation->refrensi = $data['refrensi'];
+        $quotation->duedate = $data['duedate'];
+        $quotation->discount_id = $data['discount_id'];
+        $quotation->tax_id = $data['tax_id'];
+        $quotation->pengiriman = $data['pengiriman'];
+        $quotation->total = $data['total'];
+        $quotation->note = $data['note'];
+        $quotation->save();
+
+        // $detailquotation = new DetailQuotation();
+        // $detailquotation->quotation_id = $quotation->id;
+        // $detailquotation->vendor_id = $data['vendor_id'];
+        // $detailquotation->product_id = $data['product_id'];
+        // $detailquotation->quantity = $data['quantity'];
+        // $detailquotation->sum_product = $data['sum_product'];
+        // $detailquotation->save();
+        if (count($data['vendor_id']) > 0) {
+            foreach ($data['vendor_id'] as $item => $value) {
+                $data2 = array(
+                    'quotation_id'=> $quotation->id,
+                    'vendor_id'=> $data['vendor_id'][$item],
+                    'product_id'=> $data['product_id'][$item],
+                    'quantity'=> $data['quantity'][$item],
+                    'sum_product'=> $data['sum_product'][$item],
+                );
+                DetailQuotation::create($data2);
+            }
+            return redirect('quote-list-page')->with('status', 'Quotation Berhasil Di Tambah');
+        }
+    }
+
+    public function quoteshow($id){
+        $quotation = Quotation::with('detailquotation')->where('id',$id)->first();
+        $detailquotation = DetailQuotation::where('quotation_id',$id)->sum("sum_product");
+        if ($quotation == NULL) {
+            return abort(404);
+        } else {
+            return view('pages.quotation-detail',compact('quotation','detailquotation'));
+        }
+        
+        // return view('pages.quotation-detail',compact('quotation'));
+    }
+
+    public function quotesedit($id){
+        $quotation = Quotation::with('detailquotation')->where('id',$id)->first();
+        $marketings = Marketing::all();
+        $customers = Customer::all();
+        $discounts = Discount::all();
+        $taxs = Tax::all();
+        $vendors = Vendor::all();
+
+        if ($quotation == NULL) {
+            return abort(404);
+        } else {
+            return view('pages.quotation-edit',compact('quotation','marketings','customers','discounts','taxs','vendors'));
+        }
+        
+        // return view('pages.quotation-detail',compact('quotation'));
+    }
+
+    public function quotesupdate($id, Request $request){
+        // dd($request->$id);
+        $quotation = Quotation::find($id);
+        $quotation->marketing_id = $request->marketing_id;
+        $quotation->customer_id = $request->customer_id;
+        $quotation->refrensi = $request->refrensi;
+        $quotation->duedate = $request->duedate;
+        $quotation->discount_id = $request->discount_id;
+        $quotation->tax_id = $request->tax_id;
+        $quotation->pengiriman = $request->pengiriman;
+        $quotation->total = $request->total;
+        $quotation->note = $request->note;
+
+        $quotation->save();
+
+        if (count($request->id) > 0) {
+            foreach ($request->id as $item => $value) {
+                $datad = array(
+                    'quotation_id'=>$request->quotation_id[$item],
+                    'vendor_id'=>$request->vendor_id[$item],
+                    'product_id'=>$request->product_id[$item],
+                    'quantity'=>$request->quantity[$item],
+                    'sum_product'=>$request->sum_product[$item]
+                );
+                $dquotation = DetailQuotation::where('id',$request->id[$item])->first();
+                $dquotation->update($datad);
+            }
+            return redirect('quote-list-page')->with('status', 'Quotation Berhasil Di Edit');
+        }
+    }
+
+    public function quotationdelete($id){
+        $quotation = Quotation::where('id',$id);
+        $detailquotation = DetailQuotation::where('quotation_id',$id);
+        if ($detailquotation && $detailquotation == null) {
+            return abort(404);
+        } else {
+            $quotation->delete();
+            $detailquotation->delete();
+            return redirect('quote-list-page')->with('status', 'Quotation Berhasil Di Hapus');
+        }
+    }
+
 
     /**
      * Show specified view.
@@ -198,7 +349,7 @@ class PageController extends Controller
     		'customer_name' => 'required',
             'contact' => 'required'
     	]);
- 
+
         Customer::create([
     		'instance' => $request->instance,
     		'customer_name' => $request->customer_name,
@@ -362,7 +513,8 @@ class PageController extends Controller
      */
     public function profileOverview1()
     {
-        return view('pages/product-form');
+        $vendors = Vendor::all();
+        return view('pages/product-form',compact('vendors'));
     }
 
     /**
@@ -373,7 +525,7 @@ class PageController extends Controller
      */
     public function profileOverview2()
     {
-        $product = Product::all();
+        $product = Product::with('vendor')->paginate();
         
         return view('pages/product-list', ['product' => $product]);
     }
@@ -388,7 +540,7 @@ class PageController extends Controller
     {
         $this->validate($request,[
     		'product_name' => 'required',
-            'vendor' => 'required',
+            'vendor_id' => 'required',
     		'price' => 'required',
             'stock' => 'required',
             'deskripsi'=>'required'   
@@ -396,7 +548,7 @@ class PageController extends Controller
  
         Product::create([   
     		'product_name' => $request->product_name,
-            'vendor' => $request->vendor,
+            'vendor_id' => $request->vendor_id,
     		'price' => $request->price,
             'stock' => $request->stock,
             'deskripsi'=>$request->deskripsi
@@ -428,7 +580,7 @@ class PageController extends Controller
     {
         $this->validate($request,[
     		'product_name' => 'required',
-            'vendor' => 'required',
+            'vendor_id' => 'required',
     		'price' => 'required',
             'stock' => 'required',
             'deskripsi'=>'required'  
@@ -436,7 +588,7 @@ class PageController extends Controller
  
         $product = Product::find($id);
         $product->product_name = $request->product_name;
-        $product->vendor = $request->vendor;
+        $product->vendor_id = $request->vendor_id;
         $product->price = $request->price;
         $product->stock = $request->stock;
         $product->deskripsi = $request->deskripsi;
@@ -499,6 +651,13 @@ class PageController extends Controller
             'tax_value' => $request->tax_value,
     		// 'percentage' => $request->percentage,
     	]);
+        // dd($request);
+        // if ($request->tax_value <= 100) {
+        //     dd("lebih dari 100");
+        // } else {
+        //     dd("kurang dari 100");
+        // }
+        
  
     	return redirect('tax-list-page');
     }
@@ -584,17 +743,17 @@ class PageController extends Controller
     {
         $this->validate($request,[
     		'name' => 'required',
-            'discount_value' => 'required',
+            'nilai_discount' => 'required',
     		// 'percentage' => 'required',   
     	]);
  
         Discount::create([   
     		'name' => $request->name,
-            'discount_value' => $request->discount_value,
+            'nilai_discount' => $request->nilai_discount,
     		// 'percentage' => $request->percentage,
     	]);
  
-    	return redirect('discount-list-page');
+    	return redirect('discount-list-page')->with('status','Diskon Berhasil Ditambah');
     }
 
     /**
@@ -620,13 +779,13 @@ class PageController extends Controller
     {
         $this->validate($request,[
             'name' => 'required',
-    		'discount_value' => 'required',
+    		'nilai_discount' => 'required',
             // 'percentage' => 'required'
          ]);
       
          $discount = Discount::find($id);
          $discount->name = $request->name;
-         $discount->discount_value = $request->discount_value;
+         $discount->nilai_discount = $request->nilai_discount;
         //  $tax->percentage = $request->percentage;
          $discount->save();
          return redirect('discount-list-page');

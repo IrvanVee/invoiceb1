@@ -22,7 +22,7 @@
                     </div>
                     <div>
                         <label for="crud-form-1" class="form-label">Nilai Discount</label>
-                        <input name="discount_value" type="text" class="form-control w-full" placeholder="Nilai Diskon">
+                        <input name="nilai_discount" type="text" class="form-control w-full" placeholder="Nilai Diskon">
                     </div>
                     {{-- <div>
                         <label for="crud-form-1" class="form-label">Percentage</label>
