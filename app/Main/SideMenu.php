@@ -467,14 +467,14 @@ class SideMenu
             //     ]
             // ],
             'devider',
-            'calendar' => [
-                'icon' => 'calendar',
-                'route_name' => 'calendar',
-                'params' => [
-                    'layout' => 'side-menu'
-                ],
-                'title' => 'Reports'
-            ],
+            // 'calendar' => [
+            //     'icon' => 'calendar',
+            //     'route_name' => 'calendar',
+            //     'params' => [
+            //         'layout' => 'side-menu'
+            //     ],
+            //     'title' => 'Reports'
+            // ],
             // 'components' => [
             //     'icon' => 'inbox',
             //     'title' => 'Components',
