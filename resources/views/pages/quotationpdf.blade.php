@@ -1,3 +1,8 @@
+<?php 
+function kode_unik($u = 5){
+    return substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"),10,$u);
+}
+?>
 <title>{{$quotation->marketing->marketing_name}} : {{$quotation->customer->customer_name}}</title>
 <!doctype html>
 <html>
@@ -7,7 +12,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-    <h1 class="mt-7 intro-y text-lg font-medium" style="font-size:30px;">Kode Quotation : <?php echo(mt_rand(10000,20000)) ?>{{$quotation->id}}</h1>
+    <h1 class="mt-7 intro-y text-lg font-medium" style="font-size:30px;">Kode Quotation : <?php echo kode_unik(); ?>{{$quotation->id}}</h1>
     <h2 class="intro-y text-lg font-medium mt-3">Marketing : {{$quotation->marketing->marketing_name}}</h2>
     <h3 class="intro-y text-lg font-medium mt-3">Customer  : {{$quotation->customer->customer_name}}</h3>
 

@@ -1,31 +1,33 @@
 @extends('../layout/' . $layout)
 
 @section('subhead')
-<title>CRUD Form - B One - Quotation</title>
+<title>Edit Vendor {{$invoice->vendor->vendor_name}}</title>
 @endsection
 
 @section('subcontent')
 <div class="intro-y flex items-center mt-8">
-    <h2 class="text-lg font-medium mr-auto">Form Layout</h2>
+    <h2 class="text-lg font-medium mr-auto">Form Edit {{$invoice->vendor->vendor_name}}</h2>
 </div>
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 lg:col-span-12">
         <!-- BEGIN: Form Layout -->
-        <form action="invoice-list-page/store" method="POST" class="form">
+        <form action="/invoice-update/{{$invoice->id}}" method="POST" class="form">
             @csrf
+            @method('PUT')
             <div class="intro-y box p-5">
                 <div>
                     <label for="crud-form-1" class="form-label">Vendor</label>
                     <select class="tail-select w-full @error('vendor_id') is-invalid @enderror" id="crud-form-2"
                         name="vendor_id">
-                        <option value="">silahkan pilih vendor</option>
+                        {{-- <option value="">silahkan pilih vendor</option> --}}
+                        <option value="{{$invoice->vendor_id}}">{{$invoice->vendor->vendor_name}}</option>
                         @foreach($vendors as $vendor)
                         <option value="{{$vendor->id}}"
                             {{old('vendor_id') == $vendor->id ? 'selected' : null}}>{{$vendor->vendor_name}}
                         </option>
                         @endforeach
                     </select>
-                    @error('marketing_id')
+                    @error('vendor_id')
                     <p class="mb-2" style="color: red;">{{$message}}</p>
                     @enderror
                 </div>
@@ -34,7 +36,8 @@
                     <select data-placeholder="Vendor"
                         class="tail-select w-full @error('customer_id') is-invalid @enderror" id="crud-form-2"
                         name="customer_id">
-                        <option value="">silahkan pilih customer</option>
+                        {{-- <option value="">silahkan pilih customer</option> --}}
+                        <option value="{{$invoice->customer_id}}">{{$invoice->customer->customer_name}}</option>
                         @foreach($customers as $customer)
                         <option value="{{$customer->id}}" {{old('customer_id') == $customer->id ? 'selected' : null}}>
                             {{$customer->customer_name}}</option>
@@ -49,7 +52,7 @@
                     <input type="number" onkeypress="return hanyaangka(event)"
                         class="form-control @error('refrensi') is-invalid @enderror"
                         placeholder="masukkan nomor referensi" aria-describedby="input-group-4" name="refrensi"
-                        value="{{ old('refrensi')}}" id="refrensi">
+                        value="{{ $invoice->refrensi}}" id="refrensi">
                     <button class="btn btn-outline-warning" type="button" onclick="random();">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
@@ -71,7 +74,7 @@
                 <div>
                     <label class="form-label mt-2">Due Date</label>
                     <input type="date" class="form-control @error('duedate') is-invalid @enderror" id="duedate"
-                        name="duedate" data-single-mode="true" value="{{ old('duedate')}}">
+                        name="duedate" data-single-mode="true" value="{{ $invoice->duedate}}">
                     @error('duedate')
                     <p class="mb-2" style="color: red;">{{$message}}</p>
                     @enderror
@@ -81,13 +84,12 @@
                     <table class="table" id="tableproduct">
                         <thead>
                             <tr>
-                                {{-- <th class="whitespace-nowrap">Vendor Name</th> --}}
                                 <th class="whitespace-nowrap">Product Name</th>
                                 <th class="whitespace-nowrap">Quantity</th>
                                 <th class="whitespace-nowrap">Price Product</th>
                                 <th class="whitespace-nowrap">Sum Product</th>
                                 <th class="whitespace-nowrap">
-                                    <button type="button" class="btn btn-primary btn-tambah" id="btn-tambah">
+                                    {{-- <button type="button" class="btn btn-primary btn-tambah" id="btn-tambah">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                                             stroke-linecap="round" stroke-linejoin="round"
@@ -95,12 +97,55 @@
                                             <line x1="12" y1="5" x2="12" y2="19"></line>
                                             <line x1="5" y1="12" x2="19" y2="12"></line>
                                         </svg>
-                                    </button>
+                                    </button> --}}
                                 </th>
                             </tr>
                         </thead>
                         <tbody id="table_body">
-
+                            @foreach ($invoice->detailinvoice as $detail)
+                            <tr>
+                                <td class="whitespace-nowrap" style="display:none;">
+                                    <input type="hidden" name="id[]" value="{{$detail->id}}">
+                                </td>
+                                <td class="whitespace-nowrap" style="display:none;">
+                                    <input type="hidden" name="invoice_id[]" value="{{$detail->invoice_id}}">
+                                </td>
+                                {{-- <td class="whitespace-nowrap">
+                                    <select class="form-select vendor_id" name="vendor_id[]" id="vendor_id{{$detail->id}}" data-id="{{$detail->id}}" aria-label=".form-select-lg example">
+                                        <option value="{{$detail->vendor_id}}" disabled>{{$detail->vendor->vendor_name}}</option>
+                                        @foreach ($vendors as $vendor)
+                                        <option value="{{$vendor->id}}" {{($detail->vendor_id == $vendor->id) ? 'selected' : ''}}>{{$vendor->vendor_name}}</option>
+                                    @endforeach
+                                    </select>
+                                </td> --}}
+                                <td class="whitespace-nowrap">
+                                    <select class="form-select product_id" name="product_id[]" id="product_id{{$detail->id}}" data-id="{{$detail->id}}" aria-label=".form-select-lg example">
+                                    @foreach ($products as $product)
+                                        <option value="{{$product->id}}" {{($detail->product_id == $product->id) ? 'selected' : ''}}>{{$product->product_name}}</option>
+                                    @endforeach
+                                    </select>
+                                </td>
+                                <td class="whitespace-nowrap">
+                                    <input id="quantity{{$detail->id}}" name="quantity[]" type="number" class="form-control quantity" data-id="{{$detail->id}}" value="{{$detail->quantity}}">
+                                </td>
+                                <td class="whitespace-nowrap">
+                                    <input type="number" class="form-control price" id="price{{$detail->id}}" data-id="{{$detail->id}}" value="{{$detail->product->price}}" readonly>
+                                </td>
+                                <td class="whitespace-nowrap">
+                                    <input type="number" class="form-control sum_product" id="sum_product{{$detail->id}}" name="sum_product[]" data-id="{{$detail->id}}" value="{{$detail->sum_product}}" readonly>
+                                </td>
+                                <td class="whitespace-nowrap">
+                                    {{-- <button type="button" class="btn btn-danger btn-hapus" id="btn-hapus">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="feather feather-minus block mx-auto">
+                                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        </svg>
+                                    </button> --}}
+                                </td>
+                            </tr>
+                            @endforeach
                         </tbody>
                         {{-- <tfoot>
                             <tr>
@@ -117,6 +162,7 @@
                     <label for="tax">Tax</label>
                     <div class="input-group">
                         <select data-placeholder="Discount" class="tail-select w-full" id="discount" name="discount_id">
+                            <option value="{{$invoice->discount_id}}">{{$invoice->discount->nilai_discount}}</option>
                             @foreach ($discounts as $discount)
                             <option value="{{$discount->id}}">{{$discount->nilai_discount}}</option>
                             @endforeach
@@ -125,6 +171,7 @@
                     </div>
                     <div class="input-group">
                         <select data-placeholder="Tax" name="tax_id" class="tail-select w-full" id="tax">
+                            <option value="{{$invoice->tax_id}}">{{$invoice->tax->tax_value}}</option>
                             @foreach ($taxs as $tax)
                             <option value="{{$tax->id}}">{{$tax->tax_value}}</option>
                             @endforeach
@@ -142,11 +189,11 @@
                         </div> --}}
                         <div class="input-group mt-2 sm:mt-2">
                             <div id="input-group-4" class="input-group-text">Price</div>
-                            <input type="number" class="form-control" id="totalprice" readonly>
+                            <input type="number" class="form-control totalprice" id="totalprice" value="{{$detailinvoice}}" readonly>
                         </div>
                         <div class="input-group mt-2 sm:mt-2">
                             <div id="input-group-4" class="input-group-text">Pengiriman</div>
-                            <input type="number" name="pengiriman" id="pengiriman" class="form-control" aria-describedby="input-group-4"
+                            <input type="number" name="pengiriman" id="pengiriman" class="form-control" value="{{$invoice->pengiriman}}" aria-describedby="input-group-4"
                                 value="0">
                         </div>
                     </div>
@@ -181,27 +228,40 @@
                         <div class="input-group mt-2 sm:mt-2">
                             <div id="input-group-4" class="input-group-text">Total</div>
                             <input type="number" class="form-control @error('total') is-invalid @enderror" id="total"
-                                name="total" readonly aria-describedby="input-group-4">
+                                name="total" value="{{$invoice->total}}" readonly aria-describedby="input-group-4">
                         </div>
                         @error('total')
                         <p class="mb-2" style="color: red;">{{$message}}</p>
                         @enderror
-                    </div>
-                    <div class="mt-3">
-                        <label for="regular-form-2" class="form-label">Status</label>
-                        <select class="form-select mt-2 sm:mr-2" name="status" id="status" aria-label="Default select example">
-                            <option value="" selected disabled>Pilih Status</option>
+                        <br>
+                        <div class="input-group sm:mt-2">
+                            <div id="input-group-4" class="input-group-text">Dibayar</div>
+                            <input type="number" class="form-control @error('dibayar') is-invalid @enderror" id="dibayar"
+                                name="dibayar" value="{{$invoice->dibayar}}" aria-describedby="input-group-4">
+                        </div>
+                        @error('dibayar')
+                        <p class="mb-2" style="color: red;">{{$message}}</p>
+                        @enderror
+                        <div class="mt-3">
+                            <label for="status">Status</label>
+                            <select data-placeholder="Status"
+                            class="tail-select w-full @error('status') is-invalid @enderror" id="crud-form-2"
+                            name="status">
+                            <option value="{{$invoice->status}}"
+                                {{old('status') == $invoice->status ? 'selected' : null}}>{{$invoice->status}}
+                            </option>
                             <option>Draft</option>
                             <option>Terkirim</option>
                             <option>Dibatalkan</option>
                         </select>
+                        </div>
                     </div>
                 </div>
                 <div class="mt-3">
                     <label>Note</label>
                     <div class="mt-2">
                         <textarea class="form-control" id="textarea" name="note" rows="3">
-                            {{old('note')}}
+                            {{$invoice->note}}
                         </textarea>
                         @error('note')
                         <p class="mb-2" style="color: red;">{{$message}}</p>
@@ -210,7 +270,7 @@
                 </div>
                 <div class="text-right mt-5">
                     {{-- <button type="button" class="btn btn-outline-secondary w-24 mr-1">Cancel</button> --}}
-                    <a href="invoice-list-page" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
+                    <a href="/invoice-list-page/" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
                     <button type="submit" class="btn btn-primary w-24">Save</button>
                 </div>
         </form>
@@ -273,43 +333,52 @@
     $(document).ready(function () {
         GetData();
         var i = 0;
-        $(document).on("click", ".btn-tambah", function () {
-            var table = $("#table_body");
-            table.append(
-                `<tr class="item">
-                                <td class="whitespace-nowrap">
-                                    <select class="form-select product_id" aria-label="Default select example"
-                                        id="product_id${i}" name="product_id[]" data-id="${i}">
-                                        <option value="" disabled selected="true">pilih produk</option>
-                                        @foreach ($products as $product)
-                                            <option value="{{$product->id}}">{{$product->product_name}}</option>
-                                        @endforeach
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control quantity" name="quantity[]" id="quantity${i}" data-id="${i}">
-                                </td>
-                                <td class="whitespace-nowrap">
-                                    <input type="number" class="form-control price" id="price${i}" readonly data-id="${i}">
-                                </td>
-                                <td class="whitespace-nowrap">
-                                    <input type="number" class="form-control sum_product" id="sum_product${i}" name="sum_product[]" readonly data-id="${i}">
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-danger btn-hapus" id="btn-hapus${i}" data-id="${i}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-minus block mx-auto">
-                                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                                        </svg>
-                                    </button>
-                                </td>
-                            </tr>`
-            );
-            GetData();
-            i++;
-        });
+        // $(document).on("click", ".btn-tambah", function () {
+        //     var table = $("#table_body");
+        //     table.append(
+        //         `<tr class="item">
+        //                         <td class="whitespace-nowrap">
+        //                             <select class="form-select vendor_id" aria-label="Default select example"
+        //                                 name="vendor_id[]" id="vendor_id${i}" data-id="${i}">
+        //                                 <option value="0" disabled selected="true">--pilih--</option>
+        //                                 @foreach ($vendors as $vendor)
+        //                                 <option value="{{$vendor->id}}">{{$vendor->vendor_name}}</option>
+        //                                 @endforeach
+        //                             </select>
+        //                         </td>
+        //                         <td class="whitespace-nowrap">
+        //                             <select class="form-select product_id" aria-label="Default select example"
+        //                                 id="product_id${i}" name="product_id[]" data-id="${i}">
+        //                                 <option value="" disabled selected="true">pilih produk</option>
+        //                                 {{-- @foreach ($products as $product)
+        //                                     <option value="{{$product->id}}">{{$product->product_name}}</option>
+        //                                 @endforeach --}}
+        //                             </select>
+        //                         </td>
+        //                         <td>
+        //                             <input type="number" class="form-control quantity" name="quantity[]" id="quantity${i}" data-id="${i}">
+        //                         </td>
+        //                         <td class="whitespace-nowrap">
+        //                             <input type="number" class="form-control price" id="price${i}" readonly data-id="${i}">
+        //                         </td>
+        //                         <td class="whitespace-nowrap">
+        //                             <input type="number" class="form-control sum_product" id="sum_product${i}" name="sum_product[]" readonly data-id="${i}">
+        //                         </td>
+        //                         <td>
+        //                             <button type="button" class="btn btn-danger btn-hapus" id="btn-hapus${i}" data-id="${i}">
+        //                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+        //                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+        //                                     stroke-linecap="round" stroke-linejoin="round"
+        //                                     class="feather feather-minus block mx-auto">
+        //                                     <line x1="5" y1="12" x2="19" y2="12"></line>
+        //                                 </svg>
+        //                             </button>
+        //                         </td>
+        //                     </tr>`
+        //     );
+        //     GetData();
+        //     i++;
+        // });
     });
 
     function GetData(){
@@ -364,23 +433,23 @@
         }
         $("#totalprice").val(parseInt(sum_totalproduct));
     }
-    // function GetProduct(id, selector) {
-    //     $.ajax({
-    //         type: 'get',
-    //         url: '{!!URL::to('findProductName')!!}',
-    //         data: {'id': id},
-    //         success: function (response) {
-    //             var html = `<option value = "">Tambah Product</option>`;
-    //             $.each(response.data, function (indexInArray, valueOfElement) { 
-    //                 html += `<option value = "${valueOfElement.id}">${valueOfElement.product_name}</option> `
-    //             });
-    //             $(selector).html(html);
-    //         },
-    //         error: function () {
+    function GetProduct(id, selector) {
+        $.ajax({
+            type: 'get',
+            url: '{!!URL::to('findProductName')!!}',
+            data: {'id': id},
+            success: function (response) {
+                var html = `<option value = "">Tambah Product</option>`;
+                $.each(response.data, function (indexInArray, valueOfElement) { 
+                    html += `<option value = "${valueOfElement.id}">${valueOfElement.product_name}</option> `
+                });
+                $(selector).html(html);
+            },
+            error: function () {
 
-    //         }
-    //     });
-    // }
+            }
+        });
+    }
     function random() {
         // alert("tes")
         document.getElementById("refrensi").value =

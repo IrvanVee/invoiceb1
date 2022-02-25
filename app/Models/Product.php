@@ -17,4 +17,7 @@ class Product extends Model
     public function detailquotation(){
         return $this->hasMany(DetailQuotation::class,'quotation_id');
     }
+    public function detailinvoice(){
+        return $this->hasMany(DetailInvoice::class,'quotation_id');
+    }
 }

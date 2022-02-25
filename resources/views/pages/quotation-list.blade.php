@@ -104,6 +104,10 @@
             font-family: inherit;
             font-size: inherit;
         }
+        table.dataTable thead tr {
+        background-color: black;
+        color: white;
+        }
         </style>
 @endsection
 

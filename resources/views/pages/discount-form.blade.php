@@ -9,7 +9,7 @@
         <h2 class="text-lg font-medium mr-auto">Form Layout</h2>
     </div>
     <div class="grid grid-cols-12 gap-6 mt-5">
-        <div class="intro-y col-span-12 lg:col-span-6">
+        <div class="intro-y col-span-12 lg:col-span-12">
             <!-- BEGIN: Form Layout -->
         <form method="POST" action="discount-list-page/store">
             {{ csrf_field() }}

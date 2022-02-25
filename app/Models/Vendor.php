@@ -19,4 +19,7 @@ class Vendor extends Model
     public function detailquotation(){
         return $this->hasMany(DetailQuotation::class);
     }
+    public function invoice(){
+        return $this->hasOne(Invoice::class);
+    }
 }

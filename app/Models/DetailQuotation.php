@@ -13,7 +13,7 @@ class DetailQuotation extends Model
 
     protected $fillable = ['quotation_id','vendor_id','product_id','quantity','sum_product'];
 
-    public function detailquotation(){
+    public function quotation(){
         return $this->belongsTo(Quotation::class);
     }
     public function product(){

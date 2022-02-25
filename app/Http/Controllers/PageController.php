@@ -11,7 +11,9 @@ use App\Models\Discount;
 use App\Models\Marketing;
 use App\Models\Quotation;
 use App\Models\Vendor;
+use App\Models\DetailInvoice;
 use App\Models\DetailQuotation;
+use App\Models\Invoice;
 use Facade\Ignition\QueryRecorder\Query;
 use GuzzleHttp\Handler\Proxy;
 use PDF;
@@ -134,7 +136,8 @@ class PageController extends Controller
      */
     public function invoiceList()
     {
-        return view('pages/invoice-list');
+        $invoices = Invoice::all();
+        return view('pages/invoice-list',compact('invoices'));
     }
 
     /**
@@ -145,7 +148,120 @@ class PageController extends Controller
      */
     public function invoiceForm()
     {
-        return view('pages/invoice-form');
+        // return view('pages/invoice-form');
+        $customers = Customer::all();
+        $vendors = Vendor::all();
+        $products = Product::all();
+        $discounts = Discount::all()->sortBy('nilai_discount');
+        $taxs = Tax::all()->sortBy('tax_value');
+        return view('pages/invoice-form',compact('vendors','customers','products','discounts','taxs'));
+    }
+
+    public function invoiceStore(Request $request){
+        $data = $request->all();
+        // dd($data)
+        $invoice = new Invoice();
+        $invoice->vendor_id = $data['vendor_id'];
+        $invoice->customer_id = $data['customer_id'];
+        $invoice->refrensi = $data['refrensi'];
+        $invoice->duedate = $data['duedate'];
+        $invoice->discount_id = $data['discount_id'];
+        $invoice->tax_id = $data['tax_id'];
+        $invoice->pengiriman = $data['pengiriman'];
+        $invoice->total = $data['total'];
+        $invoice->status = $data['status'];
+        $invoice->note = $data['note'];
+        $invoice->save();
+        
+        // untuk menambahkan ke detail invoice
+        if (count($data['product_id']) > 0) {
+            foreach ($data['product_id'] as $item => $value) {
+                $data3 = array(
+                    'invoice_id'=> $invoice->id,
+                    // 'vendor_id'=> $invoice->vendor_id,
+                    'product_id'=> $data['product_id'][$item],
+                    'quantity'=> $data['quantity'][$item],
+                    'sum_product'=> $data['sum_product'][$item],
+                );
+                DetailInvoice::create($data3);
+            }
+            return redirect('invoice-list-page')->with('status', 'Invoice Berhasil Di Tambah');
+        }
+    }
+
+    public function invoiceshow($id){
+        $invoice = Invoice::with('detailinvoice')->where('id',$id)->first();
+        $detailinvoice = DetailInvoice::where('invoice_id',$id)->sum("sum_product");
+        if ($invoice == NULL) {
+            return abort(404);
+        } else {
+            return view('pages.invoice-detail',compact('invoice','detailinvoice'));
+        }
+        
+    }
+
+    public function invoiceedit($id){
+        $invoice = invoice::with('detailinvoice')->where('id',$id)->first();
+        $customers = Customer::all();
+        $discounts = Discount::all();
+        $taxs = Tax::all();
+        $vendors = Vendor::all();
+        $products  = Product::all();
+        $detailinvoice = DetailInvoice::where('invoice_id',$id)->sum("sum_product");
+
+        if ($invoice == NULL) {
+            return abort(404);
+        } else {
+            return view('pages.invoice-edit',compact('invoice','customers','discounts','taxs','vendors','products','detailinvoice'));
+        }
+        
+        // return view('pages.quotation-detail',compact('quotation'));
+    }
+
+    public function invoiceupdate($id, Request $request){
+        // dd($request->$id);
+        $invoice = Invoice::find($id);
+        $invoice->vendor_id = $request->vendor_id;
+        $invoice->customer_id = $request->customer_id;
+        $invoice->refrensi = $request->refrensi;
+        $invoice->duedate = $request->duedate;
+        $invoice->discount_id = $request->discount_id;
+        $invoice->tax_id = $request->tax_id;
+        $invoice->pengiriman = $request->pengiriman;
+        $invoice->total = $request->total;
+        $invoice->dibayar = $request->dibayar;
+        $invoice->tunggakan = $invoice->total - $invoice->dibayar;
+        $invoice->status = $request->status;
+        $invoice->note = $request->note;
+
+        $invoice->save();
+
+        if (count($request->id) > 0) {
+            foreach ($request->id as $item => $value) {
+                $datai = array(
+                    'invoice_id'=>$request->invoice_id[$item],
+                    // 'vendor_id'=>$request->vendor_id[$item],
+                    'product_id'=>$request->product_id[$item],
+                    'quantity'=>$request->quantity[$item],
+                    'sum_product'=>$request->sum_product[$item]
+                );
+                $dinvoice = DetailInvoice::where('id',$request->id[$item])->first();
+                $dinvoice->update($datai);
+            }
+            return redirect('invoice-list-page')->with('status', 'Invoice Berhasil Di Edit');
+        }
+    }
+
+    public function invoicedelete($id){
+        $invoice = Invoice::where('id',$id);
+        $detailinvoice = DetailInvoice::where('invoice_id',$id);
+        if ($detailinvoice && $detailinvoice == null) {
+            return abort(404);
+        } else {
+            $invoice->delete();
+            $detailinvoice->delete();
+            return redirect('invoice-list-page')->with('status', 'Invoice Berhasil Di Hapus');
+        }
     }
 
     /**
@@ -202,6 +318,10 @@ class PageController extends Controller
             'tax_id'=>'required',
             'total'=>'required|numeric',
             'note'=>'required',
+            'vendor_id'=>'required',
+            'product_id'=>'required',
+            'quantity'=>'required',
+            'sum_product'=>'required'
         ]);
         $data = $request->all();
         // dd($data);
