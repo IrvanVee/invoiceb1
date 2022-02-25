@@ -43,6 +43,8 @@ Route::middleware('auth')->group(function() {
     Route::get('invoice-edit/edit/{id}',[PageController::class,'invoiceedit'])->name('invoice-edit');
     Route::put('invoice-update/{id}',[PageController::class,'invoiceupdate'])->name('invoice-update');
     Route::delete('/invoice-list-page/delete/{id}',[PageController::class,'invoicedelete'])->name('invoice-delete');;
+    Route::get('invoicepdf/{id}',[PageController::class,'invoicepdf'])->name('invoice-pdf');
+
     Route::get('quote-list-page', [PageController::class, 'quoteList'])->name('quote-list');
     Route::get('quote-form-page', [PageController::class, 'quoteForm'])->name('quote-form');
     Route::get('findProductName', [PageController::class, 'findProductName'])->name('findProductName');

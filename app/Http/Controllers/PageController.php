@@ -1,7 +1,7 @@
 <?php
-
+ 
 namespace App\Http\Controllers;
-
+ 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Pengguna;
@@ -18,9 +18,9 @@ use Facade\Ignition\QueryRecorder\Query;
 use GuzzleHttp\Handler\Proxy;
 use PDF;
 use Illuminate\Http\Request;
-
+ 
 use function PHPSTORM_META\map;
-
+ 
 class PageController extends Controller
 {
     /**
@@ -35,11 +35,11 @@ class PageController extends Controller
             // Specify the base layout.
             // Eg: 'side-menu', 'simple-menu', 'top-menu', 'login'
             // The default value is 'side-menu'
-
+ 
             // 'layout' => 'side-menu'
         ]);
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -50,7 +50,7 @@ class PageController extends Controller
     {
         return view('pages/dashboard-overview-2');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -61,7 +61,7 @@ class PageController extends Controller
     {
         return view('pages/dashboard-overview-3');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -72,7 +72,7 @@ class PageController extends Controller
     {
         return view('pages/inbox');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -83,7 +83,7 @@ class PageController extends Controller
     {
         return view('pages/file-manager');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -94,7 +94,7 @@ class PageController extends Controller
     {
         return view('pages/point-of-sale');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -105,7 +105,7 @@ class PageController extends Controller
     {
         return view('pages/chat');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -116,7 +116,7 @@ class PageController extends Controller
     {
         return view('pages/post');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -127,7 +127,7 @@ class PageController extends Controller
     {
         return view('pages/calendar');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -139,7 +139,7 @@ class PageController extends Controller
         $invoices = Invoice::all();
         return view('pages/invoice-list',compact('invoices'));
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -156,7 +156,7 @@ class PageController extends Controller
         $taxs = Tax::all()->sortBy('tax_value');
         return view('pages/invoice-form',compact('vendors','customers','products','discounts','taxs'));
     }
-
+ 
     public function invoiceStore(Request $request){
         $data = $request->all();
         // dd($data)
@@ -172,7 +172,7 @@ class PageController extends Controller
         $invoice->status = $data['status'];
         $invoice->note = $data['note'];
         $invoice->save();
-        
+ 
         // untuk menambahkan ke detail invoice
         if (count($data['product_id']) > 0) {
             foreach ($data['product_id'] as $item => $value) {
@@ -188,7 +188,7 @@ class PageController extends Controller
             return redirect('invoice-list-page')->with('status', 'Invoice Berhasil Di Tambah');
         }
     }
-
+ 
     public function invoiceshow($id){
         $invoice = Invoice::with('detailinvoice')->where('id',$id)->first();
         $detailinvoice = DetailInvoice::where('invoice_id',$id)->sum("sum_product");
@@ -197,9 +197,17 @@ class PageController extends Controller
         } else {
             return view('pages.invoice-detail',compact('invoice','detailinvoice'));
         }
-        
+ 
     }
 
+    public function invoicepdf($id){
+        $invoice = Invoice::with('detailinvoice')->where('id',$id)->first();
+        $detailinvoice = DetailInvoice::where('invoice_id',$id)->sum("sum_product");
+ 
+        $pdf = PDF::loadview('pages.invoicepdf',compact('invoice','detailinvoice'));
+        return $pdf->stream();
+    }
+ 
     public function invoiceedit($id){
         $invoice = invoice::with('detailinvoice')->where('id',$id)->first();
         $customers = Customer::all();
@@ -208,16 +216,16 @@ class PageController extends Controller
         $vendors = Vendor::all();
         $products  = Product::all();
         $detailinvoice = DetailInvoice::where('invoice_id',$id)->sum("sum_product");
-
+ 
         if ($invoice == NULL) {
             return abort(404);
         } else {
             return view('pages.invoice-edit',compact('invoice','customers','discounts','taxs','vendors','products','detailinvoice'));
         }
-        
+ 
         // return view('pages.quotation-detail',compact('quotation'));
     }
-
+ 
     public function invoiceupdate($id, Request $request){
         // dd($request->$id);
         $invoice = Invoice::find($id);
@@ -233,9 +241,9 @@ class PageController extends Controller
         $invoice->tunggakan = $invoice->total - $invoice->dibayar;
         $invoice->status = $request->status;
         $invoice->note = $request->note;
-
+ 
         $invoice->save();
-
+ 
         if (count($request->id) > 0) {
             foreach ($request->id as $item => $value) {
                 $datai = array(
@@ -251,7 +259,7 @@ class PageController extends Controller
             return redirect('invoice-list-page')->with('status', 'Invoice Berhasil Di Edit');
         }
     }
-
+ 
     public function invoicedelete($id){
         $invoice = Invoice::where('id',$id);
         $detailinvoice = DetailInvoice::where('invoice_id',$id);
@@ -263,7 +271,7 @@ class PageController extends Controller
             return redirect('invoice-list-page')->with('status', 'Invoice Berhasil Di Hapus');
         }
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -276,7 +284,7 @@ class PageController extends Controller
         return view('pages.quotation-list',compact('quotation'));
         // return view('pages/quotation-list');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -293,7 +301,7 @@ class PageController extends Controller
         $taxs = Tax::all()->sortBy('tax_value');
         return view('pages/quotation-form',compact('customers','marketings','products','discounts','taxs','vendors'));
     }
-
+ 
     public function findProductName(Request $request){
         $data = Product::select('product_name','id')->where('vendor_id',$request->id)->take(100)->get();
         return response()->json([
@@ -306,8 +314,8 @@ class PageController extends Controller
             'data'=>$p,
         ]);
 	}
-
-
+ 
+ 
     public function quoteStore(Request $request){
         $request->validate([
             'marketing_id' => 'required',
@@ -325,7 +333,7 @@ class PageController extends Controller
         ]);
         $data = $request->all();
         // dd($data);
-
+ 
         $quotation = new Quotation();
         $quotation->marketing_id = $data['marketing_id'];
         $quotation->customer_id = $data['customer_id'];
@@ -337,7 +345,7 @@ class PageController extends Controller
         $quotation->total = $data['total'];
         $quotation->note = $data['note'];
         $quotation->save();
-
+ 
         // $detailquotation = new DetailQuotation();
         // $detailquotation->quotation_id = $quotation->id;
         // $detailquotation->vendor_id = $data['vendor_id'];
@@ -359,7 +367,7 @@ class PageController extends Controller
             return redirect('quote-list-page')->with('status', 'Quotation Berhasil Di Tambah');
         }
     }
-
+ 
     public function quoteshow($id){
         $quotation = Quotation::with('detailquotation')->where('id',$id)->first();
         $detailquotation = DetailQuotation::where('quotation_id',$id)->sum("sum_product");
@@ -368,10 +376,10 @@ class PageController extends Controller
         } else {
             return view('pages.quotation-detail',compact('quotation','detailquotation'));
         }
-        
+ 
         // return view('pages.quotation-detail',compact('quotation'));
     }
-
+ 
     public function quotesedit($id){
         $quotation = Quotation::with('detailquotation')->where('id',$id)->first();
         $marketings = Marketing::all();
@@ -379,16 +387,16 @@ class PageController extends Controller
         $discounts = Discount::all();
         $taxs = Tax::all();
         $vendors = Vendor::all();
-
+ 
         if ($quotation == NULL) {
             return abort(404);
         } else {
             return view('pages.quotation-edit',compact('quotation','marketings','customers','discounts','taxs','vendors'));
         }
-        
+ 
         // return view('pages.quotation-detail',compact('quotation'));
     }
-
+ 
     public function quotesupdate($id, Request $request){
         // dd($request->$id);
         $quotation = Quotation::find($id);
@@ -401,9 +409,9 @@ class PageController extends Controller
         $quotation->pengiriman = $request->pengiriman;
         $quotation->total = $request->total;
         $quotation->note = $request->note;
-
+ 
         $quotation->save();
-
+ 
         if (count($request->id) > 0) {
             foreach ($request->id as $item => $value) {
                 $datad = array(
@@ -419,7 +427,7 @@ class PageController extends Controller
             return redirect('quote-list-page')->with('status', 'Quotation Berhasil Di Edit');
         }
     }
-
+ 
     public function quotationdelete($id){
         $quotation = Quotation::where('id',$id);
         $detailquotation = DetailQuotation::where('quotation_id',$id);
@@ -431,17 +439,17 @@ class PageController extends Controller
             return redirect('quote-list-page')->with('status', 'Quotation Berhasil Di Hapus');
         }
     }
-
+ 
     public function quotationpdf($id){
         $quotation = Quotation::with('detailquotation')->where('id',$id)->first();
         $detailquotation = DetailQuotation::where('quotation_id',$id)->sum("sum_product");
-
+ 
         $pdf = PDF::loadview('pages.quotationpdf',compact('quotation','detailquotation'));
         return $pdf->stream();
     }
-
-
-
+ 
+ 
+ 
     /**
      * Show specified view.
      *
@@ -452,7 +460,7 @@ class PageController extends Controller
     {
         return view('pages/customers-form');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -462,10 +470,10 @@ class PageController extends Controller
     public function usersLayout2()
     {
         $customer = Customer::all();
-
+ 
         return view('pages/customers-list', ['customer' => $customer]);
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -479,7 +487,7 @@ class PageController extends Controller
     		'customer_name' => 'required',
             'contact' => 'required'
     	]);
-
+ 
         Customer::create([
     		'instance' => $request->instance,
     		'customer_name' => $request->customer_name,
@@ -488,7 +496,7 @@ class PageController extends Controller
  
     	return redirect('customers-list-page')->with('status', 'customer berhasil di tambah');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -498,10 +506,10 @@ class PageController extends Controller
     public function customerEdit($id)
     {
         $customer = Customer::find($id);
-
+ 
         return view('pages/customers-edit', ['customer' => $customer]);
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -515,7 +523,7 @@ class PageController extends Controller
     		'customer_name' => 'required',
             'contact' => 'required'
          ]);
-      
+ 
          $customer = Customer::find($id);
          $customer->instance = $request->instance;
          $customer->customer_name = $request->customer_name;
@@ -523,7 +531,7 @@ class PageController extends Controller
          $customer->save();
          return redirect('customers-list-page')->with('status', 'customer berhasil di edit');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -536,7 +544,7 @@ class PageController extends Controller
         $customer->delete();
         return redirect('customers-list-page')->with('status', 'customer berhasil di hapus');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -547,7 +555,7 @@ class PageController extends Controller
     {
         return view('pages/users-form');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -559,7 +567,7 @@ class PageController extends Controller
         $user = Pengguna::all();
     	return view('pages/users-list', ['user' => $user]);
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -584,7 +592,7 @@ class PageController extends Controller
  
     	return redirect('users-list-page');
     } 
-
+ 
     /**
      * Show specified view.
      *
@@ -594,10 +602,10 @@ class PageController extends Controller
     public function usersEdit($id)
     {
         $user = Pengguna::find($id);
-
+ 
         return view('pages/users-edit', ['user' => $user]);
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -612,7 +620,7 @@ class PageController extends Controller
             'name' => 'required',
             'roles' => 'required'
         ]);
-
+ 
         $user = Pengguna::find($id);
         $user->email = $request->email;
         $user->password = $request->password;
@@ -621,7 +629,7 @@ class PageController extends Controller
         $user->save();
         return redirect('users-list-page');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -634,7 +642,7 @@ class PageController extends Controller
         $user->delete();
         return redirect('users-list-page');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -646,7 +654,7 @@ class PageController extends Controller
         $vendors = Vendor::all();
         return view('pages/product-form',compact('vendors'));
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -656,10 +664,10 @@ class PageController extends Controller
     public function profileOverview2()
     {
         $product = Product::with('vendor')->paginate();
-        
+ 
         return view('pages/product-list', ['product' => $product]);
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -686,7 +694,7 @@ class PageController extends Controller
  
     	return redirect('product-list-page')->with('status','produk berhasil di tambah');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -696,10 +704,10 @@ class PageController extends Controller
     public function productEdit($id)
     {
         $product = Product::find($id);
-
+ 
         return view('pages/product-edit', ['product' => $product]);
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -725,7 +733,7 @@ class PageController extends Controller
         $product->save();
         return redirect('product-list-page')->with('status','produk berhasil di edit');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -738,7 +746,7 @@ class PageController extends Controller
         $product->delete();
         return redirect('product-list-page')->with('status','produk berhasil di hapus');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -749,7 +757,7 @@ class PageController extends Controller
     {
         return view('pages/tax-form');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -761,7 +769,7 @@ class PageController extends Controller
         $tax = Tax::all();
     	return view('pages/tax-list', ['tax' => $tax]);
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -787,11 +795,11 @@ class PageController extends Controller
         // } else {
         //     dd("kurang dari 100");
         // }
-        
+ 
  
     	return redirect('tax-list-page');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -801,10 +809,10 @@ class PageController extends Controller
     public function taxEdit($id)
     {
         $tax = Tax::find($id);
-
+ 
         return view('pages/tax-edit', ['tax' => $tax]);
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -818,7 +826,7 @@ class PageController extends Controller
     		'tax_value' => 'required',
             // 'percentage' => 'required'
          ]);
-      
+ 
          $tax = Tax::find($id);
          $tax->name = $request->name;
          $tax->tax_value = $request->tax_value;
@@ -826,7 +834,7 @@ class PageController extends Controller
          $tax->save();
          return redirect('tax-list-page');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -839,7 +847,7 @@ class PageController extends Controller
         $tax->delete();
         return redirect('tax-list-page');
     }
-
+ 
         /**
      * Show specified view.
      *
@@ -850,7 +858,7 @@ class PageController extends Controller
     {
         return view('pages/discount-form');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -862,7 +870,7 @@ class PageController extends Controller
         $discount = Discount::all();
     	return view('pages/discount-list', ['discount' => $discount]);
     }
-
+ 
         /**
      * Show specified view.
      *
@@ -885,7 +893,7 @@ class PageController extends Controller
  
     	return redirect('discount-list-page')->with('status','Diskon Berhasil Ditambah');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -895,10 +903,10 @@ class PageController extends Controller
     public function discountEdit($id)
     {
         $discount = Discount::find($id);
-
+ 
         return view('pages/discount-edit', ['discount' => $discount]);
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -912,7 +920,7 @@ class PageController extends Controller
     		'nilai_discount' => 'required',
             // 'percentage' => 'required'
          ]);
-      
+ 
          $discount = Discount::find($id);
          $discount->name = $request->name;
          $discount->nilai_discount = $request->nilai_discount;
@@ -920,7 +928,7 @@ class PageController extends Controller
          $discount->save();
          return redirect('discount-list-page');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -933,7 +941,7 @@ class PageController extends Controller
         $discount->delete();
         return redirect('discount-list-page');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -944,7 +952,7 @@ class PageController extends Controller
     // {
     //     return view('pages/profile-overview-3');
     // }
-
+ 
     /**
      * Show specified view.
      *
@@ -955,7 +963,7 @@ class PageController extends Controller
     {
         return view('pages/wizard-layout-1');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -966,7 +974,7 @@ class PageController extends Controller
     {
         return view('pages/wizard-layout-2');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -977,7 +985,7 @@ class PageController extends Controller
     {
         return view('pages/wizard-layout-3');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -988,7 +996,7 @@ class PageController extends Controller
     {
         return view('pages/blog-layout-1');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -999,7 +1007,7 @@ class PageController extends Controller
     {
         return view('pages/blog-layout-2');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1010,7 +1018,7 @@ class PageController extends Controller
     {
         return view('pages/blog-layout-3');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1021,7 +1029,7 @@ class PageController extends Controller
     {
         return view('pages/pricing-layout-1');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1032,7 +1040,7 @@ class PageController extends Controller
     {
         return view('pages/pricing-layout-2');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1043,7 +1051,7 @@ class PageController extends Controller
     {
         return view('pages/invoice-layout-1');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1054,7 +1062,7 @@ class PageController extends Controller
     {
         return view('pages/invoice-layout-2');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1065,7 +1073,7 @@ class PageController extends Controller
     {
         return view('pages/faq-layout-1');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1076,7 +1084,7 @@ class PageController extends Controller
     {
         return view('pages/faq-layout-2');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1087,7 +1095,7 @@ class PageController extends Controller
     {
         return view('pages/faq-layout-3');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1098,7 +1106,7 @@ class PageController extends Controller
     {
         return view('pages/login');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1109,7 +1117,7 @@ class PageController extends Controller
     {
         return view('pages/register');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1120,7 +1128,7 @@ class PageController extends Controller
     {
         return view('pages/error-page');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1131,7 +1139,7 @@ class PageController extends Controller
     {
         return view('pages/update-profile');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1142,7 +1150,7 @@ class PageController extends Controller
     {
         return view('pages/change-password');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1153,7 +1161,7 @@ class PageController extends Controller
     {
         return view('pages/regular-table');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1164,7 +1172,7 @@ class PageController extends Controller
     {
         return view('pages/tabulator');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1175,7 +1183,7 @@ class PageController extends Controller
     {
         return view('pages/modal');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1186,7 +1194,7 @@ class PageController extends Controller
     {
         return view('pages/slide-over');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1197,7 +1205,7 @@ class PageController extends Controller
     {
         return view('pages/notification');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1208,7 +1216,7 @@ class PageController extends Controller
     {
         return view('pages/accordion');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1219,7 +1227,7 @@ class PageController extends Controller
     {
         return view('pages/button');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1230,7 +1238,7 @@ class PageController extends Controller
     {
         return view('pages/alert');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1241,7 +1249,7 @@ class PageController extends Controller
     {
         return view('pages/progress-bar');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1252,7 +1260,7 @@ class PageController extends Controller
     {
         return view('pages/tooltip');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1263,7 +1271,7 @@ class PageController extends Controller
     {
         return view('pages/dropdown');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1274,7 +1282,7 @@ class PageController extends Controller
     {
         return view('pages/typography');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1285,7 +1293,7 @@ class PageController extends Controller
     {
         return view('pages/icon');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1296,7 +1304,7 @@ class PageController extends Controller
     {
         return view('pages/loading-icon');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1307,7 +1315,7 @@ class PageController extends Controller
     {
         return view('pages/regular-form');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1318,7 +1326,7 @@ class PageController extends Controller
     {
         return view('pages/datepicker');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1329,7 +1337,7 @@ class PageController extends Controller
     {
         return view('pages/tail-select');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1340,7 +1348,7 @@ class PageController extends Controller
     {
         return view('pages/file-upload');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1351,7 +1359,7 @@ class PageController extends Controller
     {
         return view('pages/wysiwyg-editor');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1362,7 +1370,7 @@ class PageController extends Controller
     {
         return view('pages/validation');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1373,7 +1381,7 @@ class PageController extends Controller
     {
         return view('pages/chart');
     }
-
+ 
     /**
      * Show specified view.
      *
@@ -1384,7 +1392,7 @@ class PageController extends Controller
     {
         return view('pages/slider');
     }
-
+ 
     /**
      * Show specified view.
      *
