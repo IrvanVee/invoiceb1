@@ -1,7 +1,7 @@
 <?php
- 
+
 namespace App\Http\Controllers;
- 
+
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Pengguna;
@@ -35,11 +35,11 @@ class PageController extends Controller
             // Specify the base layout.
             // Eg: 'side-menu', 'simple-menu', 'top-menu', 'login'
             // The default value is 'side-menu'
- 
+
             // 'layout' => 'side-menu'
         ]);
     }
- 
+    
     /**
      * Show specified view.
      *
@@ -158,6 +158,22 @@ class PageController extends Controller
     }
  
     public function invoiceStore(Request $request){
+        $request->validate([
+            'vendor_id' => 'required',
+            'customer_id' => 'required',
+            'refrensi' => 'required',
+            'duedate' => 'required',
+            'product_id' => 'required',
+            'quantity' => 'required',
+            'sum_product' => 'required',
+            'discount_id' => 'required',
+            'tax_id' => 'required',
+            'pengiriman' => 'required',
+            'total' => 'required',
+            'status' => 'required',
+            'note' => 'required'
+        ]);
+
         $data = $request->all();
         // dd($data)
         $invoice = new Invoice();

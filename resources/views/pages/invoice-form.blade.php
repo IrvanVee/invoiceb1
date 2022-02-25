@@ -21,11 +21,11 @@
                         <option value="">silahkan pilih vendor</option>
                         @foreach($vendors as $vendor)
                         <option value="{{$vendor->id}}"
-                            {{old('vendor_id') == $vendor->id ? 'selected' : null}}>{{$vendor->vendor_name}}
-                        </option>
+                            {{old('vendor_id') == $vendor->id ? 'selected' : null}}>
+                            {{$vendor->vendor_name}}</option>
                         @endforeach
                     </select>
-                    @error('marketing_id')
+                    @error('vendor_id')
                     <p class="mb-2" style="color: red;">{{$message}}</p>
                     @enderror
                 </div>
