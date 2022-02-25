@@ -22,7 +22,8 @@
                         @foreach($vendors as $vendor)
                         <option value="{{$vendor->id}}"
                             {{old('vendor_id') == $vendor->id ? 'selected' : null}}>
-                            {{$vendor->vendor_name}}</option>
+                            {{$vendor->vendor_name}}
+                        </option>
                         @endforeach
                     </select>
                     @error('vendor_id')
