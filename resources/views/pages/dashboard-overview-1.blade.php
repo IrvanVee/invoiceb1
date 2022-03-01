@@ -44,7 +44,7 @@
                                             </div> --}}
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-bold leading-8 mt-6">{{ $invoices->count("status")}}</div>
+                                    <div class="text-3xl font-bold leading-8 mt-6">{{ $dibayar}}</div>
                                     <div class="text-base text-gray-600 mt-1">Dibayar</div>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                             </div> --}}
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-bold leading-8 mt-6">{{ $invoices->count("id") }}</div>
+                                    <div class="text-3xl font-bold leading-8 mt-6">{{ $pending }}</div>
                                     <div class="text-base text-gray-600 mt-1">Pending</div>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
                                             </div> --}}
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-bold leading-8 mt-6">152.040</div>
+                                    <div class="text-3xl font-bold leading-8 mt-6">{{$terlambat}}</div>
                                     <div class="text-base text-gray-600 mt-1">Terlambat</div>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                                             </div> --}}
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-bold leading-8 mt-6">152.040</div>
+                                    <div class="text-3xl font-bold leading-8 mt-6">{{$dibatalkan}}</div>
                                     <div class="text-base text-gray-600 mt-1">Dibatalkan</div>
                                 </div>
                             </div>

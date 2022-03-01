@@ -32,7 +32,12 @@ class PageController extends Controller
     public function dashboardOverview1()
     {
         $invoices = Invoice::all();
-        return view('pages/dashboard-overview-1',compact('invoices'));
+        $dibayar = Invoice::where('status','LIKE',"Dibayar")->count("id");
+        $pending = Invoice::where('status','LIKE',"Pending")->count("id");
+        $terlambat = Invoice::where('status','LIKE',"Terlambat")->count("id");
+        $dibatalkan = Invoice::where('status','LIKE',"Dibatalkan")->count("id");
+        return view('pages/dashboard-overview-1',compact('invoices','dibayar','pending','terlambat','dibatalkan'));
+
         // return view('pages/dashboard-overview-1', [
         //     // Specify the base layout.
         //     // Eg: 'side-menu', 'simple-menu', 'top-menu', 'login'
@@ -485,7 +490,7 @@ class PageController extends Controller
     }
 
 
-    
+
     /**
      * Show specified view.
      *
