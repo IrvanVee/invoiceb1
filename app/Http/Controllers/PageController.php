@@ -480,9 +480,9 @@ class PageController extends Controller
             return view('pages.quotation-invoice',compact('quotation','marketings','customers','discounts','taxs','vendors','detailquotation'));
         }
     }
- 
- 
- 
+
+
+    
     /**
      * Show specified view.
      *
