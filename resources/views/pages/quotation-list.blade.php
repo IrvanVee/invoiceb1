@@ -83,6 +83,10 @@
                                 <a class="flex items-center" href="/quote-detail/{{ $q->id }}">
                                     <i data-feather="list" class="w-4 h-4 mr-1"></i> Detail
                                 </a>
+                                <a class="flex items-center" href="/quote-invoice/{{ $q->id }}">
+                                    <i data-feather="corner-up-right" class="w-4 h-4 ml-3 mr-1"></i> 
+                                    Invoice
+                                </a>
                                 </div>
                             </td>
                             @empty

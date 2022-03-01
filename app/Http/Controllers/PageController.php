@@ -398,6 +398,7 @@ class PageController extends Controller
  
     public function quotesedit($id){
         $quotation = Quotation::with('detailquotation')->where('id',$id)->first();
+        $detailquotation = DetailQuotation::where('quotation_id',$id)->sum("sum_product");
         $marketings = Marketing::all();
         $customers = Customer::all();
         $discounts = Discount::all();
@@ -407,7 +408,7 @@ class PageController extends Controller
         if ($quotation == NULL) {
             return abort(404);
         } else {
-            return view('pages.quotation-edit',compact('quotation','marketings','customers','discounts','taxs','vendors'));
+            return view('pages.quotation-edit',compact('quotation','marketings','customers','discounts','taxs','vendors','detailquotation'));
         }
  
         // return view('pages.quotation-detail',compact('quotation'));
@@ -462,6 +463,22 @@ class PageController extends Controller
  
         $pdf = PDF::loadview('pages.quotationpdf',compact('quotation','detailquotation'));
         return $pdf->stream();
+    }
+
+    public function quotationinvoice($id){
+        // return Quotation::find($id);
+        $quotation = Quotation::with('detailquotation')->where('id',$id)->first();
+        $detailquotation = DetailQuotation::where('quotation_id',$id)->sum("sum_product");
+        $marketings = Marketing::all();
+        $customers = Customer::all();
+        $discounts = Discount::all();
+        $taxs = Tax::all();
+        $vendors = Vendor::all();
+        if ($quotation == NULL) {
+            return abort(404);
+        } else {
+            return view('pages.quotation-invoice',compact('quotation','marketings','customers','discounts','taxs','vendors','detailquotation'));
+        }
     }
  
  

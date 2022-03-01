@@ -55,7 +55,7 @@ Route::middleware('auth')->group(function() {
     Route::patch('quote-update/{id}',[PageController::class,'quotesupdate'])->name('quote-update');
     Route::delete('/quotation-list-page/delete/{id}',[PageController::class,'quotationdelete'])->name('quote-delete');
     Route::get('quotationpdf/{id}',[PageController::class,'quotationpdf'])->name('quotation-pdf');
-
+    Route::get('quote-invoice/{id}',[PageController::class,'quotationinvoice'])->name('quote-invoice');
     // CUSTOMER SET
     Route::get('customers-form-page', [PageController::class, 'usersLayout1'])->name('users-layout-1');
     Route::get('customers-list-page', [PageController::class, 'usersLayout2'])->name('users-layout-2');

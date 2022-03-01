@@ -11,19 +11,18 @@
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 lg:col-span-12">
         <!-- BEGIN: Form Layout -->
-        <form action="/quote-update/{{$quotation->id}}" method="POST" class="form">
+        <form action="/invoice-list-page/store" method="POST" class="form">
             @csrf
-            @method('PATCH')
             <div class="intro-y box p-5">
                 <div>
-                    <label for="crud-form-1" class="form-label">Marketing</label>
-                    <select class="tail-select w-full @error('marketing_id') is-invalid @enderror" id="crud-form-2"
-                        name="marketing_id">
-                        {{-- <option value="">silahkan pilih marketing</option> --}}
-                        <option value="{{$quotation->marketing_id}}">{{$quotation->marketing->marketing_name}}</option>
-                        @foreach($marketings as $marketing)
-                        <option value="{{$marketing->id}}"
-                            {{old('marketing_id') == $marketing->id ? 'selected' : null}}>{{$marketing->marketing_name}}
+                    <label for="crud-form-1" class="form-label">Vendor</label>
+                    <select class="tail-select w-full @error('vendor_id') is-invalid @enderror" id="crud-form-2"
+                        name="vendor_id">
+                        <option value="">silahkan pilih marketing</option>
+                        {{-- <option value="{{$quotation->vendor_id}}">{{$quotation->vendor->vendor_name}}</option> --}}
+                        @foreach($vendors as $vendor)
+                        <option value="{{$vendor->id}}"
+                            {{old('vendor_id') == $vendor->id ? 'selected' : null}}>{{$vendor->vendor_name}}
                         </option>
                         @endforeach
                     </select>
@@ -84,7 +83,7 @@
                     <table class="table" id="tableproduct">
                         <thead>
                             <tr>
-                                <th class="whitespace-nowrap">Vendor Name</th>
+                                {{-- <th class="whitespace-nowrap">Vendor Name</th> --}}
                                 <th class="whitespace-nowrap">Product Name</th>
                                 <th class="whitespace-nowrap">Quantity</th>
                                 <th class="whitespace-nowrap">Price Product</th>
@@ -105,20 +104,14 @@
                         <tbody id="table_body">
                             @foreach ($quotation->detailquotation as $detail)
                             <tr>
-                                <td class="whitespace-nowrap" style="display:none;">
-                                    <input type="hidden" name="id[]" value="{{$detail->id}}">
-                                </td>
-                                <td class="whitespace-nowrap" style="display:none;">
-                                    <input type="hidden" name="quotation_id[]" value="{{$detail->quotation_id}}">
-                                </td>
-                                <td class="whitespace-nowrap">
-                                    <select class="form-select vendor_id" name="vendor_id[]" id="vendor_id{{$detail->id}}" data-id="{{$detail->id}}" aria-label=".form-select-lg example">
+                                {{-- <td class="whitespace-nowrap">
+                                    <select class="form-select vendor_id" name="vendor_id[]" id="vendor_id{{$detail->id}}" data-id="{{$detail->id}}" aria-label=".form-select-lg example"> --}}
                                         {{-- <option value="{{$detail->vendor_id}}" disabled>{{$detail->vendor->vendor_name}}</option> --}}
-                                        @foreach ($vendors as $vendor)
+                                        {{-- @foreach ($vendors as $vendor)
                                         <option value="{{$vendor->id}}" {{($detail->vendor_id == $vendor->id) ? 'selected' : ''}}>{{$vendor->vendor_name}}</option>
                                     @endforeach
                                     </select>
-                                </td>
+                                </td> --}}
                                 <td class="whitespace-nowrap">
                                     <select class="form-select product_id" name="product_id[]" id="product_id{{$detail->id}}" data-id="{{$detail->id}}" aria-label=".form-select-lg example">
                                         <option value="{{$detail->product_id}}">{{$detail->product->product_name}}</option>
@@ -232,6 +225,15 @@
                         @error('total')
                         <p class="mb-2" style="color: red;">{{$message}}</p>
                         @enderror
+                    </div>
+                    <div class="mt-3">
+                        <label for="regular-form-2" class="form-label">Status</label>
+                        <select class="form-select mt-2 sm:mr-2" name="status" id="status" aria-label="Default select example">
+                            <option value="" selected disabled>Pilih Status</option>
+                            <option>Draft</option>
+                            <option>Terkirim</option>
+                            <option>Dibatalkan</option>
+                        </select>
                     </div>
                 </div>
                 <div class="mt-3">
