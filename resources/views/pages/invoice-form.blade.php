@@ -192,8 +192,9 @@
                         <label for="regular-form-2" class="form-label">Status</label>
                         <select class="form-select mt-2 sm:mr-2" name="status" id="status" aria-label="Default select example">
                             <option value="" selected disabled>Pilih Status</option>
-                            <option>Draft</option>
-                            <option>Terkirim</option>
+                            <option>Pending</option>
+                            <option>Dibayar</option>
+                            <option>Terlambat</option>
                             <option>Dibatalkan</option>
                         </select>
                     </div>

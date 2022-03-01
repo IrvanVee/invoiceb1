@@ -250,8 +250,9 @@
                             <option value="{{$invoice->status}}"
                                 {{old('status') == $invoice->status ? 'selected' : null}}>{{$invoice->status}}
                             </option>
-                            <option>Draft</option>
-                            <option>Terkirim</option>
+                            <option>Pending</option>
+                            <option>Dibayar</option>
+                            <option>Terlambat</option>
                             <option>Dibatalkan</option>
                         </select>
                         </div>

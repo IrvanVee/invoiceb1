@@ -28,7 +28,7 @@
                                             </div> --}}
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-bold leading-8 mt-6">4.710</div>
+                                    <div class="text-3xl font-bold leading-8 mt-6">{{ $invoices->count("id") }}</div>
                                     <div class="text-base text-gray-600 mt-1">Total Invoice</div>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@
                                             </div> --}}
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-bold leading-8 mt-6">3.721</div>
+                                    <div class="text-3xl font-bold leading-8 mt-6">{{ $invoices->count("status")}}</div>
                                     <div class="text-base text-gray-600 mt-1">Dibayar</div>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                             </div> --}}
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-bold leading-8 mt-6">2.149</div>
+                                    <div class="text-3xl font-bold leading-8 mt-6">{{ $invoices->count("id") }}</div>
                                     <div class="text-base text-gray-600 mt-1">Pending</div>
                                 </div>
                             </div>

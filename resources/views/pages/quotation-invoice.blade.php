@@ -18,7 +18,7 @@
                     <label for="crud-form-1" class="form-label">Vendor</label>
                     <select class="tail-select w-full @error('vendor_id') is-invalid @enderror" id="crud-form-2"
                         name="vendor_id">
-                        <option value="">silahkan pilih marketing</option>
+                        <option value="">silahkan pilih vendor</option>
                         {{-- <option value="{{$quotation->vendor_id}}">{{$quotation->vendor->vendor_name}}</option> --}}
                         @foreach($vendors as $vendor)
                         <option value="{{$vendor->id}}"
@@ -230,8 +230,9 @@
                         <label for="regular-form-2" class="form-label">Status</label>
                         <select class="form-select mt-2 sm:mr-2" name="status" id="status" aria-label="Default select example">
                             <option value="" selected disabled>Pilih Status</option>
-                            <option>Draft</option>
-                            <option>Terkirim</option>
+                            <option>Pending</option>
+                            <option>Dibayar</option>
+                            <option>Terlambat</option>
                             <option>Dibatalkan</option>
                         </select>
                     </div>
