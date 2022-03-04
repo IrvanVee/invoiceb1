@@ -18,6 +18,7 @@ use Facade\Ignition\QueryRecorder\Query;
 use GuzzleHttp\Handler\Proxy;
 use PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
  
 use function PHPSTORM_META\map;
  
@@ -32,16 +33,32 @@ class PageController extends Controller
     public function dashboardOverview1()
     {
         $invoices = Invoice::all();
-        return view('pages/dashboard-overview-1',compact('invoices'));
-        // return view('pages/dashboard-overview-1', [
-        //     // Specify the base layout.
-        //     // Eg: 'side-menu', 'simple-menu', 'top-menu', 'login'
-        //     // The default value is 'side-menu'
+        $dibayar = Invoice::where('status','LIKE',"Dibayar")->count("id");
+        $pending = Invoice::where('status','LIKE',"Pending")->count("id");
+        $terlambat = Invoice::where('status','LIKE',"Terlambat")->count("id");
+        $dibatalkan = Invoice::where('status','LIKE',"Dibatalkan")->count("id");
 
-        //     // 'layout' => 'side-menu'
+        $result=DB::select(DB::raw("select count(*) as total_status, status from invoice group by status"));
+        $chartData="";
+        foreach($result as $list){
+            $chartData.="['".$list->status."',     ".$list->total_status."],";
+        }
+        $arr['chartData']=rtrim($chartData,",");
 
-        // ]);
+        return view('pages/dashboard-overview-1',compact('invoices','dibayar','pending','terlambat','dibatalkan'),$arr);
+
     }
+
+    /**
+     * Show specified view.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    // public function chart()
+    // {
+
+    // }
     
     /**
      * Show specified view.

@@ -44,7 +44,7 @@
                                             </div> --}}
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-bold leading-8 mt-6">{{ $invoices->count("status")}}</div>
+                                    <div class="text-3xl font-bold leading-8 mt-6">{{ $dibayar }}</div>
                                     <div class="text-base text-gray-600 mt-1">Dibayar</div>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                             </div> --}}
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-bold leading-8 mt-6">{{ $invoices->count("id") }}</div>
+                                    <div class="text-3xl font-bold leading-8 mt-6">{{ $pending }}</div>
                                     <div class="text-base text-gray-600 mt-1">Pending</div>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
                                             </div> --}}
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-bold leading-8 mt-6">152.040</div>
+                                    <div class="text-3xl font-bold leading-8 mt-6">{{ $terlambat }}</div>
                                     <div class="text-base text-gray-600 mt-1">Terlambat</div>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                                             </div> --}}
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-bold leading-8 mt-6">152.040</div>
+                                    <div class="text-3xl font-bold leading-8 mt-6">{{ $dibatalkan }}</div>
                                     <div class="text-base text-gray-600 mt-1">Dibatalkan</div>
                                 </div>
                             </div>
@@ -160,13 +160,13 @@
                 </div> --}}
                 <!-- END: Sales Report -->
                 <!-- BEGIN: Weekly Top Seller -->
-                <div class="col-span-12 sm:col-span-6 lg:col-span-3 mt-8">
+                <div class="col-span-12 sm:col-span-6 lg:col-span-5 mt-8">
                     <div class="intro-y flex items-center h-10">
-                        <h2 class="text-lg font-medium truncate mr-5">Weekly Top Seller</h2>
+                        <h2 class="text-lg font-medium truncate mr-5">Total Chart</h2>
                     </div>
                     <div class="intro-y box p-5 mt-5">
-                        <canvas class="mt-3" id="report-pie-chart" height="300"></canvas>
-                        <div class="mt-8">
+                        <div id="piechart" style="width: 470px; height: 420px;"></div>
+                        {{-- <div class="mt-8">
                             <div class="flex items-center">
                                 <div class="w-2 h-2 bg-theme-11 rounded-full mr-3"></div>
                                 <span class="truncate">17 - 30 Years old</span>
@@ -185,7 +185,7 @@
                                 <div class="h-px flex-1 border border-r border-dashed border-gray-300 mx-3 xl:hidden"></div>
                                 <span class="font-medium xl:ml-auto">10%</span>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <!-- END: Weekly Top Seller -->
@@ -720,3 +720,26 @@
         </div>
     </div>
 @endsection
+
+@push('chart')
+<script type="text/javascript">
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+
+  var data = google.visualization.arrayToDataTable([
+    ['Status', 'Jumlah'],
+    <?php echo $chartData ?>
+  ]);
+
+  var options = {
+    // title: 'My Daily Activities'
+  };
+
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+  chart.draw(data, options);
+}
+</script>
+@endpush

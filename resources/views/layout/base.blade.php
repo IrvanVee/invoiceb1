@@ -55,6 +55,11 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     @stack('datatables')
     {{-- END : MAKE DATA TABLES WITH DATATABLES.NET --}}
+
+    {{-- BEGIN : CHART --}}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    @stack('chart')
+    {{--END : CHART  --}}
 </head>
 <!-- END: Head -->
 
