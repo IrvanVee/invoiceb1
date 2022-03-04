@@ -728,16 +728,16 @@ google.charts.setOnLoadCallback(drawChart);
 
 function drawChart() {
 
-  var data = google.visualization.arrayToDataTable([
+var data = google.visualization.arrayToDataTable([
     ['Status', 'Jumlah'],
     <?php echo $chartData ?>
-  ]);
+]);
 
-  var options = {
+var options = {
     // title: 'My Daily Activities'
-  };
+};
 
-  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
   chart.draw(data, options);
 }

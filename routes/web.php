@@ -87,6 +87,7 @@ Route::middleware('auth')->group(function() {
     Route::get('product-form-page', [PageController::class, 'profileOverview1'])->name('profile-overview-1');
     Route::get('product-list-page', [PageController::class, 'profileOverview2'])->name('profile-overview-2');
     Route::get('product-list-page/edit/{id}', [PageController::class, 'productEdit'])->name('product-edit');
+    Route::get('product-detail/{id}',[PageController::class, 'productDetail'])->name('product-detail');
     Route::put('product-list-page/update/{id}', [PageController::class, 'productUpdate'])->name('product-update');
     Route::post('product-list-page/store', [PageController::class, 'productStore'])->name('product-store');
     Route::get('product-list-page/delete/{id}', [PageController::class, 'productDelete'])->name('product-delete');

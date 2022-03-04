@@ -84,6 +84,9 @@
                                     <a class="flex items-center text-theme-6" onclick="return confirm('yakin akan menghapus data ini');" href="product-list-page/delete/{{ $p->id }}">
                                         <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete
                                     </a>
+                                    <a class="flex items-center text-dark" href="product-detail/{{ $p->id }}">
+                                        <i data-feather="arrow-right" class="w-4 h-4 ml-3"></i> Detail
+                                    </a>
                                 </div>
                                 {{-- <div class="flex justify-center items-center">
                                     <a class="flex items-center mr-3" href="javascript:;">

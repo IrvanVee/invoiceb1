@@ -766,6 +766,11 @@ class PageController extends Controller
  
         return view('pages/product-edit', ['product' => $product]);
     }
+
+    public function productDetail($id){
+        $product = Product::findorFail($id);
+        return view('pages.product-detail',compact('product'));
+    }
  
     /**
      * Show specified view.
