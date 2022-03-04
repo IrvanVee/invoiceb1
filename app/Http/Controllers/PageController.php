@@ -37,15 +37,12 @@ class PageController extends Controller
         $pending = Invoice::where('status','LIKE',"Pending")->count("id");
         $terlambat = Invoice::where('status','LIKE',"Terlambat")->count("id");
         $dibatalkan = Invoice::where('status','LIKE',"Dibatalkan")->count("id");
-<<<<<<< HEAD
-=======
-        return view('pages/dashboard-overview-1',compact('invoices','dibayar','pending','terlambat','dibatalkan'));
+        // return view('pages/dashboard-overview-1',compact('invoices','dibayar','pending','terlambat','dibatalkan'));
 
         // return view('pages/dashboard-overview-1', [
         //     // Specify the base layout.
         //     // Eg: 'side-menu', 'simple-menu', 'top-menu', 'login'
         //     // The default value is 'side-menu'
->>>>>>> d5508ab286b998e2ce86ac2e332461d0bfb12807
 
         $result=DB::select(DB::raw("select count(*) as total_status, status from invoice group by status"));
         $chartData="";
