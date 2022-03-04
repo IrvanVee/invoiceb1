@@ -44,7 +44,11 @@
                                             </div> --}}
                                         </div>
                                     </div>
+<<<<<<< HEAD
                                     <div class="text-3xl font-bold leading-8 mt-6">{{ $dibayar }}</div>
+=======
+                                    <div class="text-3xl font-bold leading-8 mt-6">{{ $dibayar}}</div>
+>>>>>>> d5508ab286b998e2ce86ac2e332461d0bfb12807
                                     <div class="text-base text-gray-600 mt-1">Dibayar</div>
                                 </div>
                             </div>
@@ -92,7 +96,11 @@
                                             </div> --}}
                                         </div>
                                     </div>
+<<<<<<< HEAD
                                     <div class="text-3xl font-bold leading-8 mt-6">{{ $terlambat }}</div>
+=======
+                                    <div class="text-3xl font-bold leading-8 mt-6">{{$terlambat}}</div>
+>>>>>>> d5508ab286b998e2ce86ac2e332461d0bfb12807
                                     <div class="text-base text-gray-600 mt-1">Terlambat</div>
                                 </div>
                             </div>
@@ -108,7 +116,11 @@
                                             </div> --}}
                                         </div>
                                     </div>
+<<<<<<< HEAD
                                     <div class="text-3xl font-bold leading-8 mt-6">{{ $dibatalkan }}</div>
+=======
+                                    <div class="text-3xl font-bold leading-8 mt-6">{{$dibatalkan}}</div>
+>>>>>>> d5508ab286b998e2ce86ac2e332461d0bfb12807
                                     <div class="text-base text-gray-600 mt-1">Dibatalkan</div>
                                 </div>
                             </div>
