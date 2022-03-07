@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
-use App\Models\Pengguna;
+use App\Models\User;
 use App\Models\Product;
 use App\Models\Tax; 
 use App\Models\Discount;
@@ -33,6 +33,7 @@ class PageController extends Controller
     public function dashboardOverview1()
     {
         $invoices = Invoice::all();
+        $users = User::all();
         $dibayar = Invoice::where('status','LIKE',"Dibayar")->count("id");
         $pending = Invoice::where('status','LIKE',"Pending")->count("id");
         $terlambat = Invoice::where('status','LIKE',"Terlambat")->count("id");
@@ -51,7 +52,7 @@ class PageController extends Controller
         }
         $arr['chartData']=rtrim($chartData,",");
 
-        return view('pages/dashboard-overview-1',compact('invoices','dibayar','pending','terlambat','dibatalkan'),$arr);
+        return view('pages/dashboard-overview-1',compact('invoices','users','dibayar','pending','terlambat','dibatalkan'),$arr);
 
     }
 
@@ -623,7 +624,7 @@ class PageController extends Controller
      */
     public function usersLayout4()
     {
-        $user = Pengguna::all();
+        $user = User::all();
     	return view('pages/users-list', ['user' => $user]);
     }
  
@@ -642,7 +643,7 @@ class PageController extends Controller
             'roles' => 'required'
     	]);
  
-        Pengguna::create([
+        User::create([
     		'email' => $request->email,
     		'password' => $request->password,
             'name' => $request->name,
@@ -660,7 +661,7 @@ class PageController extends Controller
      */
     public function usersEdit($id)
     {
-        $user = Pengguna::find($id);
+        $user = User::find($id);
  
         return view('pages/users-edit', ['user' => $user]);
     }
@@ -680,7 +681,7 @@ class PageController extends Controller
             'roles' => 'required'
         ]);
  
-        $user = Pengguna::find($id);
+        $user = User::find($id);
         $user->email = $request->email;
         $user->password = $request->password;
         $user->name = $request->name;
@@ -697,7 +698,7 @@ class PageController extends Controller
      */
     public function usersDelete($id)
     {
-        $user = Pengguna::find($id);
+        $user = User::find($id);
         $user->delete();
         return redirect('users-list-page');
     }

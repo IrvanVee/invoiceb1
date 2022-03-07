@@ -37,6 +37,19 @@ class AuthController extends Controller
     }
 
     /**
+     * Show specified view.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function registerView()
+    {
+        return view('login/register', [
+            'layout' => 'login'
+        ]);
+    }
+
+    /**
      * Logout user.
      *
      * @param  \Illuminate\Http\Request  $request

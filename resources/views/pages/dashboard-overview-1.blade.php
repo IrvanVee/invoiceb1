@@ -76,7 +76,7 @@
                                             </div> --}}
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-bold leading-8 mt-6">152.040</div>
+                                    <div class="text-3xl font-bold leading-8 mt-6">{{ $users->count("id") }}</div>
                                     <div class="text-base text-gray-600 mt-1">User</div>
                                 </div>
                             </div>
