@@ -19,10 +19,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('role',['Admin', 'Marketing', 'Vendor'])->nullable();
+            // $table->enum('role',['Admin', 'Marketing', 'Vendor'])->nullable();
             $table->string('photo')->nullable();
-            $table->string('gender');
-            $table->integer('active');
+            $table->string('gender')->nullable();
+            $table->integer('active')->nullable();
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

@@ -19,17 +19,17 @@
                 <div class="intro-y box p-5">
                     <div>
                         <label for="crud-form-1" class="form-label">Email</label>
-                        <input name="email" type="text" class="form-control w-full" placeholder="Input text" value="{{ $user->email }}">
+                        <input name="email" readonly type="text" class="form-control w-full" placeholder="Input text" value="{{ $user->email }}">
                     </div>
-                    <div>
+                    {{-- <div>
                         <label for="crud-form-1" class="form-label">Password</label>
                         <input name="password" type="text" class="form-control w-full" placeholder="Input text" value="{{ $user->password }}">
-                    </div>
+                    </div> --}}
                     <div>
                         <label for="crud-form-1" class="form-label">Name</label>
-                        <input name="name" type="text" class="form-control w-full" placeholder="Input text" value="{{ $user->name }}">
+                        <input name="name" readonly type="text" class="form-control w-full" placeholder="Input text" value="{{ $user->name }}">
                     </div>
-                    <div>
+                    {{-- <div>
                         <label for="crud-form-1" class="form-label">Roles</label>
                         <select data-placeholder="Vendor" class="tail-select w-full" name="roles">
                             <option value="">Pilih Roles</option>
@@ -37,7 +37,7 @@
                             <option value="Vendor">Vendor</option>
                             <option value="Admin">Admin</option>
                         </select>
-                    </div>
+                    </div> --}}
                 </div>
                 
                 <div class="text-right mt-5">

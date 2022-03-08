@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Request\LoginRequest;
+// use App\Http\Request\LoginRequest;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
@@ -26,14 +29,17 @@ class AuthController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function login(LoginRequest $request)
+    public function login(Request $request)
     {
-        if (!Auth::attempt([
-            'email' => $request->email, 
-            'password' => $request->password
-        ])) {
-            throw new \Exception('Wrong email or password.');
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/');
         }
+        return back()->with('error','login gagal');
     }
 
     /**
@@ -47,6 +53,23 @@ class AuthController extends Controller
         return view('login/register', [
             'layout' => 'login'
         ]);
+    }
+
+    public function register(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users|email:dns',
+            'password' => 'required|min:8'
+            // 'confirm_password' => 'required|min:8',
+        ]);
+        // dd($request->all());
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->email_verified_at = date("Y-m-d h:i:s");
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return redirect('/login')->with('status','berhasil daftar silahkan login');
     }
 
     /**

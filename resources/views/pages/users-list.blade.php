@@ -44,7 +44,7 @@
                     <tr>
                         <th class="whitespace-nowrap">EMAIL</th>
                         <th class="whitespace-nowrap">NAME</th>
-                        <th class="text-center whitespace-nowrap">ROLES</th>
+                        {{-- <th class="text-center whitespace-nowrap">ROLES</th> --}}
                         {{-- <th class="text-center whitespace-nowrap">STATUS</th> --}}
                         <th class="text-center whitespace-nowrap">ACTIONS</th>
                     </tr>
@@ -73,7 +73,7 @@
                             <td>
                                 <a href="" class="font-medium whitespace-nowrap">{{ $u->name }}</a>
                             </td>
-                            <td class="text-center">{{ $u->roles }}</td>
+                            {{-- <td class="text-center">{{ $u->roles }}</td> --}}
                             {{-- <td class="w-40">
                                 <div class="flex items-center justify-center {{ $faker['true_false'][0] ? 'text-theme-9' : 'text-theme-6' }}">
                                     <i data-feather="check-square" class="w-4 h-4 mr-2"></i> {{ $faker['true_false'][0] ? 'Active' : 'Inactive' }}
@@ -84,9 +84,16 @@
                                     <a class="flex items-center mr-3" href="users-list-page/edit/{{ $u->id }}">
                                         <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit
                                     </a>
-                                    <a class="flex items-center text-theme-6" href="users-list-page/delete/{{ $u->id }}">
+                                    {{-- <a class="flex items-center text-theme-6" href="users-list-page/delete/{{ $u->id }}">
                                         <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete
-                                    </a>
+                                    </a> --}}
+                                    <form action="/users-list-page/delete/{{ $u->id }}" onsubmit="return confirm('are you sure')" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger text-theme-6 text-decoration-none">
+                                            <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
@@ -163,4 +170,18 @@
         </div>
     </div> --}}
     <!-- END: Delete Confirmation Modal -->
+    
+<style>
+    .btn-danger{
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    /* color: #0000EE; */
+    padding: 0;
+    text-decoration: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+</style>
 @endsection

@@ -11,7 +11,7 @@
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 lg:col-span-6">
             <!-- BEGIN: Form Layout -->
-        <form method="POST" action="users-list-page/store">
+        <form method="POST" action="/users-list-page/store">
 
             {{ csrf_field() }}
             <div class="intro-y box p-5">
@@ -22,13 +22,13 @@
                     </div>
                     <div>
                         <label for="crud-form-1" class="form-label">Password</label>
-                        <input name="password" type="text" class="form-control w-full" placeholder="Input text">
+                        <input name="password" type="password" class="form-control w-full" placeholder="Input text">
                     </div>
                     <div>
                         <label for="crud-form-1" class="form-label">Name</label>
                         <input name="name" type="text" class="form-control w-full" placeholder="Input text">
                     </div>
-                    <div>
+                    {{-- <div>
                         <label for="crud-form-1" class="form-label">Roles</label>
                         <select data-placeholder="" class="tail-select w-full" name="roles">
                             <option value="">Pilih Roles</option>
@@ -36,7 +36,7 @@
                             <option value="Vendor">Vendor</option>
                             <option value="Admin">Admin</option>
                         </select>
-                    </div>
+                    </div> --}}
                 </div>
                 
                 <div class="text-right mt-5">

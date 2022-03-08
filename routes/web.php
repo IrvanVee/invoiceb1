@@ -80,7 +80,7 @@ Route::middleware('auth')->group(function() {
     Route::get('users-list-page/edit/{id}', [PageController::class, 'usersEdit'])->name('users-edit');
     Route::put('users-list-page/update/{id}', [PageController::class, 'usersUpdate'])->name('users-update');
     Route::post('users-list-page/store', [PageController::class, 'usersStore'])->name('users-store');
-    Route::get('users-list-page/delete/{id}', [PageController::class, 'usersDelete'])->name('users-delete');
+    Route::delete('users-list-page/delete/{id}', [PageController::class, 'usersDelete'])->name('users-delete');
     // END USER
 
     // PRODUCT SET

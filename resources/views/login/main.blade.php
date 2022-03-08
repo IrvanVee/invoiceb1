@@ -28,24 +28,36 @@
                     <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">Sign In</h2>
                     <div class="intro-x mt-2 text-gray-500 xl:hidden text-center">A few more clicks to sign in to your account.</div>
                     <div class="intro-x mt-8">
-                        <form id="login-form">
-                            <input id="email" type="text" class="intro-x login__input form-control py-3 px-4 border-gray-300 block" placeholder="Email" value="midone@left4code.com">
-                            <div id="error-email" class="login__input-error w-5/6 text-theme-6 mt-2"></div>
-                            <input id="password" type="password" class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4" placeholder="Password" value="password">
-                            <div id="error-password" class="login__input-error w-5/6 text-theme-6 mt-2"></div>
+                        @if (session('error'))
+                        <div class="alert alert-danger show mb-2" role="alert">{{session('error')}}</div>
+                        @endif
+                        @if (session('status'))
+                        <div class="alert alert-success show mb-2" role="alert">{{session('status')}}</div>
+                        @endif
+                        <form id="login-form" action="/login" method="POST">
+                            @csrf
+                            <input id="email" name="email" type="email" class="intro-x login__input form-control py-3 px-4 border-gray-300 block" placeholder="Email" value="{{old('email')}}">
+                            @error('email')
+                                <div style="color: red;">email tidak boleh kosong</div>
+                            @enderror
+                            <input id="password" name="password" type="password" class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4" placeholder="Password" value="">
+                            @error('password')
+                                <div style="color: red;">passsword tidak boleh kosong</div>
+                            @enderror
+                            {{-- <div id="error-password" class="login__input-error w-5/6 text-theme-6 mt-2"></div> --}}
+                            <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
+                                <button id="btn-login" class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">Login</button>
+                                <a href="register" class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top">Sign up</a>
+                            </div>
                         </form>
                     </div>
-                    <div class="intro-x flex text-gray-700 dark:text-gray-600 text-xs sm:text-sm mt-4">
+                    {{-- <div class="intro-x flex text-gray-700 dark:text-gray-600 text-xs sm:text-sm mt-4">
                         <div class="flex items-center mr-auto">
                             <input id="remember-me" type="checkbox" class="form-check-input border mr-2">
                             <label class="cursor-pointer select-none" for="remember-me">Remember me</label>
                         </div>
                         <a href="">Forgot Password?</a>
-                    </div>
-                    <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
-                        <button id="btn-login" class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">Login</button>
-                        <a href="register" class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top">Sign up</a>
-                    </div>
+                    </div> --}}
                     <div class="intro-x mt-10 xl:mt-24 text-gray-700 dark:text-gray-600 text-center xl:text-left">
                         By signin up, you agree to our <br> <a class="text-theme-1 dark:text-theme-10" href="">Terms and Conditions</a> & <a class="text-theme-1 dark:text-theme-10" href="">Privacy Policy</a>
                     </div>
@@ -72,25 +84,7 @@
                 // Loading state
                 cash('#btn-login').html('<i data-loading-icon="oval" data-color="white" class="w-5 h-5 mx-auto"></i>').svgLoader()
                 await helper.delay(1500)
-
-                axios.post(`login`, {
-                    email: email,
-                    password: password,
-                    remember_me: rememberMe
-                }).then(res => {
-                    location.href = '/'
-                }).catch(err => {
-                    cash('#btn-login').html('Login')
-                    if (err.response.data.message != 'Wrong email or password.') {
-                        for (const [key, val] of Object.entries(err.response.data.errors)) {
-                            cash(`#${key}`).addClass('border-theme-6')
-                            cash(`#error-${key}`).html(val)
-                        }
-                    } else {
-                        cash(`#password`).addClass('border-theme-6')
-                        cash(`#error-password`).html(err.response.data.message)
-                    }
-                })
+                // end loading state
             }
 
             cash('#login-form').on('keyup', function(e) {

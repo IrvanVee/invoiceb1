@@ -17,11 +17,12 @@ use App\Models\Invoice;
 use Facade\Ignition\QueryRecorder\Query;
 use GuzzleHttp\Handler\Proxy;
 use PDF;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
- 
+
 use function PHPSTORM_META\map;
- 
+
 class PageController extends Controller
 {
     /**
@@ -77,7 +78,7 @@ class PageController extends Controller
     {
         return view('pages/dashboard-overview-2');
     }
- 
+
     /**
      * Show specified view.
      *
@@ -88,7 +89,7 @@ class PageController extends Controller
     {
         return view('pages/dashboard-overview-3');
     }
- 
+
     /**
      * Show specified view.
      *
@@ -99,7 +100,7 @@ class PageController extends Controller
     {
         return view('pages/inbox');
     }
- 
+
     /**
      * Show specified view.
      *
@@ -110,7 +111,7 @@ class PageController extends Controller
     {
         return view('pages/file-manager');
     }
- 
+
     /**
      * Show specified view.
      *
@@ -121,7 +122,7 @@ class PageController extends Controller
     {
         return view('pages/point-of-sale');
     }
- 
+
     /**
      * Show specified view.
      *
@@ -132,7 +133,7 @@ class PageController extends Controller
     {
         return view('pages/chat');
     }
- 
+
     /**
      * Show specified view.
      *
@@ -143,7 +144,7 @@ class PageController extends Controller
     {
         return view('pages/post');
     }
- 
+
     /**
      * Show specified view.
      *
@@ -154,7 +155,7 @@ class PageController extends Controller
     {
         return view('pages/calendar');
     }
- 
+
     /**
      * Show specified view.
      *
@@ -166,7 +167,7 @@ class PageController extends Controller
         $invoices = Invoice::all();
         return view('pages/invoice-list',compact('invoices'));
     }
- 
+
     /**
      * Show specified view.
      *
@@ -183,7 +184,7 @@ class PageController extends Controller
         $taxs = Tax::all()->sortBy('tax_value');
         return view('pages/invoice-form',compact('vendors','customers','products','discounts','taxs'));
     }
- 
+
     public function invoiceStore(Request $request){
         $request->validate([
             'vendor_id' => 'required',
@@ -215,7 +216,7 @@ class PageController extends Controller
         $invoice->status = $data['status'];
         $invoice->note = $data['note'];
         $invoice->save();
- 
+
         // untuk menambahkan ke detail invoice
         if (count($data['product_id']) > 0) {
             foreach ($data['product_id'] as $item => $value) {
@@ -231,7 +232,7 @@ class PageController extends Controller
             return redirect('invoice-list-page')->with('status', 'Invoice Berhasil Di Tambah');
         }
     }
- 
+
     public function invoiceshow($id){
         $invoice = Invoice::with('detailinvoice')->where('id',$id)->first();
         $detailinvoice = DetailInvoice::where('invoice_id',$id)->sum("sum_product");
@@ -240,17 +241,17 @@ class PageController extends Controller
         } else {
             return view('pages.invoice-detail',compact('invoice','detailinvoice'));
         }
- 
+
     }
 
     public function invoicepdf($id){
         $invoice = Invoice::with('detailinvoice')->where('id',$id)->first();
         $detailinvoice = DetailInvoice::where('invoice_id',$id)->sum("sum_product");
- 
+
         $pdf = PDF::loadview('pages.invoicepdf',compact('invoice','detailinvoice'));
         return $pdf->stream();
     }
- 
+
     public function invoiceedit($id){
         $invoice = invoice::with('detailinvoice')->where('id',$id)->first();
         $customers = Customer::all();
@@ -259,16 +260,16 @@ class PageController extends Controller
         $vendors = Vendor::all();
         $products  = Product::all();
         $detailinvoice = DetailInvoice::where('invoice_id',$id)->sum("sum_product");
- 
+
         if ($invoice == NULL) {
             return abort(404);
         } else {
             return view('pages.invoice-edit',compact('invoice','customers','discounts','taxs','vendors','products','detailinvoice'));
         }
- 
+
         // return view('pages.quotation-detail',compact('quotation'));
     }
- 
+
     public function invoiceupdate($id, Request $request){
         // dd($request->$id);
         $invoice = Invoice::find($id);
@@ -284,9 +285,9 @@ class PageController extends Controller
         $invoice->tunggakan = $invoice->total - $invoice->dibayar;
         $invoice->status = $request->status;
         $invoice->note = $request->note;
- 
         $invoice->save();
- 
+
+
         if (count($request->id) > 0) {
             foreach ($request->id as $item => $value) {
                 $datai = array(
@@ -302,7 +303,7 @@ class PageController extends Controller
             return redirect('invoice-list-page')->with('status', 'Invoice Berhasil Di Edit');
         }
     }
- 
+
     public function invoicedelete($id){
         $invoice = Invoice::where('id',$id);
         $detailinvoice = DetailInvoice::where('invoice_id',$id);
@@ -314,7 +315,7 @@ class PageController extends Controller
             return redirect('invoice-list-page')->with('status', 'Invoice Berhasil Di Hapus');
         }
     }
- 
+
     /**
      * Show specified view.
      *
@@ -640,17 +641,18 @@ class PageController extends Controller
     		'email' => 'required',
     		'password' => 'required',
             'name' => 'required',
-            'roles' => 'required'
+            // 'roles' => 'required'
     	]);
- 
-        User::create([
-    		'email' => $request->email,
-    		'password' => $request->password,
-            'name' => $request->name,
-            'roles' => $request->roles,
-    	]);
- 
-    	return redirect('users-list-page');
+
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->email_verified_at = date("Y-m-d h:i:s");
+        $user->password = Hash::make($request->password);
+        $user->save();
+        // dd($request->all());
+
+    	return redirect('users-list-page')->with('status','user baru telah di tambahkan');
     } 
  
     /**
@@ -676,16 +678,16 @@ class PageController extends Controller
     {
         $this->validate($request,[
             'email' => 'required',
-            'password' => 'required',
+            // 'password' => 'required',
             'name' => 'required',
-            'roles' => 'required'
+            // 'roles' => 'required'
         ]);
  
         $user = User::find($id);
         $user->email = $request->email;
-        $user->password = $request->password;
+        // $user->password = $request->password;
         $user->name = $request->name;
-        $user->roles = $request->roles;
+        // $user->roles = $request->roles;
         $user->save();
         return redirect('users-list-page');
     }
