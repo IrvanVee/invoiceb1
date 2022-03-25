@@ -11,7 +11,7 @@ class Vendor extends Model
 
     protected $table = "vendor";
 
-    protected $guarded = ['id','vendor_name'];
+    protected $fillable = ['vendor_name'];
 
     public function product(){
         return $this->hasOne(Product::class);

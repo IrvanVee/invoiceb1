@@ -216,6 +216,8 @@ class SideMenu
                 ]
             ],
 
+            'devider',
+
             'users' => [
                 'icon' => 'user',
                 'title' => 'Users',
@@ -336,6 +338,45 @@ class SideMenu
                             'layout' => 'side-menu'
                         ],
                         'title' => 'Discount List'
+                    ],
+                ]
+            ],
+
+            'coop' => [
+                'icon' => 'archive',
+                'title' => 'Marketing n Vendor',
+                'sub_menu' => [
+                    'marketing-form' => [
+                        'icon' => '',
+                        'route_name' => 'marketing-form',
+                        'params' => [
+                            'layout' => 'side-menu'
+                        ],
+                        'title' => 'Insert New Marketing'
+                    ],
+                    'marketing-list' => [
+                        'icon' => '',
+                        'route_name' => 'marketing-list',
+                        'params' => [
+                            'layout' => 'side-menu'
+                        ],
+                        'title' => 'Marketing List'
+                    ],
+                    'vendor-form' => [
+                        'icon' => '',
+                        'route_name' => 'vendor-form',
+                        'params' => [
+                            'layout' => 'side-menu'
+                        ],
+                        'title' => 'Insert New Vendor'
+                    ],
+                    'vendor-list' => [
+                        'icon' => '',
+                        'route_name' => 'vendor-list',
+                        'params' => [
+                            'layout' => 'side-menu'
+                        ],
+                        'title' => 'Vendor List'
                     ],
                 ]
             ],

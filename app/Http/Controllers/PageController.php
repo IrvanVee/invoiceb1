@@ -1160,11 +1160,110 @@ class PageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function profileOverview3()
-    // {
-    //     return view('pages/profile-overview-3');
-    // }
+    public function marketingForm()
+    {
+        return view('pages/marketing-form');
+    }
+
+    public function marketingList()
+    {
+        $marketing = Marketing::all();
+    	return view('pages/marketing-list', ['marketing' => $marketing]);
+    }
+
+    public function marketingStore(Request $request)
+    {
+        $this->validate($request,[
+    		'marketing_name' => 'required',
+    	]);
  
+        Marketing::create([   
+    		'marketing_name' => $request->marketing_name
+    	]);
+ 
+    	return redirect('marketing-list-page')->with('status','Marketing Berhasil Ditambah');
+    }
+
+    public function marketingEdit($id)
+    {
+        $marketing = Marketing::find($id);
+        return view('pages/marketing-edit', ['marketing' => $marketing]);
+    }
+
+    public function marketingUpdate($id, Request $request)
+    {
+        $this->validate($request,[
+            'marketing_name' => 'required'
+         ]);
+ 
+         $marketing = Marketing::find($id);
+         $marketing->marketing_name = $request->marketing_name;
+         $marketing->save();
+         return redirect('marketing-list-page');
+    }
+
+    public function marketingDelete($id)
+    {
+        $marketing = Marketing::find($id);
+        $marketing->delete();
+        return redirect('marketing-list-page');
+    }
+
+    /**
+     * Show specified view.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function vendorForm()
+    {
+        return view('pages/vendor-form');
+    }
+
+    public function vendorList()
+    {
+        $vendor = Vendor::all();
+    	return view('pages/vendor-list', ['vendor' => $vendor]);
+    }
+
+    public function vendorStore(Request $request)
+    {
+        $this->validate($request,[
+    		'vendor_name' => 'required',
+    	]);
+ 
+        Vendor::create([   
+    		'vendor_name' => $request->vendor_name
+    	]);
+ 
+    	return redirect('vendor-list-page')->with('status','Vendor Berhasil Ditambah');
+    }
+
+    public function vendorEdit($id)
+    {
+        $vendor = Vendor::find($id);
+        return view('pages/vendor-edit', ['vendor' => $vendor]);
+    }
+
+    public function vendorUpdate($id, Request $request)
+    {
+        $this->validate($request,[
+            'vendor_name' => 'required'
+         ]);
+ 
+         $vendor = Vendor::find($id);
+         $vendor->vendor_name = $request->vendor_name;
+         $vendor->save();
+         return redirect('vendor-list-page');
+    }
+ 
+    public function vendorDelete($id)
+    {
+        $vendor = Vendor::find($id);
+        $vendor->delete();
+        return redirect('vendor-list-page');
+    }
+
     /**
      * Show specified view.
      *

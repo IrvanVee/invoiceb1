@@ -138,6 +138,24 @@ Route::middleware('auth')->group(function() {
     Route::get('discount-list-page/delete/{id}', [PageController::class, 'discountDelete'])->name('discount-delete')->middleware('role:admin');
     // END DISCOUNT
 
+    // MARKETING SET
+    Route::get('marketing-form-page', [PageController::class, 'marketingForm'])->name('marketing-form')->middleware('role:marketing|admin');
+    Route::get('marketing-list-page', [PageController::class, 'marketingList'])->name('marketing-list')->middleware('role:marketing|admin');
+    Route::get('marketing-list-page/edit/{id}', [PageController::class, 'marketingEdit'])->name('marketing-edit')->middleware('role:marketing|admin');
+    Route::put('marketing-list-page/update/{id}', [PageController::class, 'marketingUpdate'])->name('marketing-update')->middleware('role:marketing|admin');
+    Route::post('marketing-list-page/store', [PageController::class, 'marketingStore'])->name('marketing-store')->middleware('role:marketing|admin');
+    Route::get('marketing-list-page/delete/{id}', [PageController::class, 'marketingDelete'])->name('marketing-delete')->middleware('role:marketing|admin');
+    // END MARKETING
+
+    // VENDOR SET
+    Route::get('vendor-form-page', [PageController::class, 'vendorForm'])->name('vendor-form')->middleware('role:vendor|admin');
+    Route::get('vendor-list-page', [PageController::class, 'vendorList'])->name('vendor-list')->middleware('role:vendor|admin');
+    Route::get('vendor-list-page/edit/{id}', [PageController::class, 'vendorEdit'])->name('vendor-edit')->middleware('role:vendor|admin');
+    Route::put('vendor-list-page/update/{id}', [PageController::class, 'vendorUpdate'])->name('vendor-update')->middleware('role:vendor|admin');
+    Route::post('vendor-list-page/store', [PageController::class, 'vendorStore'])->name('vendor-store')->middleware('role:vendor|admin');
+    Route::get('vendor-list-page/delete/{id}', [PageController::class, 'vendorDelete'])->name('vendor-delete')->middleware('role:vendor|admin');
+    // END VENDOR
+
     // Route::get('profile-overview-3-page', [PageController::class, 'profileOverview3'])->name('profile-overview-3');
     // Route::get('wizard-layout-1-page', [PageController::class, 'wizardLayout1'])->name('wizard-layout-1');
     // Route::get('wizard-layout-2-page', [PageController::class, 'wizardLayout2'])->name('wizard-layout-2');

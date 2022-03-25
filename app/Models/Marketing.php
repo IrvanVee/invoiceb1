@@ -13,7 +13,7 @@ class Marketing extends Model
     // ini hanya untuk mendeklarasikan tabel bahwa
     // tabel itu ada
 
-    protected $guarded = ['id','marketing_name'];
+    protected $fillable = ['marketing_name'];
 
     public function quotation(){
         return $this->hasOne(Quotation::class);
