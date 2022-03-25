@@ -20,6 +20,8 @@ use PDF;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 use function PHPSTORM_META\map;
 
@@ -654,7 +656,13 @@ class PageController extends Controller
 
     	return redirect('users-list-page')->with('status','user baru telah di tambahkan');
     } 
- 
+
+    public function usersShow($id){
+        $roles = Role::all();
+        $permissions = Permission::all();
+        $user = User::find($id);
+        return view('pages.user-role',compact('user','roles','permissions'));
+    }
     /**
      * Show specified view.
      *
@@ -701,10 +709,147 @@ class PageController extends Controller
     public function usersDelete($id)
     {
         $user = User::find($id);
+        if ($user->hasRole('admin')) {
+            return redirect('users-list-page')->with('status','anda adalah admin');
+        }
         $user->delete();
-        return redirect('users-list-page');
+        return redirect('users-list-page')->with('status','user berhasil di hapus');
     }
- 
+    public function assignRoleuser(Request $request,$id){
+        $user = User::find($id);
+        if ($user->hasRole($request->role)) {
+            return redirect()->back()->with('status','Role Exists');
+        }
+        $user->assignRole($request->role);
+        return redirect()->back()->with('status','Role Asigned');
+    }
+
+    public function removeRoleUser(User $user, Role $role){
+        if ($user->hasRole($role)) {
+            $user->removeRole($role);
+            return redirect()->back()->with('status','Role Remove');
+        }
+        return redirect()->back()->with('status','Role Not Exists');
+    }
+
+    public function givePermissionUser(Request $request,$id){
+        $user = User::find($id);
+        if ($user->hasPermissionTo($request->permission)) {
+            return redirect()->back()->with('status','izin hak akses di tolak');
+        }
+        $user->givePermissionTo($request->permission);
+        return redirect()->back()->with('status','izin hak akses di tambahkan');
+    }
+
+    public function revokePermissionUser(User $user ,Permission $permission){
+        if ($user->hasPermissionTo($permission)) {
+            $user->revokePermissionTo($permission);
+            return redirect()->back()->with('status','Revoke Di Izinkan');
+        }
+        return redirect()->back()->with('status','Revoke Tidak Di izinkan');
+    }
+
+    public function permissionLayout(){
+        $permissions = Permission::all();
+        return view('pages.permission-list',compact('permissions'));
+    }
+    
+    public function permissionform(){
+        return view('pages.permission-form');
+    }
+
+    public function permissionStore(Request $request){
+        // dd($request->all());
+        $request->validate([
+            'name' => 'required|unique:permissions',
+        ]);
+        Permission::create($request->all());
+        return redirect('permission-list')->with('status','hak akses berhasil di tambah');
+    }
+
+    public function permissionEdit($id){
+        $roles = Role::all();
+        $permission = Permission::find($id);
+        return view('pages.permission-edit',compact('permission','roles'));
+    }
+
+    public function permissionUpdate(Request $request,$id){
+        $permission = Permission::find($id);
+        $permission->name = $request->name;
+        $permission->save();
+        return redirect('permission-list')->with('status','hak akses berhasil di ubah');
+    }
+
+    public function permissionDelete($id){
+        $permision = Permission::find($id);
+        $permision->delete();
+        return redirect('permission-list')->with('status','hak akses berhasil di hapus');
+    }
+
+    public function assignRole(Request $request,$id){
+        $permission = Permission::find($id);
+        if ($permission->hasRole($request->role)) {
+            return redirect()->back()->with('status','Role Exists');
+        }
+        $permission->assignRole($request->role);
+        return redirect()->back()->with('status','Role Asigned');
+    }
+
+    public function removeRole(Permission $permission, Role $role){
+        if ($permission->hasRole($role)) {
+            $permission->removeRole($role);
+            return redirect()->back()->with('status','Role Remove');
+        }
+        return redirect()->back()->with('status','Role Not Exists');
+    }
+
+    public function roleLayout(){
+        $roles = Role::whereNotIn('name',['admin'])->get();
+        return view('pages.role-list',compact('roles'));
+    }
+    public function roleForm(){
+        return view('pages.role-form');
+    }
+    public function roleStore(Request $request){
+        $request->validate([
+            'name' => 'required|unique:roles',
+        ]);
+        Role::create($request->all());
+        return redirect('role-list')->with('status','Role Berhasil Di Tambah');
+    }
+    public function roleEdit($id){
+        $role = Role::find($id);
+        $permissions = Permission::all();
+        return view('pages.role-edit',compact('role','permissions'));
+    }
+    public function roleUpdate(Request $request,$id){
+        $role = Role::find($id);
+        $role->name = $request->name;
+        $role->save();
+        return redirect('role-list')->with('status','Role Berhasil Di Edit');
+    }
+    public function roleDelete($id){
+        $role = Role::find($id);
+        $role->delete();
+        return redirect('role-list')->with('status','Role Berhasil Di Hapus');
+    }
+
+    public function givePermission(Request $request,$id){
+        $role = Role::find($id);
+        if ($role->hasPermissionTo($request->permission)) {
+            return redirect()->back()->with('status','izin hak akses di tolak');
+        }
+        $role->givePermissionTo($request->permission);
+        return redirect()->back()->with('status','izin hak akses di tambahkan');
+    }
+
+    public function revokePermission(Role $role ,Permission $permission){
+        if ($role->hasPermissionTo($permission)) {
+            $role->revokePermissionTo($permission);
+            return redirect()->back()->with('status','Revoke Di Izinkan');
+        }
+        return redirect()->back()->with('status','Revoke Tidak Di izinkan');
+    }
     /**
      * Show specified view.
      *

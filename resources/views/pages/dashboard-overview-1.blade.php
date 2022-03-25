@@ -165,7 +165,7 @@
                         <h2 class="text-lg font-medium truncate mr-5">Total Chart</h2>
                     </div>
                     <div class="intro-y box p-5 mt-5">
-                        <div id="piechart" style="width: 470px; height: 420px;"></div>
+                        <div id="piechart" style="width: 100%;height:400px;"></div>
                         {{-- <div class="mt-8">
                             <div class="flex items-center">
                                 <div class="w-2 h-2 bg-theme-11 rounded-full mr-3"></div>

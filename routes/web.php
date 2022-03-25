@@ -42,73 +42,100 @@ Route::middleware('auth')->group(function() {
 
     // INVOICE SET
     Route::get('invoice-list-page', [PageController::class, 'invoiceList'])->name('invoice-list');
-    Route::get('invoice-form-page', [PageController::class, 'invoiceForm'])->name('invoice-form');
-    Route::post('invoice-list-page/store',[PageController::class,'invoiceStore'])->name('invoice-store');
+    Route::get('invoice-form-page', [PageController::class, 'invoiceForm'])->name('invoice-form')->middleware('role:vendor|admin');
+    Route::post('invoice-list-page/store',[PageController::class,'invoiceStore'])->name('invoice-store')->middleware('role:vendor|admin');
     Route::get('invoice-detail/{id}',[PageController::class,'invoiceshow'])->name('invoice-detail');
-    Route::get('invoice-edit/edit/{id}',[PageController::class,'invoiceedit'])->name('invoice-edit');
-    Route::put('invoice-update/{id}',[PageController::class,'invoiceupdate'])->name('invoice-update');
-    Route::delete('/invoice-list-page/delete/{id}',[PageController::class,'invoicedelete'])->name('invoice-delete');;
+    Route::get('invoice-edit/edit/{id}',[PageController::class,'invoiceedit'])->name('invoice-edit')->middleware('role:vendor|admin');
+    Route::put('invoice-update/{id}',[PageController::class,'invoiceupdate'])->name('invoice-update')->middleware('role:vendor|admin');
+    Route::delete('/invoice-list-page/delete/{id}',[PageController::class,'invoicedelete'])->name('invoice-delete')->middleware('role:vendor|admin');
     Route::get('invoicepdf/{id}',[PageController::class,'invoicepdf'])->name('invoice-pdf');
     // END INVOICE
 
     // QUOTATION SET
     Route::get('quote-list-page', [PageController::class, 'quoteList'])->name('quote-list');
-    Route::get('quote-form-page', [PageController::class, 'quoteForm'])->name('quote-form');
+    Route::get('quote-form-page', [PageController::class, 'quoteForm'])->name('quote-form')->middleware('role:marketing|admin');
     Route::get('findProductName', [PageController::class, 'findProductName'])->name('findProductName');
     Route::get('findPrice', [PageController::class, 'findPrice'])->name('findPrice');
-    Route::post('qoute-list-page/store',[PageController::class,'quoteStore'])->name('quote-store');
+    Route::post('qoute-list-page/store',[PageController::class,'quoteStore'])->name('quote-store')->middleware('role:marketing|admin');
     Route::get('quote-detail/{id}',[PageController::class,'quoteshow'])->name('quote-detail');
-    Route::get('quote-edit/edit/{id}',[PageController::class,'quotesedit'])->name('quote-edit');
-    Route::patch('quote-update/{id}',[PageController::class,'quotesupdate'])->name('quote-update');
-    Route::delete('/quotation-list-page/delete/{id}',[PageController::class,'quotationdelete'])->name('quote-delete');
+    Route::get('quote-edit/edit/{id}',[PageController::class,'quotesedit'])->name('quote-edit')->middleware('role:marketing|admin');
+    Route::patch('quote-update/{id}',[PageController::class,'quotesupdate'])->name('quote-update')->middleware('role:marketing|admin');
+    Route::delete('/quotation-list-page/delete/{id}',[PageController::class,'quotationdelete'])->name('quote-delete')->middleware('role:marketing|admin');
     Route::get('quotationpdf/{id}',[PageController::class,'quotationpdf'])->name('quotation-pdf');
-    Route::get('quote-invoice/{id}',[PageController::class,'quotationinvoice'])->name('quote-invoice');
+    Route::get('quote-invoice/{id}',[PageController::class,'quotationinvoice'])->name('quote-invoice')->middleware('role:vendor|admin');
     // END QUOTATION
 
     // CUSTOMER SET
-    Route::get('customers-form-page', [PageController::class, 'usersLayout1'])->name('users-layout-1');
-    Route::get('customers-list-page', [PageController::class, 'usersLayout2'])->name('users-layout-2');
-    Route::get('customers-list-page/edit/{id}', [PageController::class, 'customerEdit'])->name('customer-edit');
-    Route::put('customers-list-page/update/{id}', [PageController::class, 'customerUpdate'])->name('customer-update'); 
-    Route::post('customers-list-page/store', [PageController::class, 'customerStore'])->name('customer-store');
-    Route::get('customers-list-page/delete/{id}', [PageController::class, 'customerDelete'])->name('customer-delete');
+    Route::get('customers-form-page', [PageController::class, 'usersLayout1'])->name('users-layout-1')->middleware('role:marketing|admin');
+    Route::get('customers-list-page', [PageController::class, 'usersLayout2'])->name('users-layout-2')->middleware('role:marketing|admin');
+    Route::get('customers-list-page/edit/{id}', [PageController::class, 'customerEdit'])->name('customer-edit')->middleware('role:marketing|admin');
+    Route::put('customers-list-page/update/{id}', [PageController::class, 'customerUpdate'])->name('customer-update')->middleware('role:marketing|admin'); 
+    Route::post('customers-list-page/store', [PageController::class, 'customerStore'])->name('customer-store')->middleware('role:marketing|admin');
+    Route::get('customers-list-page/delete/{id}', [PageController::class, 'customerDelete'])->name('customer-delete')->middleware('role:marketing|admin');
     // END CUSTOMER
 
     // USER SET
-    Route::get('users-form-page', [PageController::class, 'usersLayout3'])->name('users-layout-3');
-    Route::get('users-list-page', [PageController::class, 'usersLayout4'])->name('users-layout-4');
-    Route::get('users-list-page/edit/{id}', [PageController::class, 'usersEdit'])->name('users-edit');
-    Route::put('users-list-page/update/{id}', [PageController::class, 'usersUpdate'])->name('users-update');
-    Route::post('users-list-page/store', [PageController::class, 'usersStore'])->name('users-store');
-    Route::delete('users-list-page/delete/{id}', [PageController::class, 'usersDelete'])->name('users-delete');
+    Route::get('users-form-page', [PageController::class, 'usersLayout3'])->name('users-layout-3')->middleware('role:admin');
+    Route::get('users-list-page', [PageController::class, 'usersLayout4'])->name('users-layout-4')->middleware('role:admin');
+    Route::get('users-role/show/{id}',[PageController::class,'usersShow'])->name('users-show')->middleware('role:admin');
+    Route::get('users-list-page/edit/{id}', [PageController::class, 'usersEdit'])->name('users-edit')->middleware('role:admin');
+    Route::put('users-list-page/update/{id}', [PageController::class, 'usersUpdate'])->name('users-update')->middleware('role:admin');
+    Route::post('users-list-page/store', [PageController::class, 'usersStore'])->name('users-store')->middleware('role:admin');
+    Route::delete('users-list-page/delete/{id}', [PageController::class, 'usersDelete'])->name('users-delete')->middleware('role:admin');
     // END USER
 
+    // PERMISSION SET
+    Route::get('permission-list',[PageController::class,'permissionLayout'])->name('permission-list')->middleware('role:admin');
+    Route::get('permission-form',[PageController::class,'permissionform'])->name('permission-form')->middleware('role:admin');
+    Route::get('permission-edit/edit/{id}',[PageController::class,'permissionEdit'])->name('permission-edit')->middleware('role:admin');
+    Route::patch('permission-list/update/{id}',[PageController::class,'permissionUpdate'])->name('permission-update')->middleware('role:admin');
+    Route::post('permission-list/store',[PageController::class,'permissionStore'])->name('permission-store')->middleware('role:admin');
+    Route::delete('permission-delete/delete/{id}',[PageController::class,'permissionDelete'])->name('permission-delete')->middleware('role:admin');
+    Route::post('permissions/roles/{id}',[PageController::class,'assignRole'])->name('permission-role')->middleware('role:admin');
+    Route::delete('/permissions/{permission}/roles/{role}',[PageController::class,'removeRole'])->name('permissions.roles.remove')->middleware('role:admin');
+    Route::post('user-list/permissions/{id}',[PageController::class,'givePermissionUser'])->name('users-permission')->middleware('role:admin');
+    Route::delete('/users/{user}/permissions/{permission}', [PageController::class, 'revokePermissionUser'])->name('users.permissions.revoke')->middleware('role:admin');
+    // END PERMISSION
+
+    // ROLE SET
+    Route::get('role-list',[PageController::class,'roleLayout'])->name('role-list')->middleware('role:admin');
+    Route::get('role-form',[PageController::class,'roleForm'])->name('role-form')->middleware('role:admin');
+    Route::post('role-list/store',[PageController::class,'roleStore'])->name('role-store')->middleware('role:admin');
+    Route::get('role-edit/edit/{id}',[PageController::class,'roleEdit'])->name('role-edit')->middleware('role:admin');
+    Route::put('role-list/update/{id}',[PageController::class,'roleUpdate'])->name('role-update')->middleware('role:admin');
+    Route::delete('role-list/delete/{id}',[PageController::class,'roleDelete'])->name('role-delete')->middleware('role:admin');
+    Route::post('role-list/permissions/{id}',[PageController::class,'givePermission'])->name('role-permission')->middleware('role:admin');
+    Route::delete('/roles/{role}/permissions/{permission}',[PageController::class,'revokePermission'])->name('roles.permissions.revoke')->middleware('role:admin');
+    Route::post('roles/user/roles/{id}',[PageController::class,'assignRoleuser'])->name('role-user')->middleware('role:admin');
+    Route::delete('/users/{user}/roles/{role}',[PageController::class,'removeRoleUser'])->name('users.roles.remove')->middleware('role:admin');
+    // END ROLE
+
     // PRODUCT SET
-    Route::get('product-form-page', [PageController::class, 'profileOverview1'])->name('profile-overview-1');
-    Route::get('product-list-page', [PageController::class, 'profileOverview2'])->name('profile-overview-2');
-    Route::get('product-list-page/edit/{id}', [PageController::class, 'productEdit'])->name('product-edit');
-    Route::get('product-detail/{id}',[PageController::class, 'productDetail'])->name('product-detail');
-    Route::put('product-list-page/update/{id}', [PageController::class, 'productUpdate'])->name('product-update');
-    Route::post('product-list-page/store', [PageController::class, 'productStore'])->name('product-store');
-    Route::get('product-list-page/delete/{id}', [PageController::class, 'productDelete'])->name('product-delete');
+    Route::get('product-form-page', [PageController::class, 'profileOverview1'])->name('profile-overview-1')->middleware('role:vendor|admin');
+    Route::get('product-list-page', [PageController::class, 'profileOverview2'])->name('profile-overview-2')->middleware('role:vendor|admin');
+    Route::get('product-list-page/edit/{id}', [PageController::class, 'productEdit'])->name('product-edit')->middleware('role:vendor|admin');
+    Route::get('product-detail/{id}',[PageController::class, 'productDetail'])->name('product-detail')->middleware('role:vendor|admin');
+    Route::put('product-list-page/update/{id}', [PageController::class, 'productUpdate'])->name('product-update')->middleware('role:vendor|admin');
+    Route::post('product-list-page/store', [PageController::class, 'productStore'])->name('product-store')->middleware('role:vendor|admin');
+    Route::get('product-list-page/delete/{id}', [PageController::class, 'productDelete'])->name('product-delete')->middleware('role:vendor|admin');
     //END PRODUCT
 
     // TAX SET
-    Route::get('tax-form-page', [PageController::class, 'taxForm'])->name('tax-form');
-    Route::get('tax-list-page', [PageController::class, 'taxList'])->name('tax-list');
-    Route::get('tax-list-page/edit/{id}', [PageController::class, 'taxEdit'])->name('tax-edit');
-    Route::put('tax-list-page/update/{id}', [PageController::class, 'taxUpdate'])->name('tax-update');
-    Route::post('tax-list-page/store', [PageController::class, 'taxStore'])->name('tax-store');
-    Route::get('tax-list-page/delete/{id}', [PageController::class, 'taxDelete'])->name('tax-delete');
+    Route::get('tax-form-page', [PageController::class, 'taxForm'])->name('tax-form')->middleware('role:admin');
+    Route::get('tax-list-page', [PageController::class, 'taxList'])->name('tax-list')->middleware('role:admin');
+    Route::get('tax-list-page/edit/{id}', [PageController::class, 'taxEdit'])->name('tax-edit')->middleware('role:admin');
+    Route::put('tax-list-page/update/{id}', [PageController::class, 'taxUpdate'])->name('tax-update')->middleware('role:admin');
+    Route::post('tax-list-page/store', [PageController::class, 'taxStore'])->name('tax-store')->middleware('role:admin');
+    Route::get('tax-list-page/delete/{id}', [PageController::class, 'taxDelete'])->name('tax-delete')->middleware('role:admin');
     // END TAX
 
     // DISCOUNT SET
-    Route::get('discount-form-page', [PageController::class, 'discountForm'])->name('discount-form');
-    Route::get('discount-list-page', [PageController::class, 'discountList'])->name('discount-list');
-    Route::get('discount-list-page/edit/{id}', [PageController::class, 'discountEdit'])->name('discount-edit');
-    Route::put('discount-list-page/update/{id}', [PageController::class, 'discountUpdate'])->name('discount-update');
-    Route::post('discount-list-page/store', [PageController::class, 'discountStore'])->name('discount-store');
-    Route::get('discount-list-page/delete/{id}', [PageController::class, 'discountDelete'])->name('discount-delete');
+    Route::get('discount-form-page', [PageController::class, 'discountForm'])->name('discount-form')->middleware('role:admin');
+    Route::get('discount-list-page', [PageController::class, 'discountList'])->name('discount-list')->middleware('role:admin');
+    Route::get('discount-list-page/edit/{id}', [PageController::class, 'discountEdit'])->name('discount-edit')->middleware('role:admin');
+    Route::put('discount-list-page/update/{id}', [PageController::class, 'discountUpdate'])->name('discount-update')->middleware('role:admin');
+    Route::post('discount-list-page/store', [PageController::class, 'discountStore'])->name('discount-store')->middleware('role:admin');
+    Route::get('discount-list-page/delete/{id}', [PageController::class, 'discountDelete'])->name('discount-delete')->middleware('role:admin');
     // END DISCOUNT
 
     // Route::get('profile-overview-3-page', [PageController::class, 'profileOverview3'])->name('profile-overview-3');

@@ -1,7 +1,7 @@
 @extends('../layout/' . $layout)
 
 @section('subhead')
-    <title>CRUD Data List - B One - Users</title>
+    <title>CRUD Permission List - B One - Admin</title>
 @endsection
 
 @section('subcontent')
@@ -9,11 +9,11 @@
     @if (session('status'))
     <div class="alert alert-success show mb-2">
         {{ session('status') }}
-    </div>
-@endif
+        </div>
+    @endif
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-            <a href="users-form-page" class="btn btn-primary shadow-md mr-2">Add New User</a>
+            <a href="/permission-form/" class="btn btn-primary shadow-md mr-2">Add New Permission</a>
             {{-- <div class="dropdown">
                 <button class="dropdown-toggle btn px-2 box text-gray-700 dark:text-gray-300" aria-expanded="false">
                     <span class="w-5 h-5 flex items-center justify-center">
@@ -47,8 +47,8 @@
             <table class="table table-report -mt-2">
                 <thead>
                     <tr>
-                        <th class="whitespace-nowrap">EMAIL</th>
-                        <th class="whitespace-nowrap">NAME</th>
+                        <th class="whitespace-nowrap">NO</th>
+                        <th class="whitespace-nowrap">PERMISSION NAME</th>
                         {{-- <th class="text-center whitespace-nowrap">ROLES</th> --}}
                         {{-- <th class="text-center whitespace-nowrap">STATUS</th> --}}
                         <th class="text-center whitespace-nowrap">ACTIONS</th>
@@ -56,58 +56,42 @@
                 </thead>
                 <tbody>
                     {{-- @foreach (array_slice($fakers, 0,2) as $faker)   --}}
-                    @foreach ($user as $u)
-                        <tr class="intro-x">
-                            {{-- <td class="w-40">
-                                <div class="flex">
-                                    <div class="w-10 h-10 image-fit zoom-in">
-                                        <img alt="Rubick Tailwind HTML Admin Template" class="tooltip rounded-full" src="{{ asset('dist/images/' . $faker['images'][0]) }}" title="Uploaded at {{ $faker['dates'][0] }}">
-                                    </div>
-                                    <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                        <img alt="Rubick Tailwind HTML Admin Template" class="tooltip rounded-full" src="{{ asset('dist/images/' . $faker['images'][1]) }}" title="Uploaded at {{ $faker['dates'][0] }}">
-                                    </div>
-                                    <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                        <img alt="Rubick Tailwind HTML Admin Template" class="tooltip rounded-full" src="{{ asset('dist/images/' . $faker['images'][2]) }}" title="Uploaded at {{ $faker['dates'][0] }}">
-                                    </div>
-                                </div>
-                            </td> --}}
-                            <td>
-                                {{-- <a href="" class="font-medium whitespace-nowrap">{{ $faker['products'][0]['name'] }}</a> --}}
-                                <div class="text-gray-600 text-l whitespace-nowrap font-medium mt-0.5">{{ $u->email }}</div>
-                            </td>
-                            <td>
-                                <a href="" class="font-medium whitespace-nowrap">{{ $u->name }}</a>
-                            </td>
-                            {{-- <td class="text-center">{{ $u->roles }}</td> --}}
-                            {{-- <td class="w-40">
-                                <div class="flex items-center justify-center {{ $faker['true_false'][0] ? 'text-theme-9' : 'text-theme-6' }}">
-                                    <i data-feather="check-square" class="w-4 h-4 mr-2"></i> {{ $faker['true_false'][0] ? 'Active' : 'Inactive' }}
-                                </div>
-                            </td> --}}
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3" href="users-list-page/edit/{{ $u->id }}">
-                                        <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit
-                                    </a>
-                                    {{-- <a class="flex items-center text-theme-6" href="users-list-page/delete/{{ $u->id }}">
+                    @forelse ($permissions as $permission)
+                    <tr class="intro-x">
+                        <td>
+                            {{-- <a href="" class="font-medium whitespace-nowrap">{{ $faker['products'][0]['name'] }}</a> --}}
+                            <div class="text-gray-600 text-l whitespace-nowrap font-medium mt-0.5">{{ $loop->iteration }}</div>
+                        </td>
+                        <td>
+                            <a href="" class="font-medium whitespace-nowrap">{{ $permission->name }}</a>
+                        </td>
+                        {{-- <td class="text-center">{{ $u->roles }}</td> --}}
+                        {{-- <td class="w-40">
+                            <div class="flex items-center justify-center {{ $faker['true_false'][0] ? 'text-theme-9' : 'text-theme-6' }}">
+                                <i data-feather="check-square" class="w-4 h-4 mr-2"></i> {{ $faker['true_false'][0] ? 'Active' : 'Inactive' }}
+                            </div>
+                        </td> --}}
+                        <td class="table-report__action w-56">
+                            <div class="flex justify-center items-center">
+                                <a class="flex items-center mr-3" href="/permission-edit/edit/{{ $permission->id }}">
+                                    <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit
+                                </a>
+                                {{-- <a class="flex items-center text-theme-6" href="users-list-page/delete/{{ $u->id }}">
+                                    <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete
+                                </a> --}}
+                                <form action="/permission-delete/delete/{{ $permission->id }}" onsubmit="return confirm('are you sure')" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger text-theme-6 text-decoration-none">
                                         <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete
-                                    </a> --}}
-                                    <form action="/users-list-page/delete/{{ $u->id }}" onsubmit="return confirm('are you sure')" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger text-theme-6 text-decoration-none">
-                                            <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete
-                                        </button>
-                                    </form>
-                                </div>
-                                <div class="flex justify-center items-center">
-                                    <a class="flex items-center text-theme-10 ml-5" href="/users-role/show/{{$u->id}}">
-                                        <i data-feather="key" class="w-4 h-4 mr-1 ml-3"></i> Role
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    @empty
+                    <td style="color: red;text-align:center;" colspan="3">tidak ada hak akses</td>
+                    @endforelse
                     {{-- @endforeach --}}
                 </tbody>
             </table>

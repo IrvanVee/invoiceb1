@@ -246,6 +246,60 @@ class SideMenu
                     // ]
                 ]
             ],
+            
+            'permission' => [
+                'icon' => 'edit',
+                'title' => 'Permission',
+                'sub_menu' => [
+                    'add-permission' => [
+                        'icon' => '',
+                        'route_name' => 'permission-form',
+                        'params' => [
+                            'layout' => 'side-menu'
+                        ],
+                        'title' => 'Add Permission'
+                    ],
+                    'permission-list' => [
+                        'icon' => '',
+                        'route_name' => 'permission-list',
+                        'params' => [
+                            'layout' => 'side-menu'
+                        ],
+                        'title' => 'Permission List'
+                    ],
+                    // 'users-layout-3' => [
+                    //     'icon' => '',
+                    //     'route_name' => 'users-layout-3',
+                    //     'params' => [
+                    //         'layout' => 'side-menu'
+                    //     ],
+                    //     'title' => 'Layout 3'
+                    // ]
+                ]
+            ],
+
+            'role' => [
+                'icon' => 'list',
+                'title' => 'Role',
+                'sub_menu' => [
+                    'role-form' => [
+                        'icon' => '',
+                        'route_name' => 'role-form',
+                        'params' => [
+                            'layout' => 'side-menu'
+                        ],
+                        'title' => 'Add Role'
+                    ],
+                    'role-list' => [
+                        'icon' => '',
+                        'route_name' => 'role-list',
+                        'params' => [
+                            'layout' => 'side-menu'
+                        ],
+                        'title' => 'Role List'
+                    ]
+                ]
+            ],
 
             'setting' => [
                 'icon' => 'settings',
