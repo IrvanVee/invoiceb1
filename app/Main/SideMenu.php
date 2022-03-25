@@ -344,7 +344,7 @@ class SideMenu
 
             'coop' => [
                 'icon' => 'archive',
-                'title' => 'Marketing n Vendor',
+                'title' => 'Marketing & Vendor',
                 'sub_menu' => [
                     'marketing-form' => [
                         'icon' => '',

@@ -117,21 +117,29 @@
                     <label for="diskon">Diskon</label>
                     <label for="tax">Tax</label>
                     <div class="input-group">
-                        <select data-placeholder="Discount" class="tail-select w-full" id="discount" name="discount_id">
+                        <select data-placeholder="Discount" class="tail-select w-full @error('discount_id') is-invalid @enderror" id="discount" name="discount_id">
+                            <option value="">Silahkan Pilih Discount</option>
                             @foreach ($discounts as $discount)
-                            <option value="{{$discount->id}}">{{$discount->nilai_discount}}</option>
+                            <option value="{{$discount->id}}" {{old('discount_id') == $discount->id ? 'selected' : null}}>{{$discount->nilai_discount}}</option>
                             @endforeach
                         </select>
                         <label class="input-group-text" for="inputGroupSelect02">%</label>
                     </div>
                     <div class="input-group">
                         <select data-placeholder="Tax" name="tax_id" class="tail-select w-full" id="tax">
+                            <option value="">Silahkan Pilih Tax</option>
                             @foreach ($taxs as $tax)
-                            <option value="{{$tax->id}}">{{$tax->tax_value}}</option>
+                            <option value="{{$tax->id}}" {{old('tax_id') == $tax->id ? 'selected' : null}}>{{$tax->tax_value}}</option>
                             @endforeach
                         </select>
                         <label class="input-group-text" for="inputGroupSelect02">%</label>
                     </div>
+                    @error('discount_id')
+                    <p class="mb-2" style="color: red;">{{$message}}</p>
+                    @enderror
+                    @error('tax_id')
+                    <p class="mb-2" style="color: red;">{{$message}}</p>
+                    @enderror
                     {{-- end div --}}
                 </div>
                 <div class="mt-3">

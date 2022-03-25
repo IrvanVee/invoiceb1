@@ -24,7 +24,7 @@
                 </div>
                 <div class="mt-3">
                     <label for="crud-form-2" class="form-label">Vendor</label>
-                    <select data-placeholder="Select Vendor" class="tail-select w-full" name="vendor_id" value="{{old('vendor_id')}}">
+                    <select class="tail-select w-full" name="vendor_id" value="{{old('vendor_id')}}">
                     @foreach ($vendors as $vendor)
                         <option value="{{$vendor->id}}">{{$vendor->vendor_name}}</option>
                     @endforeach
