@@ -737,6 +737,10 @@ var options = {
     // title: 'My Daily Activities'
 };
 
+$(window).resize(function(){
+  drawChart();
+});
+
 var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
   chart.draw(data, options);

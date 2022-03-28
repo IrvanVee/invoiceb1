@@ -21,14 +21,19 @@
                 </div>
                 <div class="mt-3">
                     <label for="crud-form-2" class="form-label">Vendor</label>
-                    <select data-placeholder="Select Vendor" class="tail-select w-full" name="vendor_id">
-                        {{-- <option value="">Select Vendor</option>
-                        <option value="1">Vendor 1</option>
-                        <option value="2">Vendor 2</option> --}}
-                        <option value="{{$product->vendor_id}}">
-                        {{$product->vendor->vendor_name}}
+                    <select class="tail-select w-full @error('vendor_id') is-invalid @enderror" id="crud-form-2"
+                        name="vendor_id">
+                        {{-- <option value="">silahkan pilih vendor</option> --}}
+                        <option value="{{$product->vendor_id}}">{{$product->vendor->vendor_name}}</option>
+                        @foreach($vendors as $vendor)
+                        <option value="{{$vendor->id}}"
+                            {{old('vendor_id') == $vendor->id ? 'selected' : null}}>{{$vendor->vendor_name}}
                         </option>
+                        @endforeach
                     </select>
+                    @error('vendor_id')
+                    <p class="mb-2" style="color: red;">{{$message}}</p>
+                    @enderror
                 </div>
                 <div class="mt-3">
                     <label for="crud-form-3" class="form-label">Price</label>

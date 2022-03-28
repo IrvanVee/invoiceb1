@@ -911,8 +911,8 @@ class PageController extends Controller
     public function productEdit($id)
     {
         $product = Product::find($id);
- 
-        return view('pages/product-edit', ['product' => $product]);
+        $vendors = Vendor::all();
+        return view('pages/product-edit', compact('product','vendors'));
     }
 
     public function productDetail($id){
@@ -955,7 +955,9 @@ class PageController extends Controller
     public function productDelete($id)
     {
         $product = Product::find($id);
+        $productdetailinvoice = DetailInvoice::where('product_id',$id);
         $product->delete();
+        $productdetailinvoice->delete();
         return redirect('product-list-page')->with('status','produk berhasil di hapus');
     }
  
@@ -1254,14 +1256,18 @@ class PageController extends Controller
          $vendor = Vendor::find($id);
          $vendor->vendor_name = $request->vendor_name;
          $vendor->save();
-         return redirect('vendor-list-page');
+         return redirect('vendor-list-page')->with('status','vendor berhasil di update');
     }
  
     public function vendorDelete($id)
     {
         $vendor = Vendor::find($id);
+        $vendorinvoice = Invoice::where('vendor_id',$id);
+        $vendorproduct = Product::where('vendor_id',$id);
         $vendor->delete();
-        return redirect('vendor-list-page');
+        $vendorinvoice->delete();
+        $vendorproduct->delete();
+        return redirect('vendor-list-page')->with('status','Vendor Berhasil Di Hapus');
     }
 
     /**

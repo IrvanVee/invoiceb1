@@ -73,7 +73,30 @@
                         </li>
                     @endif
                 @endforeach
-            </ul>
+{{-- <li>
+    <a href="javascript:;" class="side-menu side-menu--active">
+        <div class="side-menu__icon">
+            <i data-lucide="home"></i>
+        </div>
+        <div class="side-menu__title">
+            Dashboard
+                                                    <div class="side-menu__sub-icon transform rotate-180">
+                    <i data-lucide="chevron-down"></i>
+                </div>
+                                            </div>
+    </a>
+                                    <ul class="side-menu__sub-open">
+                                                    <li>
+                    <a href="http://rubick.left4code.com/page/side-menu/light/dashboard-overview-1" class="side-menu side-menu--active">
+                        <div class="side-menu__icon">
+                            <i data-lucide="activity"></i>
+                        </div>
+                        <div class="side-menu__title">
+                            Overview 1
+                                                                            </div>
+                    </a>
+                                                            </li>
+            </ul> --}}
         </nav>
         <!-- END: Side Menu -->
         <!-- BEGIN: Content -->
