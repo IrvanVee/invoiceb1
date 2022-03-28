@@ -1,9 +1,13 @@
+<title>{{$invoice->vendor->vendor_name}} : {{$invoice->customer->customer_name}}</title>
 <?php 
 function kode_unik($u = 5){
     return substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"),10,$u);
 }
 ?>
-<title>{{$invoice->vendor->vendor_name}} : {{$invoice->vendor->vendor_name}}</title>
+<?php ?>
+{{-- <h2>TEsting</h2> --}}
+<img src="https://files.fm/thumb_show.php?i=w677pagtk" style="width: 13%;" alt="">
+<?php ?>
 <!doctype html>
 <html>
 <head>
@@ -12,6 +16,12 @@ function kode_unik($u = 5){
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
+    <?php 
+        // $pdf = new FPDF();
+        // $PDF->AddPage();
+        // $pdf->Image('dist/images/LOGO B1.png', 10, -5);
+        // $pdf->Output();
+    ?>
     <h1 class="mt-7 intro-y text-lg font-medium" style="font-size:30px;">Kode Invoice : <?php echo kode_unik(); ?>{{$invoice->id}}</h1>
     <h2 class="intro-y text-lg font-medium mt-3">Vendor : {{$invoice->vendor->vendor_name}}</h2>
     <h3 class="intro-y text-lg font-medium mt-3">Customer  : {{$invoice->customer->customer_name}}</h3>
