@@ -604,7 +604,9 @@ class PageController extends Controller
     public function customerDelete($id)
     {
         $customer = Customer::find($id);
+        $customerquotation = Quotation::where('customer_id',$id);
         $customer->delete();
+        $customerquotation->delete();
         return redirect('customers-list-page')->with('status', 'customer berhasil di hapus');
     }
  
@@ -956,8 +958,10 @@ class PageController extends Controller
     {
         $product = Product::find($id);
         $productdetailinvoice = DetailInvoice::where('product_id',$id);
+        $productdetailquotation = DetailQuotation::where('product_id',$id);
         $product->delete();
         $productdetailinvoice->delete();
+        $productdetailquotation->delete();
         return redirect('product-list-page')->with('status','produk berhasil di hapus');
     }
  
@@ -1207,7 +1211,9 @@ class PageController extends Controller
     public function marketingDelete($id)
     {
         $marketing = Marketing::find($id);
+        $marketingquotation = Quotation::where('marketing_id',$id);
         $marketing->delete();
+        $marketingquotation->delete();
         return redirect('marketing-list-page');
     }
 
@@ -1264,9 +1270,11 @@ class PageController extends Controller
         $vendor = Vendor::find($id);
         $vendorinvoice = Invoice::where('vendor_id',$id);
         $vendorproduct = Product::where('vendor_id',$id);
+        $vendordquotation = DetailQuotation::where('vendor_id',$id);
         $vendor->delete();
         $vendorinvoice->delete();
         $vendorproduct->delete();
+        $vendordquotation->delete();
         return redirect('vendor-list-page')->with('status','Vendor Berhasil Di Hapus');
     }
 
