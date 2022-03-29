@@ -238,6 +238,14 @@ class SideMenu
                         ],
                         'title' => 'User List'
                     ],
+                    'profile-page' => [
+                        'icon' => '',
+                        'route_name' => 'profile-page',
+                        'params' => [
+                            'layout' => 'side-menu'
+                        ],
+                        'title' => 'Edit Profile'
+                    ],
                     // 'users-layout-3' => [
                     //     'icon' => '',
                     //     'route_name' => 'users-layout-3',

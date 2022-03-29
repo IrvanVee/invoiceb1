@@ -1,7 +1,7 @@
 @extends('../layout/' . $layout)
 
 @section('subhead')
-    <title>CRUD Role List - B One - Admin</title>
+    <title>CRUD Data List - B One - Role</title>
 @endsection
 
 @section('subcontent')

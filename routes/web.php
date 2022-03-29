@@ -82,6 +82,7 @@ Route::middleware('auth')->group(function() {
     Route::put('users-list-page/update/{id}', [PageController::class, 'usersUpdate'])->name('users-update')->middleware('role:admin');
     Route::post('users-list-page/store', [PageController::class, 'usersStore'])->name('users-store')->middleware('role:admin');
     Route::delete('users-list-page/delete/{id}', [PageController::class, 'usersDelete'])->name('users-delete')->middleware('role:admin');
+    Route::get('profile-page', [PageController::class, 'profilePage'])->name('profile-page');
     // END USER
 
     // PERMISSION SET

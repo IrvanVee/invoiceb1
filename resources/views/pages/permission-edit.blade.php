@@ -1,7 +1,7 @@
 @extends('../layout/' . $layout)
 
 @section('subhead')
-    <title>CRUD Form Permission - B One - Admin</title>
+    <title>CRUD Form - B One - Permission   </title>
 @endsection
 
 @section('subcontent')

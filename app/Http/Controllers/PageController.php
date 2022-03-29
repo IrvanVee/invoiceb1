@@ -639,6 +639,17 @@ class PageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function profilePage()
+    {
+        return view('pages/profile-page');
+    }
+
+    /**
+     * Show specified view.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function usersStore(Request $request)
     {
     	$this->validate($request,[
