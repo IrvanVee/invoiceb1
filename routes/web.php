@@ -154,7 +154,7 @@ Route::middleware('auth')->group(function() {
     Route::get('vendor-list-page/edit/{id}', [PageController::class, 'vendorEdit'])->name('vendor-edit')->middleware('role:vendor|admin');
     Route::put('vendor-list-page/update/{id}', [PageController::class, 'vendorUpdate'])->name('vendor-update')->middleware('role:vendor|admin');
     Route::post('vendor-list-page/store', [PageController::class, 'vendorStore'])->name('vendor-store')->middleware('role:vendor|admin');
-    Route::get('vendor-list-page/delete/{id}', [PageController::class, 'vendorDelete'])->name('vendor-delete')->middleware('role:vendor|admin');
+    Route::delete('vendor-list-page/delete/{id}', [PageController::class, 'vendorDelete'])->name('vendor-delete')->middleware('role:vendor|admin');
     // END VENDOR
 
     // Route::get('profile-overview-3-page', [PageController::class, 'profileOverview3'])->name('profile-overview-3');

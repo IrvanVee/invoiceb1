@@ -102,7 +102,8 @@
                 <div class="p-4 border-b border-theme-27 dark:border-dark-3">
                     <div class="font-medium">{{ Auth::user()->name }}</div>
                     <div class="text-xs text-theme-28 mt-0.5 dark:text-gray-600">
-                        @role('admin')
+                        {{ Auth::user()->getRoleNames()[0] }}
+                        {{-- @role('admin')
                         <i>admin</i>
                         @endrole
                         @role('vendor')
@@ -110,7 +111,7 @@
                         @endrole
                         @role('marketing')
                         <i>marketing</i>
-                        @endrole
+                        @endrole --}}
                     </div>
                 </div>
                 <div class="p-2">

@@ -925,7 +925,13 @@ class PageController extends Controller
     {
         $product = Product::find($id);
         $vendors = Vendor::all();
-        return view('pages/product-edit', compact('product','vendors'));
+        if ($product == NULL) {
+            return abort(404);
+        } else {
+            // echo "tidak bisa";
+            return view('pages/product-edit', compact('product','vendors'));
+        }
+        
     }
 
     public function productDetail($id){

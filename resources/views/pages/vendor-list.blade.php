@@ -96,9 +96,14 @@
         <a class="flex items-center mr-3" href="vendor-list-page/edit/{{ $v->id }}">
             <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit
         </a>
-        <a class="flex items-center text-theme-6" href="vendor-list-page/delete/{{ $v->id }}">
+        {{-- <a class="flex items-center text-theme-6" href="vendor-list-page/delete/{{ $v->id }}">
             <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete
-        </a>
+        </a> --}}
+        <form action="/vendor-list-page/delete/{{ $v->id }}" onsubmit="return confirm('are you sure?')" method="post">
+        @csrf
+        @method("DELETE")
+        <button type="submit" class="btn btn-danger text-theme-6 text-decoration-none">Delete</button>
+        </form>
     </div>
 </td>
 </tr>
@@ -176,4 +181,17 @@
     </div>
 </div>
 <!-- END: Delete Confirmation Modal -->
+<style>
+    .btn-danger{
+            border: none;
+            outline: none;
+            background: none;
+            cursor: pointer;
+            /* color: #0000EE; */
+            padding: 0;
+            text-decoration: none;
+            font-family: inherit;
+            font-size: inherit;
+        }
+</style>
 @endsection
