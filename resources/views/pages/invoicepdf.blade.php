@@ -88,31 +88,52 @@
             </tr>
         </tfoot> --}}
     </table>
-    <table class="table" style="float:right">
+    <table class="table" style="float:right;margin-top:5%;">
     <tbody>
       <tr>
         <th scope="row" style="text-align:right;">Sub Total</th>
-        <td style="padding-right: 100px;"></td>
+        <td style="padding-left: 100px;"></td>
+        <td style="padding-left: 100px;"></td>
+        <td style="padding-left: 100px;"></td>
         <td style="text-align:right;">{{number_format($detailinvoice,-2,".",".")}}</td>
       </tr>
+      <tr></tr>
       <tr>
         <th scope="row" style="text-align:right;">Pajak</th>
-        <td style="padding-right: 100px;"></td>
+        <td style="padding-left: 100px;"></td>
+        <td style="padding-left: 100px;"></td>
+        <td style="padding-left: 100px;"></td>
         <td style="text-align:right;">{{$invoice->tax->tax_value}}</td>
       </tr>
+      <tr></tr>
       <tr>
         <th scope="row" style="text-align:right;">Diskon</th>
-        <td style="padding-right: 100px;"></td>
+        <td style="padding-left: 100px;"></td>
+        <td style="padding-left: 100px;"></td>
+        <td style="padding-left: 100px;"></td>
         <td style="text-align:right;">{{$invoice->discount->nilai_discount}}</td>
       </tr>
+      <tr></tr>
       <tr>
         <th scope="row" style="text-align:right;">Total</th>
-        <td style="padding-right: 100px;"></td>
+        <td style="padding-left: 100px;"></td>
+        <td style="padding-left: 100px;"></td>
+        <td style="padding-left: 100px;"></td>
         <td style="text-align:right;">Rp. {{number_format($invoice->total,-2,".",".")}}</td>
       </tr>
     </tbody>
   </table>
   
+  <div class="" style="margin-top: 25%">
+    <p><b>Vendor</b></p>
+    <hr width="40%" style="margin-top: 5px;margin-bottom:5px;float:left;">
+    <p><b>{{$invoice->vendor->vendor_name}}</b></p>
+  </div>
+  <div class="" style="margin-top:-14 %;">
+    <p style="text-align: left;margin-left:70%;margin-bottom:20%:"><b>{{ $invoice->created_at }}</b></p>
+    <p style="text-align: center;margin-left:60%;"><b>{{$invoice->customer->customer_name}}</b></p>
+  </div>
+      
 </div> 
 </body>
 </html>
