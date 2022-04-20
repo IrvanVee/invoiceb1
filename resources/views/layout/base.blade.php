@@ -26,6 +26,10 @@ License: You must have a valid license purchased only from themeforest(the above
     <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}" />
     <!-- END: CSS Assets-->
 
+    {{-- BEGIN: font awesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {{-- END: font awesome --}}
+
     <!-- BEGIN: JAVASCRIPT Assets-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- END: JAVASCRIPT Assets-->

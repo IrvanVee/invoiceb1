@@ -17,7 +17,7 @@
             </a>
             <div class="side-nav__devider my-6"></div>
             <ul>
-                @foreach ($side_menu as $menuKey => $menu)
+                {{-- @foreach ($side_menu as $menuKey => $menu)
                     @if ($menu == 'devider')
                         <li class="side-nav__devider my-6"></li>
                     @else
@@ -72,31 +72,366 @@
                             @endif
                         </li>
                     @endif
-                @endforeach
-{{-- <li>
-    <a href="javascript:;" class="side-menu side-menu--active">
-        <div class="side-menu__icon">
-            <i data-lucide="home"></i>
-        </div>
-        <div class="side-menu__title">
-            Dashboard
-                                                    <div class="side-menu__sub-icon transform rotate-180">
-                    <i data-lucide="chevron-down"></i>
-                </div>
-                                            </div>
-    </a>
-                                    <ul class="side-menu__sub-open">
-                                                    <li>
-                    <a href="http://rubick.left4code.com/page/side-menu/light/dashboard-overview-1" class="side-menu side-menu--active">
+                @endforeach --}}
+            <li>
+                <a href="javascript:;" class="side-menu side-menu--active">
+                    <div class="side-menu__icon">
+                        <i data-lucide="home"></i>
+                    </div>
+                    <div class="side-menu__title">
+                        Dashboard
+                        <div class="side-menu__sub-icon transform rotate-180">
+                                <i data-lucide="chevron-down"></i>
+                        </div>
+                    </div>
+                </a>
+            <ul class="side-menu__sub-open">
+                <li>
+                    <a href="/" class="side-menu side-menu--active">
                         <div class="side-menu__icon">
                             <i data-lucide="activity"></i>
                         </div>
                         <div class="side-menu__title">
-                            Overview 1
-                                                                            </div>
+                            Main
+                        </div>
                     </a>
-                                                            </li>
-            </ul> --}}
+                </li>
+            </ul>
+            <li class="side-nav__devider my-6"></li>
+            <li>
+                <a href="javascript:;" class="side-menu">
+                    <div class="side-menu__icon">
+                        <i data-lucide="home"></i>
+                    </div>
+                    <div class="side-menu__title">
+                        Penjualan
+                        <div class="side-menu__sub-icon transform rotate-180">
+                                <i data-lucide="chevron-down"></i>
+                        </div>
+                    </div>
+                </a>
+            <ul class="menu">
+                <li>
+                    <a href="/invoice-form-page" class="side-menu side-menu--active">
+                        <div class="side-menu__icon">
+                            <i data-lucide="activity"></i>
+                        </div>
+                        <div class="side-menu__title">
+                            Add Invoice
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/invoice-list-page" class="side-menu side-menu--active">
+                        <div class="side-menu__icon">
+                            <i data-lucide="activity"></i>
+                        </div>
+                        <div class="side-menu__title">
+                            Invoice List
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/quote-form-page" class="side-menu side-menu--active">
+                        <div class="side-menu__icon">
+                            <i data-lucide="activity"></i>
+                        </div>
+                        <div class="side-menu__title">
+                            Add Quotation
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/quote-list-page" class="side-menu side-menu--active">
+                        <div class="side-menu__icon">
+                            <i data-lucide="activity"></i>
+                        </div>
+                        <div class="side-menu__title">
+                            Quote List
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <li>
+                <a href="javascript:;" class="side-menu">
+                    <div class="side-menu__icon">
+                        <i data-lucide="home"></i>
+                    </div>
+                    <div class="side-menu__title">
+                        Product
+                        <div class="side-menu__sub-icon transform rotate-180">
+                                <i data-lucide="chevron-down"></i>
+                        </div>
+                    </div>
+                </a>
+            <ul class="menu">
+                <li>
+                    <a href="/product-form-page" class="side-menu side-menu--active">
+                        <div class="side-menu__icon">
+                            <i data-lucide="activity"></i>
+                        </div>
+                        <div class="side-menu__title">
+                            Add Product
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/product-list-page" class="side-menu side-menu--active">
+                        <div class="side-menu__icon">
+                            <i data-lucide="activity"></i>
+                        </div>
+                        <div class="side-menu__title">
+                            Product List
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <li>
+                <a href="javascript:;" class="side-menu">
+                    <div class="side-menu__icon">
+                        <i data-lucide="home"></i>
+                    </div>
+                    <div class="side-menu__title">
+                        Customers
+                        <div class="side-menu__sub-icon transform rotate-180">
+                                <i data-lucide="chevron-down"></i>
+                        </div>
+                    </div>
+                </a>
+            <ul class="menu">
+                <li>
+                    <a href="/customers-form-page" class="side-menu side-menu--active">
+                        <div class="side-menu__icon">
+                            <i data-lucide="activity"></i>
+                        </div>
+                        <div class="side-menu__title">
+                            Add Customer
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/customers-list-page" class="side-menu">
+                        <div class="side-menu__icon">
+                            <i data-lucide="activity"></i>
+                        </div>
+                        <div class="side-menu__title">
+                            Customers List
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <li class="side-nav__devider my-6"></li>
+            <li>
+            <a href="javascript:;" class="side-menu">
+                <div class="side-menu__icon">
+                    <i data-lucide="home"></i>
+                </div>
+                <div class="side-menu__title">
+                    Users
+                    <div class="side-menu__sub-icon transform rotate-180">
+                            <i data-lucide="chevron-down"></i>
+                    </div>
+                </div>
+            </a>
+            <ul class="menu">
+                <li>
+                    <a href="/users-form-page" class="side-menu side-menu--active">
+                        <div class="side-menu__icon">
+                            <i data-lucide="activity"></i>
+                        </div>
+                        <div class="side-menu__title">
+                            Add User
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/users-list-page" class="side-menu side-menu--active">
+                        <div class="side-menu__icon">
+                            <i data-lucide="activity"></i>
+                        </div>
+                        <div class="side-menu__title">
+                            User List
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <li>
+                <a href="javascript:;" class="side-menu">
+                    <div class="side-menu__icon">
+                        <i data-lucide="home"></i>
+                    </div>
+                    <div class="side-menu__title">
+                        Permission
+                        <div class="side-menu__sub-icon transform rotate-180">
+                                <i data-lucide="chevron-down"></i>
+                        </div>
+                    </div>
+                </a>
+                <ul class="menu">
+                    <li>
+                        <a href="/permission-form" class="side-menu side-menu--active">
+                            <div class="side-menu__icon">
+                                <i data-lucide="activity"></i>
+                            </div>
+                            <div class="side-menu__title">
+                                Add Permission
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/permission-list" class="side-menu side-menu--active">
+                            <div class="side-menu__icon">
+                                <i data-lucide="activity"></i>
+                            </div>
+                            <div class="side-menu__title">
+                                Permission List
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <li>
+                    <a href="javascript:;" class="side-menu">
+                        <div class="side-menu__icon">
+                            <i data-lucide="home"></i>
+                        </div>
+                        <div class="side-menu__title">
+                            Role
+                            <div class="side-menu__sub-icon transform rotate-180">
+                                    <i data-lucide="chevron-down"></i>
+                            </div>
+                        </div>
+                    </a>
+                    <ul class="menu">
+                        <li>
+                            <a href="/role-form" class="side-menu side-menu--active">
+                                <div class="side-menu__icon">
+                                    <i data-lucide="activity"></i>
+                                </div>
+                                <div class="side-menu__title">
+                                    Add Role
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/role-list" class="side-menu side-menu--active">
+                                <div class="side-menu__icon">
+                                    <i data-lucide="activity"></i>
+                                </div>
+                                <div class="side-menu__title">
+                                    Role List
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <li>
+                        <a href="javascript:;" class="side-menu">
+                            <div class="side-menu__icon">
+                                <i data-lucide="home"></i>
+                            </div>
+                            <div class="side-menu__title">
+                                Settings
+                                <div class="side-menu__sub-icon transform rotate-180">
+                                        <i data-lucide="chevron-down"></i>
+                                </div>
+                            </div>
+                        </a>
+                        <ul class="menu">
+                            <li>
+                                <a href="/tax-form-page" class="side-menu side-menu--active">
+                                    <div class="side-menu__icon">
+                                        <i data-lucide="activity"></i>
+                                    </div>
+                                    <div class="side-menu__title">
+                                        Input Tax
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/tax-list-page" class="side-menu side-menu--active">
+                                    <div class="side-menu__icon">
+                                        <i data-lucide="activity"></i>
+                                    </div>
+                                    <div class="side-menu__title">
+                                        Tax List
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/discount-form-page" class="side-menu side-menu--active">
+                                    <div class="side-menu__icon">
+                                        <i data-lucide="activity"></i>
+                                    </div>
+                                    <div class="side-menu__title">
+                                        Input Discount
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/discount-list-page" class="side-menu side-menu--active">
+                                    <div class="side-menu__icon">
+                                        <i data-lucide="activity"></i>
+                                    </div>
+                                    <div class="side-menu__title">
+                                        Discount List
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                        <li>
+                            <a href="javascript:;" class="side-menu">
+                                <div class="side-menu__icon">
+                                    <i data-lucide="home"></i>
+                                </div>
+                                <div class="side-menu__title">
+                                    Marketing & Vendor
+                                    <div class="side-menu__sub-icon transform rotate-180">
+                                            <i data-lucide="chevron-down"></i>
+                                    </div>
+                                </div>
+                            </a>
+                            <ul class="menu">
+                                <li>
+                                    <a href="/marketing-form-page" class="side-menu side-menu--active">
+                                        <div class="side-menu__icon">
+                                            <i data-lucide="activity"></i>
+                                        </div>
+                                        <div class="side-menu__title">
+                                            Insert New Marketing
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/marketing-list-page" class="side-menu side-menu--active">
+                                        <div class="side-menu__icon">
+                                            <i data-lucide="activity"></i>
+                                        </div>
+                                        <div class="side-menu__title">
+                                            Marketing List
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/vendor-form-page" class="side-menu side-menu--active">
+                                        <div class="side-menu__icon">
+                                            <i data-lucide="activity"></i>
+                                        </div>
+                                        <div class="side-menu__title">
+                                            Insert New Vendor
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" class="side-menu side-menu--active">
+                                        <div class="side-menu__icon">
+                                            <i data-lucide="activity"></i>
+                                        </div>
+                                        <div class="side-menu__title">
+                                            Vendor List
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
         </nav>
         <!-- END: Side Menu -->
         <!-- BEGIN: Content -->
