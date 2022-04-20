@@ -548,13 +548,15 @@ class PageController extends Controller
         $this->validate($request,[
     		'instance' => 'required',
     		'customer_name' => 'required',
-            'contact' => 'required'
+            'contact' => 'required',
+            'address' => 'required'
     	]);
  
         Customer::create([
     		'instance' => $request->instance,
     		'customer_name' => $request->customer_name,
-            'contact' => $request->contact
+            'contact' => $request->contact,
+            'address' => $request->address
     	]);
  
     	return redirect('customers-list-page')->with('status', 'customer berhasil di tambah');
@@ -584,13 +586,15 @@ class PageController extends Controller
         $this->validate($request,[
             'instance' => 'required',
     		'customer_name' => 'required',
-            'contact' => 'required'
+            'contact' => 'required',
+            'address' => 'required'
          ]);
  
          $customer = Customer::find($id);
          $customer->instance = $request->instance;
          $customer->customer_name = $request->customer_name;
          $customer->contact = $request->contact;
+         $customer->address = $request->address;
          $customer->save();
          return redirect('customers-list-page')->with('status', 'customer berhasil di edit');
     }
@@ -1198,10 +1202,12 @@ class PageController extends Controller
     {
         $this->validate($request,[
     		'marketing_name' => 'required',
+            'address' => 'required'
     	]);
  
         Marketing::create([   
-    		'marketing_name' => $request->marketing_name
+    		'marketing_name' => $request->marketing_name,
+            'address' => $request->address
     	]);
  
     	return redirect('marketing-list-page')->with('status','Marketing Berhasil Ditambah');
@@ -1216,11 +1222,13 @@ class PageController extends Controller
     public function marketingUpdate($id, Request $request)
     {
         $this->validate($request,[
-            'marketing_name' => 'required'
+            'marketing_name' => 'required',
+            'address' => 'required'
          ]);
  
          $marketing = Marketing::find($id);
          $marketing->marketing_name = $request->marketing_name;
+         $marketing->address = $request->address;
          $marketing->save();
          return redirect('marketing-list-page');
     }
@@ -1255,10 +1263,12 @@ class PageController extends Controller
     {
         $this->validate($request,[
     		'vendor_name' => 'required',
+            'address' => 'required'
     	]);
  
         Vendor::create([   
-    		'vendor_name' => $request->vendor_name
+    		'vendor_name' => $request->vendor_name,
+            'address' => $request->address
     	]);
  
     	return redirect('vendor-list-page')->with('status','Vendor Berhasil Ditambah');
@@ -1273,11 +1283,13 @@ class PageController extends Controller
     public function vendorUpdate($id, Request $request)
     {
         $this->validate($request,[
-            'vendor_name' => 'required'
+            'vendor_name' => 'required',
+            'address' => 'required'
          ]);
  
          $vendor = Vendor::find($id);
          $vendor->vendor_name = $request->vendor_name;
+         $vendor->address = $request->address;
          $vendor->save();
          return redirect('vendor-list-page')->with('status','vendor berhasil di update');
     }

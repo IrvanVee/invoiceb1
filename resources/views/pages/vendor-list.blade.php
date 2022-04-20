@@ -51,11 +51,12 @@
     </div>
     <!-- BEGIN: Data List -->
 
-    <div class="intro-y col-span-6 overflow-auto lg:overflow-visible">
+    <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
         <table class="table table-report mt-2">
             <thead>
                 <tr>
                     <th class="whitespace-nowrap">VENDOR NAME</th>
+                    <th class="whitespace-nowrap">ADDRESS</th>
                     <th class="text-center whitespace-nowrap">ACTIONS</th>
                 </tr>
             </thead>
@@ -81,6 +82,10 @@
 <td>
     {{-- <a href="" class="font-medium whitespace-nowrap">{{ $T-> }}</a> --}}
     <div class="text-gray-600 text-l font-medium whitespace-nowrap mt-0.5">{{ $v->vendor_name }}</div>
+</td>
+<td>
+    {{-- <a href="" class="font-medium whitespace-nowrap">{{ $T-> }}</a> --}}
+    <div class="text-gray-600 text-l font-medium whitespace-nowrap mt-0.5">{{ $v->address }}</div>
 </td>
 {{-- <td>
                                 <a href="" class="font-medium whitespace-nowrap">{{ $faker['products'][0]['name'] }}</a>

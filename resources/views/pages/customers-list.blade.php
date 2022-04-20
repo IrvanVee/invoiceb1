@@ -54,6 +54,7 @@
                         <th class="whitespace-nowrap">INSTANCE</th>
                         <th class="whitespace-nowrap">CUSTOMER NAME</th>
                         <th class="text-center whitespace-nowrap">CONTACT</th>
+                        <th class="text-center whitespace-nowrap">ADDRESS</th>
                         <th class="text-center whitespace-nowrap">ACTIONS</th>
                     </tr>
                 </thead>
@@ -82,6 +83,7 @@
                             </td>
                             <td><a href="" class="font-medium whitespace-nowrap">{{ $c->customer_name }}</a></td>
                             <td class="text-center">{{ $c->contact }}</td>
+                            <td class="text-center">{{ $c->address }}</td>
                             {{-- <td class="w-40">
                                 <div class="flex items-center justify-center {{ $faker['true_false'][0] ? 'text-theme-9' : 'text-theme-6' }}">
                                     <i data-feather="check-square" class="w-4 h-4 mr-2"></i> {{ $faker['true_false'][0] ? 'Active' : 'Inactive' }}

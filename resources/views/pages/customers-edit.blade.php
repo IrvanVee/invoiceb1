@@ -29,6 +29,10 @@
                     <label class="form-label mt-2">Contact</label>
                     <input name="contact" type="text" class="form-control" placeholder="Input Email or Phone Number" aria-describedby="input-group-4" value=" {{ $customer->contact }}"> 
                 </div>
+                <div>
+                    <label class="form-label mt-2">Address</label>
+                    <textarea name="address" class="form-control" id="" cols="30" rows="10" placeholder="Input your Address here"></textarea>
+                </div>
                 {{-- <div class="mt-3">
                     <label>Description</label>
                     <div class="mt-2">

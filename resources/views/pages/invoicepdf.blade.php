@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}" />
-    <title>{{$invoice->vendor->vendor_name}} : {{$invoice->customer->customer_name}}</title>
+    <title>{{$invoice->vendor->vendor_name}} : {{$invoice->customer->instance}}</title>
 </head>
 <body>
 <div class="flex-container mt-3" style="width:100%; display:table;">
@@ -13,7 +13,8 @@
     <img src="https://files.fm/thumb_show.php?i=w677pagtk" style="width: 60%;" alt="">
     <p><b>Vendor</b></p>
     <hr width="200" style="margin-top: 5px;margin-bottom:5px;float:left;">
-    <p><b>{{$invoice->vendor->vendor_name}}</b></p>          
+    <p><b>{{$invoice->vendor->vendor_name}}</b></p>
+    <p>{{$invoice->vendor->address}}</p>
 </div>
 <div class="flex-item" style=" margin: auto; width:50%; text-align: right; display:table-cell"> 
 <h1>Invoice</h1>
@@ -43,7 +44,8 @@
   </table>
     <p style="text-align: left;margin-left:83px;margin-top:42%;"><b>Customer</b></p>
     <hr width="200" style="margin-top: 5px;margin-bottom:5px;float:right;">
-    <p style="text-align: left;margin-left:83px;"><b>{{$invoice->customer->customer_name}}</b></p>       
+    <p style="text-align: left;margin-left:83px;"><b>{{$invoice->customer->instance}}</b></p>
+    <p style="text-align: left;margin-left:83px;">{{$invoice->customer->address}}</p>       
 </div>                    
 </div>
 <div class="overflow-x-auto">
@@ -59,7 +61,8 @@
         <tbody>
             @foreach ($invoice->detailinvoice as $detail)
             <tr style="background-color: #f2f2f2;">
-                <td class="whitespace-nowrap">{{$detail->product->product_name}}</td>
+                <td class="whitespace-nowrap"><b>{{$detail->product->product_name}}</b>
+                                              {!!$detail->product->deskripsi!!}</td>
                 <td class="whitespace-nowrap">Rp. {{number_format($detail->product->price,-2,".",".")}}</td>
                 <td class="whitespace-nowrap">{{$detail->quantity}}</td>
                 <td class="whitespace-nowrap">Rp. {{number_format($detail->sum_product,-2,".",".")}}</td>
@@ -128,6 +131,7 @@
     <p><b>Vendor</b></p>
     <hr width="40%" style="margin-top: 5px;margin-bottom:5px;float:left;">
     <p><b>{{$invoice->vendor->vendor_name}}</b></p>
+    <p>{{$invoice->vendor->address}}</p>
   </div>
   <div class="" style="margin-top:-14 %;">
     <p style="text-align: left;margin-left:70%;margin-bottom:20%:"><b>{{ $invoice->created_at }}</b></p>

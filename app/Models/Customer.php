@@ -10,7 +10,7 @@ class Customer extends Model
 {
     protected $table = "customer";
 
-    protected $fillable = ['instance','customer_name','contact'];
+    protected $fillable = ['instance','customer_name','contact','address'];
 
     public function quotation(){
         return $this->hasOne(Quotation::class);
