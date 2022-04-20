@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
             'gender' => 'male',
             'active' => 1,
         ]);
-        $user->assignRole('marketing','admin');
+        $user->assignRole('marketing','admin','vendor');
 
         // Fake users
         // User::factory()->times(9)->create();

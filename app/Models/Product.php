@@ -12,7 +12,7 @@ class Product extends Model
     protected $fillable = ['product_name', 'vendor_id', 'price', 'stock','deskripsi'];
 
     public function vendor(){
-        return $this->belongsTo(Vendor::class);
+        return $this->belongsTo(Vendor::class,'vendor_id');
     }
     public function detailquotation(){
         return $this->hasMany(DetailQuotation::class,'quotation_id');
