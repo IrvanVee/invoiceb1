@@ -76,12 +76,12 @@
             <li>
                 <a href="javascript:;" class="side-menu {{request()->is('/') ? 'side-menu--active' : ''}}">
                     <div class="side-menu__icon">
-                        <i data-lucide="home"></i>
+                        <i class="fa fa-home"></i>
                     </div>
                     <div class="side-menu__title">
                         Dashboard
                         <div class="side-menu__sub-icon transform rotate-180">
-                                <i data-lucide="chevron-down"></i>
+                                <i class="fa fa-angle-down"></i>
                         </div>
                     </div>
                 </a>
@@ -89,7 +89,7 @@
                 <li>
                     <a href="/" class="side-menu {{request()->is('/') ? 'side-menu--active' : ''}}">
                         <div class="side-menu__icon">
-                            <i data-lucide="activity"></i>
+                            <i class="fa fa-dashboard"></i>
                         </div>
                         <div class="side-menu__title">
                             Main
@@ -101,12 +101,13 @@
             <li>
                 <a href="javascript:;" class="side-menu {{Request::is('invoice-form-page') || Request::is('invoice-list-page') || Request::is('quote-form-page') || Request::is('quote-list-page')  ? 'side-menu--active' : ''}}">
                     <div class="side-menu__icon">
-                        <i data-lucide="home"></i>
+                        {{-- <i class="fa fa-home"></i> --}}
+                        <i class="fa fa-edit"></i>
                     </div>
                     <div class="side-menu__title">
                         Penjualan
                         <div class="side-menu__sub-icon transform rotate-180">
-                                <i data-lucide="chevron-down"></i>
+                                <i class="fa fa-angle-down"></i>
                         </div>
                     </div>
                 </a>
@@ -160,12 +161,12 @@
             <li>
                 <a href="javascript:;" class="side-menu {{Request::is('product-form-page') || Request::is('product-list-page') ? 'side-menu--active' : ''}}">
                     <div class="side-menu__icon">
-                        <i data-lucide="home"></i>
+                        <i class="fa fa-gift"></i>
                     </div>
                     <div class="side-menu__title">
                         Product
                         <div class="side-menu__sub-icon transform rotate-180">
-                                <i data-lucide="chevron-down"></i>
+                            <i class="fa fa-angle-down"></i>
                         </div>
                     </div>
                 </a>
@@ -196,12 +197,14 @@
             <li>
                 <a href="javascript:;" class="side-menu {{Request::is('customers-form-page') || Request::is('customers-list-page') ? 'side-menu--active' : ''}}">
                     <div class="side-menu__icon">
-                        <i data-lucide="home"></i>
+                        <i class="fas fa-user-friends"></i>
+                        {{-- <i class="fa fa-user"></i> --}}
+                        {{-- <i data-lucide="home"></i> --}}
                     </div>
                     <div class="side-menu__title">
                         Customers
                         <div class="side-menu__sub-icon transform rotate-180">
-                                <i data-lucide="chevron-down"></i>
+                                <i class="fa fa-angle-down"></i>
                         </div>
                     </div>
                 </a>
@@ -233,12 +236,13 @@
             <li>
                 <a href="javascript:;" class="side-menu {{Request::is('users-form-page') || Request::is('users-list-page') ? 'side-menu--active' : ''}}">
                     <div class="side-menu__icon">
-                        <i data-lucide="home"></i>
+                        {{-- <i data-lucide="home"></i> --}}
+                        <i class="fa fa-user"></i>
                     </div>
                     <div class="side-menu__title">
                         Users
                         <div class="side-menu__sub-icon transform rotate-180">
-                                <i data-lucide="chevron-down"></i>
+                                <i class="fa fa-angle-down"></i>
                         </div>
                     </div>
                 </a>
@@ -267,12 +271,14 @@
                 <li>
                     <a href="javascript:;" class="side-menu {{Request::is('permission-form') || Request::is('permission-list') ? 'side-menu--active' : ''}}">
                         <div class="side-menu__icon">
-                            <i data-lucide="home"></i>
+                            {{-- <i data-lucide="home"></i> --}}
+                            <i class="fa fa-edit"></i>
+
                         </div>
                         <div class="side-menu__title">
                             Permission
                             <div class="side-menu__sub-icon transform rotate-180">
-                                    <i data-lucide="chevron-down"></i>
+                                    <i class="fa fa-angle-down"></i>
                             </div>
                         </div>
                     </a>
@@ -301,12 +307,13 @@
                     <li>
                         <a href="javascript:;" class="side-menu {{Request::is('role-form') || Request::is('role-list') ? 'side-menu--active' : ''}}">
                             <div class="side-menu__icon">
-                                <i data-lucide="home"></i>
+                                {{-- <i data-lucide="home"></i> --}}
+                                <i class="fa fa-bars"></i>
                             </div>
                             <div class="side-menu__title">
                                 Role
                                 <div class="side-menu__sub-icon transform rotate-180">
-                                        <i data-lucide="chevron-down"></i>
+                                        <i class="fa fa-angle-down"></i>
                                 </div>
                             </div>
                         </a>
@@ -335,12 +342,12 @@
                         <li>
                             <a href="javascript:;" class="side-menu {{Request::is('tax-form-page') || Request::is('tax-list-page') || Request::is('discount-form-page') || Request::is('discount-list-page') ? 'side-menu--active' : ''}}">
                                 <div class="side-menu__icon">
-                                    <i data-lucide="home"></i>
+                                    <i class="fa fa-gear"></i>
                                 </div>
                                 <div class="side-menu__title">
                                     Settings
                                     <div class="side-menu__sub-icon transform rotate-180">
-                                            <i data-lucide="chevron-down"></i>
+                                            <i class="fa fa-angle-down"></i>
                                     </div>
                                 </div>
                             </a>
@@ -389,12 +396,13 @@
                             <li>
                                 <a href="javascript:;" class="side-menu {{Request::is('marketing-form-page') || Request::is('marketing-list-page') || Request::is('vendor-form-page') || Request::is('vendor-list-page') ? 'side-menu--active' : ''}}">
                                     <div class="side-menu__icon">
-                                        <i data-lucide="home"></i>
+                                        <i class="fa fa-archive"></i>
+                                        {{-- <i data-lucide="home"></i> --}}
                                     </div>
                                     <div class="side-menu__title">
                                         Marketing & Vendor
                                         <div class="side-menu__sub-icon transform rotate-180">
-                                                <i data-lucide="chevron-down"></i>
+                                                <i class="fa fa-angle-down"></i>
                                         </div>
                                     </div>
                                 </a>

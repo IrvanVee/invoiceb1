@@ -27,6 +27,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END: CSS Assets-->
 
     {{-- BEGIN: font awesome --}}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     {{-- END: font awesome --}}
 
