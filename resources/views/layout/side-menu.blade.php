@@ -89,7 +89,8 @@
                 <li>
                     <a href="/" class="side-menu {{request()->is('/') ? 'side-menu--active' : ''}}">
                         <div class="side-menu__icon">
-                            <i class="fa fa-dashboard"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                            {{-- <i class="fa fa-dashboard"></i> --}}
                         </div>
                         <div class="side-menu__title">
                             Main
@@ -116,7 +117,8 @@
                 <li>
                     <a href="/invoice-form-page" class="side-menu {{Request()->is('invoice-form-page') ? 'side-menu--active' : ''}}">
                         <div class="side-menu__icon">
-                            <i data-lucide="activity"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                            {{-- <i data-lucide="activity" class="">&#xf0ae;</i> --}}
                         </div>
                         <div class="side-menu__title">
                             Add Invoice
@@ -126,7 +128,8 @@
                 <li>
                     <a href="/invoice-list-page" class="side-menu {{Request()->is('invoice-list-page') ? 'side-menu--active' : ''}}">
                         <div class="side-menu__icon">
-                            <i data-lucide="activity"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                            {{-- <i data-lucide="activity"></i> --}}
                         </div>
                         <div class="side-menu__title">
                             Invoice List
@@ -138,7 +141,8 @@
                 <li>
                     <a href="/quote-form-page" class="side-menu {{Request()->is('quote-form-page') ? 'side-menu--active' : ''}}">
                         <div class="side-menu__icon">
-                            <i data-lucide="activity"></i>
+                            {{-- <i data-lucide="activity"></i> --}}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                         </div>
                         <div class="side-menu__title">
                             Add Quotation
@@ -150,7 +154,8 @@
                 <li>
                     <a href="/quote-list-page" class="side-menu {{Request()->is('quote-list-page') ? 'side-menu--active' : ''}}">
                         <div class="side-menu__icon">
-                            <i data-lucide="activity"></i>
+                            {{-- <i data-lucide="activity"></i> --}}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                         </div>
                         <div class="side-menu__title">
                             Quote List
@@ -176,7 +181,8 @@
                 <li>
                     <a href="/product-form-page" class="side-menu {{Request()->is('product-form-page') ? 'side-menu--active' : ''}}">
                         <div class="side-menu__icon">
-                            <i data-lucide="activity"></i>
+                            {{-- <i data-lucide="activity"></i> --}}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                         </div>
                         <div class="side-menu__title">
                             Add Product
@@ -186,7 +192,8 @@
                 <li>
                     <a href="/product-list-page" class="side-menu {{Request()->is('product-list-page') ? 'side-menu--active' : ''}}">
                         <div class="side-menu__icon">
-                            <i data-lucide="activity"></i>
+                            {{-- <i data-lucide="activity"></i> --}}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                         </div>
                         <div class="side-menu__title">
                             Product List
@@ -214,7 +221,8 @@
                 <li>
                     <a href="/customers-form-page" class="side-menu {{Request()->is('customers-form-page') ? 'side-menu--active' : ''}}">
                         <div class="side-menu__icon">
-                            <i data-lucide="activity"></i>
+                            {{-- <i data-lucide="activity"></i> --}}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                         </div>
                         <div class="side-menu__title">
                             Add Customer
@@ -224,7 +232,8 @@
                 <li>
                     <a href="/customers-list-page" class="side-menu {{Request()->is('customers-list-page') ? 'side-menu--active' : ''}}">
                         <div class="side-menu__icon">
-                            <i data-lucide="activity"></i>
+                            {{-- <i data-lucide="activity"></i> --}}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                         </div>
                         <div class="side-menu__title">
                             Customers List
@@ -252,7 +261,8 @@
                     <li>
                         <a href="/users-form-page" class="side-menu {{Request()->is('users-form-page') ? 'side-menu--active' : ''}}">
                             <div class="side-menu__icon">
-                                <i data-lucide="activity"></i>
+                                {{-- <i data-lucide="activity"></i> --}}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                             </div>
                             <div class="side-menu__title">
                                 Add User
@@ -262,7 +272,8 @@
                     <li>
                         <a href="/users-list-page" class="side-menu {{Request()->is('users-list-page') ? 'side-menu--active' : ''}}">
                             <div class="side-menu__icon">
-                                <i data-lucide="activity"></i>
+                                {{-- <i data-lucide="activity"></i> --}}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                             </div>
                             <div class="side-menu__title">
                                 User List
@@ -288,7 +299,8 @@
                         <li>
                             <a href="/permission-form" class="side-menu {{Request()->is('permission-form') ? 'side-menu--active' : ''}}">
                                 <div class="side-menu__icon">
-                                    <i data-lucide="activity"></i>
+                                    {{-- <i data-lucide="activity"></i> --}}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                                 </div>
                                 <div class="side-menu__title">
                                     Add Permission
@@ -298,7 +310,8 @@
                         <li>
                             <a href="/permission-list" class="side-menu {{Request()->is('permission-list') ? 'side-menu--active' : ''}}">
                                 <div class="side-menu__icon">
-                                    <i data-lucide="activity"></i>
+                                    {{-- <i data-lucide="activity"></i> --}}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                                 </div>
                                 <div class="side-menu__title">
                                     Permission List
@@ -323,7 +336,8 @@
                             <li>
                                 <a href="/role-form" class="side-menu {{Request()->is('role-form') ? 'side-menu--active' : ''}}">
                                     <div class="side-menu__icon">
-                                        <i data-lucide="activity"></i>
+                                        {{-- <i data-lucide="activity"></i> --}}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                                     </div>
                                     <div class="side-menu__title">
                                         Add Role
@@ -333,7 +347,8 @@
                             <li>
                                 <a href="/role-list" class="side-menu {{Request()->is('role-list') ? 'side-menu--active' : ''}}">
                                     <div class="side-menu__icon">
-                                        <i data-lucide="activity"></i>
+                                        {{-- <i data-lucide="activity"></i> --}}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                                     </div>
                                     <div class="side-menu__title">
                                         Role List
@@ -357,7 +372,8 @@
                                 <li>
                                     <a href="/tax-form-page" class="side-menu {{Request()->is('tax-form-page') ? 'side-menu--active' : ''}}">
                                         <div class="side-menu__icon">
-                                            <i data-lucide="activity"></i>
+                                            {{-- <i data-lucide="activity"></i> --}}
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                                         </div>
                                         <div class="side-menu__title">
                                             Input Tax
@@ -367,7 +383,8 @@
                                 <li>
                                     <a href="/tax-list-page" class="side-menu {{Request()->is('tax-list-page') ? 'side-menu--active' : ''}}">
                                         <div class="side-menu__icon">
-                                            <i data-lucide="activity"></i>
+                                            {{-- <i data-lucide="activity"></i> --}}
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                                         </div>
                                         <div class="side-menu__title">
                                             Tax List
@@ -377,7 +394,8 @@
                                 <li>
                                     <a href="/discount-form-page" class="side-menu {{Request()->is('discount-form-page') ? 'side-menu--active' : ''}}">
                                         <div class="side-menu__icon">
-                                            <i data-lucide="activity"></i>
+                                            {{-- <i data-lucide="activity"></i> --}}
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                                         </div>
                                         <div class="side-menu__title">
                                             Input Discount
@@ -387,7 +405,8 @@
                                 <li>
                                     <a href="/discount-list-page" class="side-menu {{Request()->is('discount-list-page') ? 'side-menu--active' : ''}}">
                                         <div class="side-menu__icon">
-                                            <i data-lucide="activity"></i>
+                                            {{-- <i data-lucide="activity"></i> --}}
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                                         </div>
                                         <div class="side-menu__title">
                                             Discount List
@@ -412,7 +431,8 @@
                                     <li>
                                         <a href="/marketing-form-page" class="side-menu {{Request()->is('marketing-form-page') ? 'side-menu--active' : ''}}">
                                             <div class="side-menu__icon">
-                                                <i data-lucide="activity"></i>
+                                                {{-- <i data-lucide="activity"></i> --}}
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                                             </div>
                                             <div class="side-menu__title">
                                                 Insert New Marketing
@@ -422,7 +442,8 @@
                                     <li>
                                         <a href="/marketing-list-page" class="side-menu {{Request()->is('marketing-list-page') ? 'side-menu--active' : ''}}">
                                             <div class="side-menu__icon">
-                                                <i data-lucide="activity"></i>
+                                                {{-- <i data-lucide="activity"></i> --}}
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                                             </div>
                                             <div class="side-menu__title">
                                                 Marketing List
@@ -432,7 +453,8 @@
                                     <li>
                                         <a href="/vendor-form-page" class="side-menu {{Request()->is('vendor-form-page') ? 'side-menu--active' : ''}}">
                                             <div class="side-menu__icon">
-                                                <i data-lucide="activity"></i>
+                                                {{-- <i data-lucide="activity"></i> --}}
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                                             </div>
                                             <div class="side-menu__title">
                                                 Insert New Vendor
@@ -442,7 +464,8 @@
                                     <li>
                                         <a href="/vendor-list-page" class="side-menu {{Request()->is('vendor-list-page') ? 'side-menu--active' : ''}}">
                                             <div class="side-menu__icon">
-                                                <i data-lucide="activity"></i>
+                                                {{-- <i data-lucide="activity"></i> --}}
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity" data-lucide="activity" class="lucide lucide-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                                             </div>
                                             <div class="side-menu__title">
                                                 Vendor List

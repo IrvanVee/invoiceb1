@@ -10,7 +10,8 @@
 <body>
 <div class="flex-container mt-3" style="width:100%; display:table;">
 <div class="flex-item" style="width:50%; text-align: left; display: table-cell">
-    <img src="https://files.fm/thumb_show.php?i=w677pagtk" style="width: 60%;" alt="">
+  <img src="https://files.fm/thumb_show.php?i=w677pagtk" style="width: 60%;" alt="">
+    {{-- <img src="{{public_path('dist/images/b-one.jpg')}}" style="width: 60%;" alt=""> --}}
     <p><b>Vendor</b></p>
     <hr width="200" style="margin-top: 5px;margin-bottom:5px;float:left;">
     <p><b>{{$invoice->vendor->vendor_name}}</b></p>
@@ -124,6 +125,14 @@
         <td style="padding-left: 100px;"></td>
         <td style="text-align:right;">Rp. {{number_format($invoice->total,-2,".",".")}}</td>
       </tr>
+      <tr></tr>
+      <tr>
+        <th scope="row" style="text-align:right;">Terbilang</th>
+        <td style="padding-left: 100px;"></td>
+        <td style="padding-left: 100px;"></td>
+        <td style="padding-left: 100px;"></td>
+        <td style="text-align:right;"><i>{{Riskihajar\Terbilang\Facades\Terbilang::make($invoice->total)}} rupiah</i></td>
+      </tr>
     </tbody>
   </table>
   
@@ -134,7 +143,8 @@
     <p>{{$invoice->vendor->address}}</p>
   </div>
   <div class="" style="margin-top:-14 %;">
-    <p style="text-align: left;margin-left:70%;margin-bottom:20%:"><b>{{ $invoice->created_at }}</b></p>
+    <p style="text-align: left;margin-left:70%;margin-bottom:20%;"><b>{{ $invoice->created_at }}</b></p>
+    <img src="{{public_path('image/'.$invoice->ttd)}}" style="margin-left:70%;margin-top:-15%;width:30%;" alt="">
     <p style="text-align: center;margin-left:60%;"><b>{{$invoice->customer->customer_name}}</b></p>
   </div>
       

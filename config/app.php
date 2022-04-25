@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'id',
 
     /*
     |--------------------------------------------------------------------------
@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        RiskiHajar\Terbilang\TerbilangServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -230,7 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Hp' => App\Helper::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        
+        'Terbilang' => RiskiHajar\Terbilang\Facades\Terbilang::class,
     ],
 
 ];

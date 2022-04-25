@@ -204,6 +204,10 @@ class PageController extends Controller
             'note' => 'required'
         ]);
 
+        $imgName = $request->ttd->getClientOriginalName(). '.'. time(). '.' . $request->ttd->extension();
+
+        $request->ttd->move(public_path('image'), $imgName);
+
         $data = $request->all();
         // dd($data)
         $invoice = new Invoice();
@@ -214,6 +218,7 @@ class PageController extends Controller
         $invoice->discount_id = $data['discount_id'];
         $invoice->tax_id = $data['tax_id'];
         $invoice->pengiriman = $data['pengiriman'];
+        $invoice->ttd = $imgName;
         $invoice->total = $data['total'];
         $invoice->status = $data['status'];
         $invoice->note = $data['note'];

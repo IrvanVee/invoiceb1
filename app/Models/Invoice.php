@@ -12,7 +12,7 @@ class Invoice extends Model
     protected $table = 'invoice';
 
     // protected $guarded = ['id'];
-    protected $fillable = ['id','vendor_id','customer_id','refrensi','duedate','discount_id','tax_id','pengiriman','total','status','note'];
+    protected $fillable = ['id','vendor_id','customer_id','refrensi','duedate','discount_id','tax_id','pengiriman','ttd','total','status','note'];
 
     public function vendor(){
         return $this->belongsTo(Vendor::class);

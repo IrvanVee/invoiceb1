@@ -11,7 +11,7 @@
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 lg:col-span-12">
         <!-- BEGIN: Form Layout -->
-        <form action="invoice-list-page/store" method="POST" class="form">
+        <form action="invoice-list-page/store" method="POST" class="form" enctype="multipart/form-data">
             @csrf
             <div class="intro-y box p-5">
                 <div>
@@ -206,6 +206,10 @@
                             <option>Dibatalkan</option>
                         </select>
                     </div>
+                </div>
+                <div class="mt-3">
+                    <label>ttd</label>
+                    <input type="file" class="form-control" id="ttd" name="ttd">
                 </div>
                 <div class="mt-3">
                     <label>Note</label>

@@ -24,6 +24,7 @@ class CreateInvoiceTable extends Migration
             $table->integer("pengiriman");
             $table->integer("dibayar")->nullable();
             $table->integer("total");
+            $table->string("ttd")->nullable();
             $table->integer("tunggakan")->nullable();
             $table->string("status");
             $table->longText("note");
