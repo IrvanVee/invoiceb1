@@ -63,6 +63,7 @@
                             <td>{{number_format($q->total,-2,".",".")}}</td>
                             <td class="text-center">{{$q->duedate}}</td>
                             <td>
+                                @role('marketing|admin')
                                 {{-- edit show delete --}}
                                 <div class="flex justify-center items-center">
                                     <a class="flex items-center mr-3" href="/quote-edit/edit/{{ $q->id }}">
@@ -83,10 +84,13 @@
                                 <a class="flex items-center" href="/quote-detail/{{ $q->id }}">
                                     <i data-feather="list" class="w-4 h-4 mr-1"></i> Detail
                                 </a>
+                                @endrole
+                                @role('vendor|admin')
                                 <a class="flex items-center" href="/quote-invoice/{{ $q->id }}">
                                     <i data-feather="corner-up-right" class="w-4 h-4 ml-3 mr-1"></i> 
                                     Invoice
                                 </a>
+                                @endrole
                                 </div>
                             </td>
                             @empty

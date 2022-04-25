@@ -145,6 +145,8 @@
                         </div>
                     </a>
                 </li>
+                @endrole
+                @role('admin|marketing|vendor')
                 <li>
                     <a href="/quote-list-page" class="side-menu {{Request()->is('quote-list-page') ? 'side-menu--active' : ''}}">
                         <div class="side-menu__icon">
