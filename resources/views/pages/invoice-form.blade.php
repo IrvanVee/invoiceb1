@@ -45,6 +45,21 @@
                     <p class="mb-2" style="color: red;">{{$message}}</p>
                     @enderror
                 </div>
+                <div>
+                    <label for="crud-form-1" class="form-label mt-3">Marketing</label>
+                    <select data-placeholder="Vendor"
+                        class="tail-select w-full @error('marketing_id') is-invalid @enderror" id="crud-form-2"
+                        name="marketing_id">
+                        <option value="">silahkan pilih marketing</option>
+                        @foreach($marketings as $marketing)
+                        <option value="{{$marketing->id}}" {{old('marketing_id') == $marketing->id ? 'selected' : null}}>
+                            {{$marketing->marketing_name}}</option>
+                        @endforeach
+                    </select>
+                    @error('customer_id')
+                    <p class="mb-2" style="color: red;">{{$message}}</p>
+                    @enderror
+                </div>
                 <label class="form-label mt-2">No. Referensi</label>
                 <div class="input-group">
                     <input type="number" onkeypress="return hanyaangka(event)"

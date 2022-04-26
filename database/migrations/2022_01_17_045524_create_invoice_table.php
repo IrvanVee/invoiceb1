@@ -17,6 +17,7 @@ class CreateInvoiceTable extends Migration
             $table->id();
             $table->integer("vendor_id");
             $table->integer("customer_id");
+            $table->integer("marketing_id")->nullable();
             $table->integer("refrensi");
             $table->date("duedate");
             $table->integer("discount_id");

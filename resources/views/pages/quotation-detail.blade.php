@@ -35,7 +35,7 @@
                         $quantity = $detail->quantity;
                         $sum = $detail->sum_product;
                         $result = $sum / $quantity;
-                        echo "<td class='whitespace-nowrap'>".number_format($result,-2,".",".")."</td>";
+                        echo "<td class='whitespace-nowrap'>Rp ".number_format($result,-2,".",".")."</td>";
                     @endphp
                     <td class="whitespace-nowrap">{{$detail->quantity}}</td>
                     <td class="whitespace-nowrap">Rp. {{number_format($detail->sum_product,-2,".",".")}}</td>

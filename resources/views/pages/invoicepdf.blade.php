@@ -12,10 +12,16 @@
 <div class="flex-item" style="width:50%; text-align: left; display: table-cell">
   <img src="https://files.fm/thumb_show.php?i=w677pagtk" style="width: 60%;" alt="">
     {{-- <img src="{{public_path('dist/images/b-one.jpg')}}" style="width: 60%;" alt=""> --}}
-    <p><b>Vendor</b></p>
+    <p><b>Info Perusahaan</b></p>
     <hr width="200" style="margin-top: 5px;margin-bottom:5px;float:left;">
-    <p><b>{{$invoice->vendor->vendor_name}}</b></p>
-    <p>{{$invoice->vendor->address}}</p>
+    {{-- <p><b>{{$invoice->vendor->vendor_name}}</b></p> --}}
+    {{-- <p>{{$invoice->vendor->address}}</p> --}}
+    <p><b>PT. Satu Visi Indocreative</b></p>
+    <p><span>Jalan Masjid Bendungan, No 5,</span></p>
+    <p><span>Dewi Sartika, Cawang, Jakarta Timur,</span></p>
+    <p><span>DKI Jakarta, 13630</span></p>
+    <p><span>Telp: (021) 80885716</span></p>
+    <p><span>Email: finance@b-onecorp.co.id</span></p>
 </div>
 <div class="flex-item" style=" margin: auto; width:50%; text-align: right; display:table-cell"> 
 <h1>Invoice</h1>
@@ -137,10 +143,15 @@
   </table>
   
   <div class="" style="margin-top: 25%">
-    <p><b>Vendor</b></p>
+    {{-- <p><b>Vendor</b></p> --}}
+    <p><b>Keterangan</b></p>
     <hr width="40%" style="margin-top: 5px;margin-bottom:5px;float:left;">
-    <p><b>{{$invoice->vendor->vendor_name}}</b></p>
-    <p>{{$invoice->vendor->address}}</p>
+    {{-- <p><b>{{$invoice->vendor->vendor_name}}</b></p> --}}
+    {{-- <p>{{$invoice->vendor->address}}</p> --}}
+    <p><span>Pembayaran dapat ditransfer ke Bank Mandiri KCP Jakarta</span></p>
+    <p><span>Kemanggisan</span></p>
+    <p><span>No Rekening : 165-00-515555 5</span></p>
+    <p><span>Atas Nama : PT . Satu Visi Indocreative</span></p>
   </div>
   <div class="" style="margin-top:-14 %;">
     <p style="text-align: left;margin-left:70%;margin-bottom:20%;"><b>{{ $invoice->created_at }}</b></p>

@@ -181,16 +181,18 @@ public function invoiceForm()
     // return view('pages/invoice-form');
     $customers = Customer::all();
     $vendors = Vendor::all();
+    $marketings = Marketing::all();
     $products = Product::all();
     $discounts = Discount::all()->sortBy('nilai_discount');
     $taxs = Tax::all()->sortBy('tax_value');
-    return view('pages/invoice-form',compact('vendors','customers','products','discounts','taxs'));
+    return view('pages/invoice-form',compact('vendors','customers','products','discounts','taxs','marketings'));
 }
 
 public function invoiceStore(Request $request){
     $request->validate([
         'vendor_id' => 'required',
         'customer_id' => 'required',
+        'marketing_id' => 'required',
         'refrensi' => 'required',
         'duedate' => 'required',
         'product_id' => 'required',
@@ -213,6 +215,7 @@ public function invoiceStore(Request $request){
     $invoice = new Invoice();
     $invoice->vendor_id = $data['vendor_id'];
     $invoice->customer_id = $data['customer_id'];
+    $invoice->marketing_id = $data['marketing_id'];
     $invoice->refrensi = $data['refrensi'];
     $invoice->duedate = $data['duedate'];
     $invoice->discount_id = $data['discount_id'];
@@ -262,6 +265,7 @@ public function invoicepdf($id){
 public function invoiceedit($id){
     $invoice = invoice::with('detailinvoice')->where('id',$id)->first();
     $customers = Customer::all();
+    $marketings = Marketing::all();
     $discounts = Discount::all();
     $taxs = Tax::all();
     $vendors = Vendor::all();
@@ -271,7 +275,7 @@ public function invoiceedit($id){
     if ($invoice == NULL) {
         return abort(404);
     } else {
-        return view('pages.invoice-edit',compact('invoice','customers','discounts','taxs','vendors','products','detailinvoice'));
+        return view('pages.invoice-edit',compact('invoice','customers','discounts','taxs','vendors','products','detailinvoice','marketings'));
     }
 
     // return view('pages.quotation-detail',compact('quotation'));
@@ -282,6 +286,7 @@ public function invoiceupdate($id, Request $request){
     $invoice = Invoice::find($id);
     $invoice->vendor_id = $request->vendor_id;
     $invoice->customer_id = $request->customer_id;
+    $invoice->marketing_id = $request->marketing_id;
     $invoice->refrensi = $request->refrensi;
     $invoice->duedate = $request->duedate;
     $invoice->discount_id = $request->discount_id;

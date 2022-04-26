@@ -1,17 +1,17 @@
 @extends('../layout/' . $layout)
 
 @section('subhead')
-<title>Edit Quotation {{$quotation->marketing->marketing_name}}</title>
+<title>Quotation - Invoice {{$quotation->marketing->marketing_name}}</title>
 @endsection
 
 @section('subcontent')
 <div class="intro-y flex items-center mt-8">
-    <h2 class="text-lg font-medium mr-auto">Form Edit {{$quotation->marketing->marketing_name}}</h2>
+    <h2 class="text-lg font-medium mr-auto">Form Quotation - Invoice {{$quotation->marketing->marketing_name}}</h2>
 </div>
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 lg:col-span-12">
         <!-- BEGIN: Form Layout -->
-        <form action="/invoice-list-page/store" method="POST" class="form">
+        <form action="/invoice-list-page/store" method="POST" class="form" enctype="multipart/form-data">
             @csrf
             <div class="intro-y box p-5">
                 <div>
@@ -40,6 +40,22 @@
                         @foreach($customers as $customer)
                         <option value="{{$customer->id}}" {{old('customer_id') == $customer->id ? 'selected' : null}}>
                             {{$customer->customer_name}}</option>
+                        @endforeach
+                    </select>
+                    @error('customer_id')
+                    <p class="mb-2" style="color: red;">{{$message}}</p>
+                    @enderror
+                </div>
+                <div>
+                    <label for="crud-form-1" class="form-label mt-3">Marketing</label>
+                    <select data-placeholder="Vendor"
+                        class="tail-select w-full @error('marketing_id') is-invalid @enderror" id="crud-form-2"
+                        name="marketing_id">
+                        {{-- <option value="">silahkan pilih customer</option> --}}
+                        <option value="{{$quotation->marketing_id}}">{{$quotation->marketing->marketing_name}}</option>
+                        @foreach($marketings as $marketing)
+                        <option value="{{$marketing->id}}" {{old('marketing_id') == $marketing->id ? 'selected' : null}}>
+                            {{$marketing->marketing_name}}</option>
                         @endforeach
                     </select>
                     @error('customer_id')
@@ -225,6 +241,10 @@
                         @error('total')
                         <p class="mb-2" style="color: red;">{{$message}}</p>
                         @enderror
+                    </div>
+                    <div class="mt-3">
+                        <label>ttd</label>
+                        <input type="file" class="form-control" id="ttd" name="ttd">
                     </div>
                     <div class="mt-3">
                         <label for="regular-form-2" class="form-label">Status</label>

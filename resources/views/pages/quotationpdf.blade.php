@@ -11,10 +11,17 @@
 <div class="flex-container mt-3" style="width:100%; display:table;">
 <div class="flex-item" style="width:50%; text-align: left; display: table-cell">
     <img src="https://files.fm/thumb_show.php?i=w677pagtk" style="width: 60%;" alt="">
-    <p><b>Marketing</b></p>
+    {{-- <p><b>Marketing</b></p> --}}
+    <p><b>Info Perusahaan</b></p>
     <hr width="200" style="margin-top: 5px;margin-bottom:5px;float:left;">
-    <p><b>{{$quotation->marketing->marketing_name}}</b></p>
-    <p>{{$quotation->marketing->address}}</p>
+    {{-- <p><b>{{$quotation->marketing->marketing_name}}</b></p> --}}
+    <p><b>PT. Satu Visi Indocreative</b></p>
+    {{-- <p>{{$quotation->marketing->address}}</p> --}}
+    <p><span>Jalan Masjid Bendungan, No 5,</span></p>
+    <p><span>Dewi Sartika, Cawang, Jakarta Timur,</span></p>
+    <p><span>DKI Jakarta, 13630</span></p>
+    <p><span>Telp: (021) 80885716</span></p>
+    <p><span>Email: finance@b-onecorp.co.id</span></p>
 </div>
 <div class="flex-item" style=" margin: auto; width:50%; text-align: right; display:table-cell"> 
 <h1>Quotation</h1>
@@ -63,7 +70,13 @@
             <tr style="background-color: #f2f2f2;">
                 <td class="whitespace-nowrap"><b>{{$detail->product->product_name}}</b>
                 {!!$detail->product->deskripsi!!}</td>
-                <td class="whitespace-nowrap">Rp. {{number_format($detail->product->price,-2,".",".")}}</td>
+                {{-- <td class="whitespace-nowrap">Rp. {{number_format($detail->product->price,-2,".",".")}}</td> --}}
+                @php
+                        $quantity = $detail->quantity;
+                        $sum = $detail->sum_product;
+                        $result = $sum / $quantity;
+                        echo "<td class='whitespace-nowrap'>Rp ".number_format($result,-2,".",".")."</td>";
+                    @endphp
                 <td class="whitespace-nowrap">{{$detail->quantity}}</td>
                 <td class="whitespace-nowrap">Rp. {{number_format($detail->sum_product,-2,".",".")}}</td>
             </tr>
@@ -107,13 +120,18 @@
   </table>
   
   <div class="" style="margin-top: 25%">
-    <p><b>Marketing</b></p>
+    {{-- <p><b>Marketing</b></p> --}}
+    <p><b>Keterangan</b></p>
     <hr width="40%" style="margin-top: 5px;margin-bottom:5px;float:left;">
-    <p><b>{{$quotation->marketing->marketing_name}}</b></p>
-    <p>{{$quotation->marketing->address}}</p>
+    {{-- <p><b>{{$quotation->marketing->marketing_name}}</b></p> --}}
+    {{-- <p>{{$quotation->marketing->address}}</p> --}}
+    <p><span>Pembayaran dapat ditransfer ke Bank Mandiri KCP Jakarta</span></p>
+    <p><span>Kemanggisan</span></p>
+    <p><span>No Rekening : 165-00-515555 5</span></p>
+    <p><span>Atas Nama : PT . Satu Visi Indocreative</span></p>
   </div>
   <div class="" style="margin-top:-14 %;">
-    <p style="text-align: left;margin-left:70%;margin-bottom:20%:"><b>{{ $quotation->created_at }}</b></p>
+    <p style="text-align: left;margin-left:70%;margin-bottom:10%:"><b>{{ $quotation->created_at }}</b></p>
     <p style="text-align: center;margin-left:60%;"><b>{{$quotation->customer->customer_name}}</b></p>
   </div>
       
