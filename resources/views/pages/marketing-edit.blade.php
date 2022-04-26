@@ -21,6 +21,17 @@
                     <label for="crud-form-1" class="form-label">Marketing Name</label>
                     <input name="marketing_name" type="text" class="form-control w-full" placeholder="Name Marketing" value=" {{ $marketing->marketing_name }}">
                 </div>
+                <div class="mt-3">
+                    <label>Instance</label>
+                    <div class="mt-2">
+                        <input name="instance" type="text" class="form-control w-full" value="{{$marketing->instance}}" placeholder="Instance">
+                    @error('instance')
+                    <div class="bg-red-400 p-2 shadow-sm rounded mt-2" style="color:red;">
+                        {{ $message }}
+                    </div> 
+                    @enderror
+                    </div>
+                </div>
                 <div>
                     <label class="form-label mt-2">Address</label>
                     <textarea name="address" class="form-control" id="" cols="30" rows="10" placeholder="Input your Address here"></textarea>

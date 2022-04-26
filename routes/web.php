@@ -71,6 +71,7 @@ Route::middleware('auth')->group(function() {
     Route::get('customers-list-page/edit/{id}', [PageController::class, 'customerEdit'])->name('customer-edit')->middleware('role:marketing|admin');
     Route::put('customers-list-page/update/{id}', [PageController::class, 'customerUpdate'])->name('customer-update')->middleware('role:marketing|admin'); 
     Route::post('customers-list-page/store', [PageController::class, 'customerStore'])->name('customer-store')->middleware('role:marketing|admin');
+    Route::post('/customers-list-page/store/tambah',[PageController::class, 'customerStoretambah'])->name('customer-store-tambah')->middleware('role:marketing|admin');
     Route::get('customers-list-page/delete/{id}', [PageController::class, 'customerDelete'])->name('customer-delete')->middleware('role:marketing|admin');
     // END CUSTOMER
 

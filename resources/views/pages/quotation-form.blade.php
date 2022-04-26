@@ -29,8 +29,8 @@
                     <p class="mb-2" style="color: red;">{{$message}}</p>
                     @enderror
                 </div>
-                <div>
-                    <label for="crud-form-1" class="form-label mt-3">Customer</label>
+                <label for="crud-form-1" class="form-label mt-3">Customer</label>
+                <div class="input-group">
                     <select data-placeholder="Vendor"
                         class="tail-select w-full @error('customer_id') is-invalid @enderror" id="crud-form-2"
                         name="customer_id">
@@ -43,6 +43,11 @@
                     @error('customer_id')
                     <p class="mb-2" style="color: red;">{{$message}}</p>
                     @enderror
+                    {{-- <div id="input-group-price" class="input-group-text">.00</div> --}}
+                    {{-- <a href="/customers-form-page" class="btn btn-sm btn-primary w-24 mr-1 mb-2">Tambah Customer</a> --}}
+                    <div class="text-center"> 
+                        <a href="javascript:;" data-toggle="modal" data-target="#medium-modal-size-preview" class="button inline-block bg-theme-1 text-white">Add Customer</a> 
+                    </div>
                 </div>
                 <label class="form-label mt-2">No. Referensi</label>
                 <div class="input-group">
@@ -207,6 +212,59 @@
         </form>
     </div>
     <!-- END: Form Layout -->
+    <div class="modal modal-dialog-centered" id="medium-modal-size-preview">
+        <div class="container w-50" style="width: 50%;align-items: center;">
+            <div class="modal__content p-10 text-left rounded-0">
+                <form method="POST" action="/customers-list-page/store/tambah">
+                    {{ csrf_field() }}
+    
+                <div class="intro-y box p-5">
+                    <div>
+                        <label for="crud-form-1" class="form-label">Instance</label>
+                        <input type="text" name="instance" class="form-control w-full" value="{{old('instance')}}">
+                        @error('instance')
+                        <div class="bg-red-400 p-2 shadow-sm rounded mt-2" style="color:red;">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    </div>
+                    <div>
+                        <label for="crud-form-1" class="form-label">Customer Name</label>
+                        <input name="customer_name" type="text" class="form-control w-full" value="{{old('customer_name')}}">
+                        @error('customer_name')
+                        <div class="bg-red-400 p-2 shadow-sm rounded mt-2" style="color:red;">
+                            {{ $message }}
+                        </div> 
+                        @enderror
+                    </div>
+                    <div>
+                        <label class="form-label mt-2">Contact</label>
+                        <input name="contact" type="text" class="form-control" placeholder="Input Email or Phone Number" aria-describedby="input-group-4" value="{{old('contact')}}"> 
+                        @error('contact')
+                        <div class="bg-red-400 p-2 shadow-sm rounded mt-2" style="color:red;">
+                            {{ $message }}
+                        </div> 
+                        @enderror
+                    </div>
+                    <div>
+                        <label class="form-label mt-2">Address</label>
+                        <textarea name="address" class="form-control" id="" cols="30" rows="10" placeholder="Input your Address here" value="{{old('address')}}"></textarea> 
+                        @error('address')
+                        <div class="bg-red-400 p-2 shadow-sm rounded mt-2" style="color:red;">
+                            {{ $message }}
+                        </div> 
+                        @enderror
+                    </div>
+                    <div class="text-right mt-5">
+                        <button type="button"  class="btn btn-gray close" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                        {{-- <input type="submit" class="btn btn-primary w-24" value="Save"> --}}
+                        <button class="btn btn-primary w-24" type="submit">Save</button>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
 </div>
 </div>
 @endsection
@@ -290,7 +348,7 @@
                                     <input type="number" class="form-control quantity" name="quantity[]" id="quantity${i}" data-id="${i}">
                                 </td>
                                 <td class="whitespace-nowrap">
-                                    <input type="number" class="form-control price" id="price${i}" readonly data-id="${i}">
+                                    <input type="number" class="form-control price" id="price${i}" data-id="${i}">
                                 </td>
                                 <td class="whitespace-nowrap">
                                     <input type="number" class="form-control sum_product" id="sum_product${i}" name="sum_product[]" readonly data-id="${i}">

@@ -25,6 +25,17 @@
                     </div> 
                     @enderror
                 </div>
+                <div class="mt-3">
+                    <label>Instance</label>
+                    <div class="mt-2">
+                        <input name="instance" type="text" class="form-control w-full" value="{{old('instance')}}" placeholder="Instance">
+                    @error('instance')
+                    <div class="bg-red-400 p-2 shadow-sm rounded mt-2" style="color:red;">
+                        {{ $message }}
+                    </div> 
+                    @enderror
+                    </div>
+                </div>
                 <div>
                     <label class="form-label mt-2">Address</label>
                     <textarea name="address" class="form-control" id="" cols="30" rows="10" placeholder="Input your Address here" value="{{old('address')}}"></textarea> 
@@ -34,14 +45,6 @@
                     </div> 
                     @enderror
                 </div>
-                {{-- <div class="mt-3">
-                    <label>Description</label>
-                    <div class="mt-2">
-                        <div data-simple-toolbar="true" class="editor">
-                            <p>Content of the editor.</p>
-                        </div>
-                    </div>
-                </div> --}}
                 <div class="text-right mt-5">
                     <a href="marketing-list-page" type="button" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
                     <input type="submit" class="btn btn-primary w-24" value="Save">

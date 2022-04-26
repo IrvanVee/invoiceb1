@@ -56,6 +56,7 @@
             <thead>
                 <tr>
                     <th class="whitespace-nowrap">MARKETING NAME</th>
+                    <th class="whitespace-nowrap">INSTANCE</th>
                     <th class="whitespace-nowrap">ADDRESS</th>
                     <th class="text-center whitespace-nowrap">ACTIONS</th>
                 </tr>
@@ -82,6 +83,10 @@
 <td>
     {{-- <a href="" class="font-medium whitespace-nowrap">{{ $T-> }}</a> --}}
     <div class="text-gray-600 text-l font-medium whitespace-nowrap mt-0.5">{{ $m->marketing_name }}</div>
+</td>
+<td>
+    {{-- <a href="" class="font-medium whitespace-nowrap">{{ $T-> }}</a> --}}
+    <div class="text-gray-600 text-l font-medium whitespace-nowrap mt-0.5">{{ $m->instance }}</div>
 </td>
 <td>
     {{-- <a href="" class="font-medium whitespace-nowrap">{{ $T-> }}</a> --}}
