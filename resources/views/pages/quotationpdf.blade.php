@@ -125,10 +125,12 @@
     <hr width="40%" style="margin-top: 5px;margin-bottom:5px;float:left;">
     {{-- <p><b>{{$quotation->marketing->marketing_name}}</b></p> --}}
     {{-- <p>{{$quotation->marketing->address}}</p> --}}
-    <p><span>Pembayaran dapat ditransfer ke Bank Mandiri KCP Jakarta</span></p>
+    {{-- <p><span>Pembayaran dapat ditransfer ke Bank Mandiri KCP Jakarta</span></p>
     <p><span>Kemanggisan</span></p>
     <p><span>No Rekening : 165-00-515555 5</span></p>
-    <p><span>Atas Nama : PT . Satu Visi Indocreative</span></p>
+    <p><span>Atas Nama : PT . Satu Visi Indocreative</span></p> --}}
+    <p><span>{!! $quotation->note !!}</span></p>
+
   </div>
   <div class="" style="margin-top:-14 %;">
     <p style="text-align: left;margin-left:70%;margin-bottom:10%:"><b>{{ $quotation->created_at }}</b></p>

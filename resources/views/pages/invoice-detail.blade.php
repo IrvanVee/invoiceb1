@@ -10,6 +10,7 @@
 <h1 class="mt-10" style="font-size:30px;">Quotation Id : {{$invoice->id}}</h1>
     <h2 class="intro-y text-lg font-medium mt-5">Vendor : {{$invoice->vendor->vendor_name}}</h2>
     <h3 class="intro-y text-lg font-medium mt-5">Customer  : {{$invoice->customer->customer_name}}</h3>
+    <h3 class="intro-y text-lg font-medium mt-5">Marketing  : {{$invoice->marketing->marketing_name}}</h3>
 
     <p class="intro-y text-lg font-medium mt-5">No Refrensi : {{$invoice->refrensi}}</p>
     <p class="intro-y text-lg font-medium mt-3">Deadline : {{$invoice->duedate}}</p>

@@ -235,7 +235,7 @@
                     </div>
                 </div>
                 <div class="mt-3">
-                    <label>Note</label>
+                    <label>Keterangan</label>
                     <div class="mt-2">
                         <textarea class="form-control" id="textarea" name="note" rows="3">
                             {{$quotation->note}}

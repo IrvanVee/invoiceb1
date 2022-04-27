@@ -153,7 +153,7 @@
     <p><span>No Rekening : 165-00-515555 5</span></p>
     <p><span>Atas Nama : PT . Satu Visi Indocreative</span></p>
   </div>
-  <div class="" style="margin-top:-14 %;">
+  <div class="" style="margin-top:-29%;">
     <p style="text-align: left;margin-left:70%;margin-bottom:20%;"><b>{{ $invoice->created_at }}</b></p>
     <img src="{{public_path('image/'.$invoice->ttd)}}" style="margin-left:70%;margin-top:-15%;width:30%;" alt="">
     <p style="text-align: center;margin-left:60%;"><b>{{$invoice->customer->customer_name}}</b></p>

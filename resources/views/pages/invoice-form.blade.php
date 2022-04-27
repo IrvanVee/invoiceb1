@@ -223,7 +223,7 @@
                     </div>
                 </div>
                 <div class="mt-3">
-                    <label>ttd</label>
+                    <label>Tanda Tangan</label>
                     <input type="file" class="form-control" id="ttd" name="ttd">
                 </div>
                 <div class="mt-3">
