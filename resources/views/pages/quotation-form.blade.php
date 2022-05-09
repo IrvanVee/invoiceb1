@@ -8,6 +8,20 @@
 <div class="intro-y flex items-center mt-8">
     <h2 class="text-lg font-medium mr-auto">Form Layout</h2>
 </div>
+@if (session('status'))
+    <div class="alert alert-success show mb-2">
+        {{ session('status') }}
+    </div>
+@endif
+@if ($errors->any())
+    <div class="alert alert-danger show mb-2">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 lg:col-span-12">
         <!-- BEGIN: Form Layout -->
