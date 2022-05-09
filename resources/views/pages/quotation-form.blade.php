@@ -88,8 +88,8 @@
                             <tr>
                                 <th class="whitespace-nowrap">Vendor Name</th>
                                 <th class="whitespace-nowrap">Product Name</th>
-                                <th class="whitespace-nowrap">Quantity</th>
                                 <th class="whitespace-nowrap">Price Product</th>
+                                <th class="whitespace-nowrap">Quantity</th>
                                 <th class="whitespace-nowrap">Sum Product</th>
                                 <th class="whitespace-nowrap">
                                     <button type="button" class="btn btn-primary btn-tambah" id="btn-tambah">
@@ -344,11 +344,11 @@
                                         @endforeach --}}
                                     </select>
                                 </td>
-                                <td>
-                                    <input type="number" class="form-control quantity" name="quantity[]" id="quantity${i}" data-id="${i}">
-                                </td>
                                 <td class="whitespace-nowrap">
                                     <input type="number" class="form-control price" id="price${i}" data-id="${i}">
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control quantity" name="quantity[]" id="quantity${i}" data-id="${i}">
                                 </td>
                                 <td class="whitespace-nowrap">
                                     <input type="number" class="form-control sum_product" id="sum_product${i}" name="sum_product[]" readonly data-id="${i}">

@@ -155,7 +155,7 @@
   </div>
   <div class="" style="margin-top:-29%;">
     <p style="text-align: left;margin-left:70%;margin-bottom:20%;"><b>{{ $invoice->created_at }}</b></p>
-    <img src="{{public_path('image/'.$invoice->ttd)}}" style="margin-left:70%;margin-top:-15%;width:30%;" alt="">
+    <img src="{{public_path('image/'.$invoice->ttd)}}" style="margin-left:70%;margin-top:-15%;width:30%;height:160px;" alt="">
     <p style="text-align: center;margin-left:60%;"><b>{{$invoice->customer->customer_name}}</b></p>
   </div>
       

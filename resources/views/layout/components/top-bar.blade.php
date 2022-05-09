@@ -112,6 +112,9 @@
                         @role('marketing')
                         <i>marketing</i>
                         @endrole
+                        @unlessrole('admin|vendor|marketing')
+                        no role
+                        @endunlessrole
                     </div>
                 </div>
                 <div class="p-2">

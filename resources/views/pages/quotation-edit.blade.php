@@ -86,8 +86,8 @@
                             <tr>
                                 <th class="whitespace-nowrap">Vendor Name</th>
                                 <th class="whitespace-nowrap">Product Name</th>
-                                <th class="whitespace-nowrap">Quantity</th>
                                 <th class="whitespace-nowrap">Price Product</th>
+                                <th class="whitespace-nowrap">Quantity</th>
                                 <th class="whitespace-nowrap">Sum Product</th>
                                 <th class="whitespace-nowrap">
                                     {{-- <button type="button" class="btn btn-primary btn-tambah" id="btn-tambah">
@@ -125,10 +125,10 @@
                                     </select>
                                 </td>
                                 <td class="whitespace-nowrap">
-                                    <input id="quantity{{$detail->id}}" name="quantity[]" type="number" class="form-control quantity" data-id="{{$detail->id}}" value="{{$detail->quantity}}">
+                                    <input type="number" class="form-control price" id="price{{$detail->id}}" data-id="{{$detail->id}}" value="{{$detail->product->price}}" readonly>
                                 </td>
                                 <td class="whitespace-nowrap">
-                                    <input type="number" class="form-control price" id="price{{$detail->id}}" data-id="{{$detail->id}}" value="{{$detail->product->price}}" readonly>
+                                    <input id="quantity{{$detail->id}}" name="quantity[]" type="number" class="form-control quantity" data-id="{{$detail->id}}" value="{{$detail->quantity}}">
                                 </td>
                                 <td class="whitespace-nowrap">
                                     <input type="number" class="form-control sum_product" id="sum_product{{$detail->id}}" name="sum_product[]" data-id="{{$detail->id}}" value="{{$detail->sum_product}}" readonly>
