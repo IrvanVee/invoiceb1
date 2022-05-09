@@ -52,13 +52,14 @@
                     <select data-placeholder="Vendor"
                         class="tail-select w-full @error('marketing_id') is-invalid @enderror" id="crud-form-2"
                         name="marketing_id">
+                        <option value="{{$invoice->marketing_id}}">{{$invoice->marketing->marketing_name}}</option>
                         <option value="">silahkan pilih marketing</option>
                         @foreach($marketings as $marketing)
                         <option value="{{$marketing->id}}" {{old('marketing_id') == $marketing->id ? 'selected' : null}}>
                             {{$marketing->marketing_name}}</option>
                         @endforeach
                     </select>
-                    @error('customer_id')
+                    @error('marketing_id')
                     <p class="mb-2" style="color: red;">{{$message}}</p>
                     @enderror
                 </div>
@@ -272,10 +273,10 @@
                         </select>
                         </div>
                     </div>
-                    <div class="mt-3">
+                    {{-- <div class="mt-3">
                         <label>Tanda Tangan</label>
                         <input type="file" class="form-control" id="ttd" name="ttd">
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="mt-3">
                     <label>Note</label>
