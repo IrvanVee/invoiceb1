@@ -293,8 +293,8 @@ public function invoiceupdate($id, Request $request){
     $invoice->tax_id = $request->tax_id;
     $invoice->pengiriman = $request->pengiriman;
     $invoice->total = $request->total;
-    $invoice->dibayar = $request->dibayar;
-    $invoice->tunggakan = $invoice->total - $invoice->dibayar;
+    // $invoice->dibayar = $request->dibayar;
+    // $invoice->tunggakan = $invoice->total - $invoice->dibayar;
     $invoice->status = $request->status;
     $invoice->note = $request->note;
     $invoice->save();
@@ -326,6 +326,15 @@ public function invoicedelete($id){
         $detailinvoice->delete();
         return redirect('invoice-list-page')->with('status', 'Invoice Berhasil Di Hapus');
     }
+}
+
+public function invoicepayment(Request $request,$id){
+    $pay = Invoice::find($id);
+    $pay->total = $request->total;
+    $pay->dibayar = $request->dibayar;
+    $pay->tunggakan = $pay->total - $pay->dibayar;
+    $pay->save();
+    return redirect('invoice-list-page')->with('status','pembayaran berhasil di tambah');
 }
 
 /**

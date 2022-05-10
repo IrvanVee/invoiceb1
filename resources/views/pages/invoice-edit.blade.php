@@ -250,11 +250,11 @@
                         <p class="mb-2" style="color: red;">{{$message}}</p>
                         @enderror
                         <br>
-                        <div class="input-group sm:mt-2">
+                        {{-- <div class="input-group sm:mt-2">
                             <div id="input-group-4" class="input-group-text">Dibayar</div>
                             <input type="number" class="form-control @error('dibayar') is-invalid @enderror" id="dibayar"
                                 name="dibayar" value="{{$invoice->dibayar}}" aria-describedby="input-group-4">
-                        </div>
+                        </div> --}}
                         @error('dibayar')
                         <p class="mb-2" style="color: red;">{{$message}}</p>
                         @enderror
