@@ -18,7 +18,7 @@
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
             <a href="/invoice-form-page"><button class="btn btn-primary shadow-md mr-2">Add New Invoice</button></a>
-            <a href="javascript:;" data-toggle="modal" data-target="#basic-modal-preview" class="btn btn-success">Add Payment</a>
+            {{-- <a href="javascript:;" data-toggle="modal" data-target="#basic-modal-preview" class="btn btn-success">Add Payment</a> --}}
             {{-- <div class="dropdown">
                 <button class="dropdown-toggle btn px-2 box text-gray-700 dark:text-gray-300" aria-expanded="false">
                     <span class="w-5 h-5 flex items-center justify-center">
@@ -97,7 +97,8 @@
                                     <a class="flex items-center" href="/invoice-detail/{{ $invoice->id }}">
                                         <i data-feather="list" class="w-4 h-4 mr-1"></i> Detail
                                     </a>
-                                    {{-- <a href="javascript:;" data-toggle="modal" data-target="#basic-modal-preview" class="text-theme-9 ml-2">Pay</a> --}}
+                                    <button type="button" data-toggle="modal" id="edit" data-target="#basic-modal-preview" value="{{$invoice->id}}" class="text-theme-9 ml-2" onclick='openModal()'>Pay</button>
+                                    {{-- <a href="" >Pay</a> --}}
                                 </div>
                             </td>
                             @empty
@@ -111,38 +112,7 @@
             <div class="container w-50" style="width: 50%;align-items: center;">
                 <div class="modal__content p-10 text-left">
                     <h2 class="intro-y text-lg font-large">Add Payment</h2>
-                    @foreach ($invoices as $invoice)
-                    <form action="/invoice-payment/{{$invoice->id}}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <div class="mt-2">
-                            <label for="id">Nomor Refrensi</label>
-                            <select data-search="true" name="refrensi" class="tail-select w-full">
-                                <option value="{{$invoice->refrensi}}">{{$invoice->refrensi}}</option>
-                                {{-- @foreach ($invoices as $invoice)
-                                    <option value="{{$invoice->refrensi}}">{{$invoice->refrensi}}</option>
-                                @endforeach --}}
-                                </select>
-                                @error('refrensi_id')
-                                <span style="color:red;">{{$message}}</span>
-                                @enderror
-                            </select>
-                        </div>
-                        <label for="total">Total</label>
-                        <div class="input-group sm:mt-2">
-                            <div id="input-group-4" class="input-group-text">Total</div>
-                            <input type="number" class="form-control @error('total') is-invalid @enderror" id="total"
-                            name="total" readonly value="{{$invoice->total}}" aria-describedby="input-group-4">
-                        </div>
-                        <label for="dibayar">Dibayar</label>
-                        <div class="input-group sm:mt-2">
-                            <div id="input-group-4" class="input-group-text">Dibayar</div>
-                            <input type="number" class="form-control @error('dibayar') is-invalid @enderror" id="dibayar"
-                            name="dibayar" value="{{$invoice->dibayar}}" aria-describedby="input-group-4">
-                        </div>
-                        <button type="submit" class="btn btn-success" style="width:100%;margin-top:20px;">Add Payment {{$invoice->refrensi}}</button>
-                    </form>
-                    @endforeach
+                    <p>ini id ke : </p>
                 </div>
             </div>
         </div>
@@ -168,3 +138,23 @@
         }
     </style>
 @endsection
+
+@push('count')
+<script>
+    // alert("bismillah")
+    $(document).ready(function () {
+
+        $(document).on("click",'#edit', function () {
+            var id = $(this).val();
+            alert(id);
+            // myModal.show();
+            // window.$('#basic-modal-preview').modal('show');
+        });
+    });
+    function openModal() {
+    var myModal = new bootstrap.Modal(document.getElementById('#basic-modal-preview'), {  keyboard: false });
+    myModal.show();
+    alert("test")
+    }
+</script>
+@endpush
