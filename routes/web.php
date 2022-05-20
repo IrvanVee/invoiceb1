@@ -49,7 +49,8 @@ Route::middleware('auth')->group(function() {
     Route::put('invoice-update/{id}',[PageController::class,'invoiceupdate'])->name('invoice-update')->middleware('role:vendor|admin');
     Route::delete('/invoice-list-page/delete/{id}',[PageController::class,'invoicedelete'])->name('invoice-delete')->middleware('role:vendor|admin');
     Route::get('invoicepdf/{id}',[PageController::class,'invoicepdf'])->name('invoice-pdf');
-    Route::put('invoice-payment/{id}',[PageController::class,'invoicepayment'])->name('invoice-payment')->middleware('role:vendor|admin');
+    Route::put('invoice-payment',[PageController::class,'invoicepayment'])->name('invoice-payment')->middleware('role:vendor|admin');
+    Route::get('addpay/{id}', [PageController::class, 'addpay'])->name('addpay');
     // END INVOICE
 
     // QUOTATION SET

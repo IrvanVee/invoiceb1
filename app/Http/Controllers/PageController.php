@@ -328,13 +328,23 @@ public function invoicedelete($id){
     }
 }
 
-public function invoicepayment(Request $request,$id){
+public function invoicepayment(Request $request){
+    $id = $request->input('id');
     $pay = Invoice::find($id);
-    $pay->total = $request->total;
-    $pay->dibayar = $request->dibayar;
+    // $pay->id = $request->id;
+    $pay->total = $request->input('total');
+    $pay->dibayar = $request->input('dibayar');
     $pay->tunggakan = $pay->total - $pay->dibayar;
-    $pay->save();
+    $pay->update();
     return redirect('invoice-list-page')->with('status','pembayaran berhasil di tambah');
+}
+
+public function addpay($id){
+    $payment = Invoice::find($id);
+    return response()->json([
+        'status'=>200,
+        'payment'=>$payment,
+    ]);
 }
 
 /**

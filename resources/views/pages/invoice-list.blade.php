@@ -97,8 +97,10 @@
                                     <a class="flex items-center" href="/invoice-detail/{{ $invoice->id }}">
                                         <i data-feather="list" class="w-4 h-4 mr-1"></i> Detail
                                     </a>
-                                    <button type="button" data-toggle="modal" id="edit" data-target="#basic-modal-preview" value="{{$invoice->id}}" class="text-theme-9 ml-2" onclick='openModal()'>Pay</button>
-                                    {{-- <a href="" >Pay</a> --}}
+                                    {{-- <button type="button" >Pay</button> --}}
+                                    <button type="button" id="edit" value="{{$invoice->id}}">
+                                        <a href="javascript:;" data-toggle="modal" data-target="#basic-modal-preview" class="text-theme-9 ml-2">Pay</a>
+                                    </button>
                                 </div>
                             </td>
                             @empty
@@ -109,10 +111,38 @@
             </table>
         </div>
         <div class="modal modal-dialog-centered modal-dialog-scrollable" id="basic-modal-preview">
-            <div class="container w-50" style="width: 50%;align-items: center;">
+            <div class="container" style="align-items: center;">
                 <div class="modal__content p-10 text-left">
                     <h2 class="intro-y text-lg font-large">Add Payment</h2>
-                    <p>ini id ke : </p>
+                    <form action="/invoice-payment/" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" id="id" name="id" class="form-control">
+                        <div class="mt-2">
+                            <label for="id">Nomor Refrensi</label>
+                            <div class="input-group sm:mt-2">
+                                <div id="input-group-4" class="input-group-text">No Refrensi</div>
+                                <input type="number" class="form-control @error('refrensi') is-invalid @enderror" id="refrensi"
+                                name="refrensi" readonly id="refrensi" aria-describedby="input-group-4">
+                            </div>
+                            @error('refrensi_id')
+                            <span style="color:red;">{{$message}}</span>
+                            @enderror
+                        </div>
+                        <label for="total">Total</label>
+                        <div class="input-group sm:mt-2">
+                            <div id="input-group-4" class="input-group-text">Total</div>
+                            <input type="number" class="form-control @error('total') is-invalid @enderror" id="total"
+                            name="total" readonly id="total" aria-describedby="input-group-4">
+                        </div>
+                        <label for="dibayar">Dibayar</label>
+                        <div class="input-group sm:mt-2">
+                            <div id="input-group-4" class="input-group-text">Dibayar</div>
+                            <input type="number" id="dibayar" class="form-control @error('dibayar') is-invalid @enderror" id="dibayar"
+                            name="dibayar" aria-describedby="input-group-4">
+                        </div>
+                        <button type="submit" class="btn btn-success" style="width:100%;margin-top:20px;">Add Payment</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -136,25 +166,39 @@
             background-color: white;
             color: black;
         }
+        .modal__content{
+            position: absolute;
+            background-color: white;
+            color: black;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
     </style>
 @endsection
 
-@push('count')
+@push('ajax')
 <script>
     // alert("bismillah")
     $(document).ready(function () {
 
         $(document).on("click",'#edit', function () {
             var id = $(this).val();
-            alert(id);
+            $.ajax({
+                type: "GET",
+                url: "/addpay/"+id,
+                success: function (response) {
+                    // console.log(response)
+                    $("#refrensi").val(response.payment.refrensi)
+                    $("#total").val(response.payment.total)
+                    $("#dibayar").val(response.payment.dibayar)
+                    $("#id").val(response.payment.id)
+                }
+            });
             // myModal.show();
             // window.$('#basic-modal-preview').modal('show');
         });
     });
-    function openModal() {
-    var myModal = new bootstrap.Modal(document.getElementById('#basic-modal-preview'), {  keyboard: false });
-    myModal.show();
-    alert("test")
-    }
+
 </script>
 @endpush
