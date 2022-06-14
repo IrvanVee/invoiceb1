@@ -10,8 +10,8 @@
 <body>
 <div class="flex-container mt-3" style="width:100%; display:table;">
 <div class="flex-item" style="width:50%; text-align: left; display: table-cell">
-  <img src="https://files.fm/thumb_show.php?i=w677pagtk" style="width: 60%;" alt="">
-    {{-- <img src="{{public_path('dist/images/b-one.jpg')}}" style="width: 60%;" alt=""> --}}
+  {{-- <img src="https://files.fm/thumb_show.php?i=w677pagtk" style="width: 60%;" alt=""> --}}
+    <img src="{{public_path('dist/images/b-one.jpg')}}" style="width: 60%;" alt="">
     <p><b>Info Perusahaan</b></p>
     <hr width="200" style="margin-top: 5px;margin-bottom:5px;float:left;">
     {{-- <p><b>{{$invoice->vendor->vendor_name}}</b></p> --}}
@@ -158,7 +158,6 @@
     <img src="{{public_path('image/'.$invoice->ttd)}}" style="margin-left:70%;margin-top:-15%;width:30%;height:160px;" alt="">
     <p style="text-align: center;margin-left:60%;"><b>{{$invoice->customer->customer_name}}</b></p>
   </div>
-      
 </div> 
 </body>
 </html>

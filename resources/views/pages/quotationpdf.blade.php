@@ -10,7 +10,8 @@
 <body>
 <div class="flex-container mt-3" style="width:100%; display:table;">
 <div class="flex-item" style="width:50%; text-align: left; display: table-cell">
-    <img src="https://files.fm/thumb_show.php?i=w677pagtk" style="width: 60%;" alt="">
+    {{-- <img src="https://files.fm/thumb_show.php?i=w677pagtk" style="width: 60%;" alt=""> --}}
+    <img src="{{public_path('dist/images/b-one.jpg')}}" style="width: 60%;" alt="">
     {{-- <p><b>Marketing</b></p> --}}
     <p><b>Info Perusahaan</b></p>
     <hr width="200" style="margin-top: 5px;margin-bottom:5px;float:left;">

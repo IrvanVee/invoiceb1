@@ -258,6 +258,10 @@ public function invoicepdf($id){
     $invoice = Invoice::with('detailinvoice')->where('id',$id)->first();
     $detailinvoice = DetailInvoice::where('invoice_id',$id)->sum("sum_product");
 
+    if ($invoice == NULL) {
+        return abort(404);
+    }
+
     $pdf = PDF::loadview('pages.invoicepdf',compact('invoice','detailinvoice'));
     return $pdf->stream();
 }
@@ -529,6 +533,10 @@ public function quotationpdf($id){
     $quotation = Quotation::with('detailquotation')->where('id',$id)->first();
     $detailquotation = DetailQuotation::where('quotation_id',$id)->sum("sum_product");
 
+    if ($quotation == NULL) {
+        return abort(404);
+    }
+
     $pdf = PDF::loadview('pages.quotationpdf',compact('quotation','detailquotation'));
     return $pdf->stream();
 }
@@ -627,6 +635,9 @@ public function customerStoretambah(Request $request){
 public function customerEdit($id)
 {
     $customer = Customer::find($id);
+    if ($customer == NULL) {
+        return abort(404);
+    }
 
     return view('pages/customers-edit', ['customer' => $customer]);
 }
@@ -1104,6 +1115,9 @@ public function taxStore(Request $request)
 public function taxEdit($id)
 {
     $tax = Tax::find($id);
+    if ($tax == NULL) {
+        return abort(404);
+    }
 
     return view('pages/tax-edit', ['tax' => $tax]);
 }
@@ -1198,6 +1212,9 @@ public function discountStore(Request $request)
 public function discountEdit($id)
 {
     $discount = Discount::find($id);
+    if ($discount == NULL) {
+        return abort(404);
+    }
 
     return view('pages/discount-edit', ['discount' => $discount]);
 }
@@ -1274,6 +1291,9 @@ public function marketingStore(Request $request)
 public function marketingEdit($id)
 {
     $marketing = Marketing::find($id);
+    if ($marketing == NULL) {
+        return abort(404);
+    }
     return view('pages/marketing-edit', ['marketing' => $marketing]);
 }
 
@@ -1337,6 +1357,9 @@ public function vendorStore(Request $request)
 public function vendorEdit($id)
 {
     $vendor = Vendor::find($id);
+    if ($vendor == NULL) {
+        return abort(404);
+    }
     return view('pages/vendor-edit', ['vendor' => $vendor]);
 }
 
