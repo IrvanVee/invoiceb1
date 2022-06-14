@@ -745,6 +745,9 @@ public function usersShow($id){
     $roles = Role::all();
     $permissions = Permission::all();
     $user = User::find($id);
+    if ($user == null) {
+        return abort(404);
+    }
     return view('pages.user-role',compact('user','roles','permissions'));
 }
 /**
@@ -756,6 +759,9 @@ public function usersShow($id){
 public function usersEdit($id)
 {
     $user = User::find($id);
+    if ($user == null) {
+        return abort(404);
+    }
 
     return view('pages/users-edit', ['user' => $user]);
 }
@@ -854,6 +860,9 @@ public function permissionStore(Request $request){
 public function permissionEdit($id){
     $roles = Role::all();
     $permission = Permission::find($id);
+    if ($permission == null) {
+        return abort(404);
+    }
     return view('pages.permission-edit',compact('permission','roles'));
 }
 
@@ -904,6 +913,9 @@ public function roleStore(Request $request){
 public function roleEdit($id){
     $role = Role::find($id);
     $permissions = Permission::all();
+    if ($role == null) {
+        return abort(404);
+    }
     return view('pages.role-edit',compact('role','permissions'));
 }
 public function roleUpdate(Request $request,$id){

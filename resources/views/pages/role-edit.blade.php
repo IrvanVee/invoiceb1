@@ -30,7 +30,7 @@
                     @enderror
                 </div>
                 <div class="text-right mt-5">
-                    <a href="role-list" type="button" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
+                    <a href="/role-list" type="button" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
                     <input type="submit" class="btn btn-success w-24" value="Update">
                 </div>
             </div>
@@ -74,7 +74,7 @@
                     @enderror
                 </div>
                 <div class="text-right mt-5">
-                    <a href="role-list" type="button" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
+                    <a href="/role-list" type="button" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
                     <input type="submit" class="btn btn-success w-24" value="Assign">
                 </div>
             </div>
