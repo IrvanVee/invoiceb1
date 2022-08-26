@@ -13,8 +13,8 @@
 
     <p class="intro-y text-lg font-medium mt-5">No Refrensi : {{$quotation->refrensi}}</p>
     <p class="intro-y text-lg font-medium mt-3">Deadline : {{$quotation->duedate}}</p>
-    <p class="intro-y text-lg font-medium mt-3">Diskon : {{$quotation->discount->nilai_discount}}% </p>
-    <p class="intro-y text-lg font-medium mt-3">Tax : {{$quotation->tax->tax_value}}% </p>  
+    <p class="intro-y text-lg font-medium mt-3">Diskon : {{$quotation->discount_id}}% </p>
+    <p class="intro-y text-lg font-medium mt-3">Tax : {{$quotation->tax_id}}% </p>  
     <p class="intro-y text-lg font-medium mt-3">Pengiriman : Rp. {{number_format($quotation->pengiriman,-2,".",".")}}</p>  
     <div class="overflow-x-auto">
         <table class="table mt-3">

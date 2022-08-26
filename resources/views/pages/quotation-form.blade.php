@@ -135,19 +135,21 @@
                     <label for="diskon">Diskon</label>
                     <label for="tax">Tax</label>
                     <div class="input-group">
-                        <select data-placeholder="Discount" class="tail-select w-full" id="discount" name="discount_id">
+                        {{-- <select data-placeholder="Discount" class="tail-select w-full" id="discount" name="discount_id">
                             @foreach ($discounts as $discount)
                             <option value="{{$discount->id}}">{{$discount->nilai_discount}}</option>
                             @endforeach
-                        </select>
+                        </select> --}}
+                        <input type="number" class="form-control" value="0" id="discount" placeholder="silahkan isi discount">
                         <label class="input-group-text" for="inputGroupSelect02">%</label>
                     </div>
                     <div class="input-group">
-                        <select data-placeholder="Tax" name="tax_id" class="tail-select w-full" id="tax">
+                        {{-- <select data-placeholder="Tax" name="tax_id" class="tail-select w-full" id="tax">
                             @foreach ($taxs as $tax)
                             <option value="{{$tax->id}}">{{$tax->tax_value}}</option>
                             @endforeach
-                        </select>
+                        </select> --}}
+                        <input type="number" class="form-control" id="tax" value="0" placeholder="silahkan isi tax" placeholder="silahkan isi tax">
                         <label class="input-group-text" for="inputGroupSelect02">%</label>
                     </div>
                     {{-- end div --}}
@@ -162,6 +164,7 @@
                         <div class="input-group mt-2 sm:mt-2">
                             <div id="input-group-4" class="input-group-text">Price</div>
                             <input type="number" class="form-control" id="totalprice" readonly>
+                            <button type="button" class="btn btn-primary" id="totalall">totalkan</button>
                         </div>
                         <div class="input-group mt-2 sm:mt-2">
                             <div id="input-group-4" class="input-group-text">Pengiriman</div>
@@ -176,7 +179,7 @@
                     <div class="m:grid grid-cols-3 gap-2">
                         <div class="input-group sm">
                             <div id="input-group-3" class="input-group-text">Discount</div>
-                            <input type="number" class="form-control" readonly id="outputdiscount"
+                            <input type="number" class="form-control @error('discount_id') is-invalid @enderror" name="discount_id" readonly id="outputdiscount" value="0"
                                 aria-describedby="input-group-3">
                         </div>
                         <div class="input-group sm sm:mt-2">
@@ -188,8 +191,8 @@
                         <label class="form-label">Tax</label>
                         <div class="input-group mt-2 sm:mt-2">
                             <div id="input-group-4" class="input-group-text">Tax</div>
-                            <input type="number" class="form-control" readonly id="outputtax"
-                                aria-describedby="input-group-4">
+                            <input type="number" class="form-control @error('tax_id') is-invalid @enderror" readonly id="outputtax"
+                            aria-describedby="input-group-4" name="tax_id" value="0">
                         </div>
                         <div class="input-group sm sm:mt-2">
                             <div id="input-group-3" class="input-group-text">Hasil Tax</div>
@@ -213,9 +216,9 @@
                         <textarea class="form-control" id="textarea" name="note" rows="3">
                             {{old('note')}}
                         </textarea>
-                        @error('note')
+                        {{-- @error('note')
                         <p class="mb-2" style="color: red;">{{$message}}</p>
-                        @enderror
+                        @enderror --}}
                     </div>
                 </div>
                 <div class="text-right mt-5">
@@ -301,18 +304,29 @@
 <script>
     // begin discount
     $(function () {
-        $("#discount").change(function () {
-            var diskon = $("#discount option:selected").text();
-            $("#outputdiscount").val(diskon);
+        $("#discount").keyup(function () {
+            // var diskon = $("#discount").text();
+            // $("#outputdiscount").val(diskon);
+            var diskon = $("#discount").val();
+            if (diskon == 0) {
+                $("#outputdiscount").val(0)
+            } else {
+                $("#outputdiscount").val(diskon)
+            }
+            // console.log(diskon)
         })
     })
     // end discount
 
     // begin tax
     $(function () {
-        $("#tax").change(function () {
-            var taks = $("#tax option:selected").text();
-            $("#outputtax").val(taks);
+        $("#tax").keyup(function () {
+            var taks = $("#tax").val();
+            if (taks == 0) {
+                $("#outputtax").val(0);
+            } else {
+                $("#outputtax").val(taks);
+            }
         })
     })
     // end tax
@@ -470,7 +484,8 @@
 @push('count')
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#totalprice,#outputdiscount").keyup(function(){
+            $("#totalall").click(function(){
+                // pehitungan antara discount dan price
                 var totalprice = $("#totalprice").val();
                 var outputdiscount = $("#outputdiscount").val();
 
@@ -481,9 +496,7 @@
                 if (outputdiscount == 0) {
                     $("#hasildiscount").val(0);
                 }
-            })
-            $("#totalprice , #outputtax").keyup(function(){
-                var totalprice = $("#totalprice").val();
+                // perhitungan tax dan price
                 var outputtax = $("#outputtax").val();
 
                 var hasiltax = parseInt(totalprice) * parseInt(outputtax) / 100 - parseInt(totalprice);
@@ -491,9 +504,7 @@
                 if (outputtax == 0) {
                     $("#hasiltax").val(0);
                 }
-            })
-            $("#totalprice , #hasildiscount , #hasiltax").keyup(function(){
-                var totalprice = $("#totalprice").val();
+                // menghitung semua total dari hasil perhitungan
                 var hasildiscount = $("#hasildiscount").val();
                 var hasiltax = $("#hasiltax").val();
                 var pengiriman = $("#pengiriman").val();

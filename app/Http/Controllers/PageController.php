@@ -203,15 +203,18 @@ public function invoiceStore(Request $request){
         'pengiriman' => 'required',
         'total' => 'required',
         'status' => 'required',
-        'note' => 'required'
+        // 'note' => 'required'
     ]);
 
-    $imgName = $request->ttd->getClientOriginalName(). '.'. time(). '.' . $request->ttd->extension();
-
+    $imgName = null;
+    if ($request->ttd) {
+        $imgName = $request->ttd->getClientOriginalName(). '.'. time(). '.' . $request->ttd->extension();
+    
     $request->ttd->move(public_path('image'), $imgName);
+    }
 
     $data = $request->all();
-    // dd($data)
+    // dd($data);
     $invoice = new Invoice();
     $invoice->vendor_id = $data['vendor_id'];
     $invoice->customer_id = $data['customer_id'];
@@ -404,7 +407,7 @@ public function quoteStore(Request $request){
         'discount_id'=>'required',
         'tax_id'=>'required',
         'total'=>'required|numeric',
-        'note'=>'required',
+        // 'note'=>'required',
         'vendor_id'=>'required',
         'product_id'=>'required',
         'quantity'=>'required',

@@ -99,7 +99,7 @@
         <td style="padding-left: 100px;"></td>
         <td style="padding-left: 100px;"></td>
         <td style="padding-left: 100px;"></td>
-        <td style="text-align:right;">{{$quotation->tax->tax_value}}</td>
+        <td style="text-align:right;">{{$quotation->tax_id}}</td>
       </tr>
       <tr></tr>
       <tr>
@@ -107,7 +107,7 @@
         <td style="padding-left: 100px;"></td>
         <td style="padding-left: 100px;"></td>
         <td style="padding-left: 100px;"></td>
-        <td style="text-align:right;">{{$quotation->discount->nilai_discount}}</td>
+        <td style="text-align:right;">{{$quotation->discount_id}}</td>
       </tr>
       <tr></tr>
       <tr>

@@ -14,8 +14,8 @@
 
     <p class="intro-y text-lg font-medium mt-5">No Refrensi : {{$invoice->refrensi}}</p>
     <p class="intro-y text-lg font-medium mt-3">Deadline : {{$invoice->duedate}}</p>
-    <p class="intro-y text-lg font-medium mt-3">Diskon : {{$invoice->discount->nilai_discount}}% </p>
-    <p class="intro-y text-lg font-medium mt-3">Tax : {{$invoice->tax->tax_value}}% </p>  
+    <p class="intro-y text-lg font-medium mt-3">Diskon : {{$invoice->discount_id}}% </p>
+    <p class="intro-y text-lg font-medium mt-3">Tax : {{$invoice->tax_id}}% </p>  
     <p class="intro-y text-lg font-medium mt-3">Pengiriman : Rp. {{number_format($invoice->pengiriman,-2,".",".")}}</p>  
     <div class="overflow-x-auto">
         <table class="table mt-3">
