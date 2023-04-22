@@ -224,7 +224,7 @@
                         <div class="input-group sm">
                             <div id="input-group-3" class="input-group-text">Discount</div>
                             <input type="number" class="form-control" name="discount_id" readonly id="outputdiscount"
-                                aria-describedby="input-group-3">
+                                aria-describedby="input-group-3" value="{{$invoice->discount_id}}">
                         </div>
                         <div class="input-group sm sm:mt-2">
                             <div id="input-group-3" class="input-group-text">Hasil Discount</div>
@@ -236,7 +236,7 @@
                         <div class="input-group mt-2 sm:mt-2">
                             <div id="input-group-4" class="input-group-text">Tax</div>
                             <input type="number" class="form-control" name="tax_id" readonly id="outputtax"
-                                aria-describedby="input-group-4">
+                                aria-describedby="input-group-4" value="{{$invoice->tax_id}}">
                         </div>
                         <div class="input-group sm sm:mt-2">
                             <div id="input-group-3" class="input-group-text">Hasil Tax</div>
